@@ -25,6 +25,9 @@ make install
 ```
 
 ### Compiling
+
+First make sure `CMAKE_PREFIX_PATH` is set to HDF5 installation cmake directory and `CC` is set to an MPI compiler.
+
 ```bash
 mkdir build
 cd build

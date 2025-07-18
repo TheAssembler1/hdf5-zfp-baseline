@@ -1,23 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
+cmake_policy(SET CMP0074 NEW)
+
 project(hdf5-zfp-baseline C)
 
-# Find HDF5 package (C API)
 find_package(HDF5 REQUIRED COMPONENTS C)
 
-# List of c source files
 set(SOURCES
     src/main.c
 )
 
-# Add your executable
-add_executable(zfp_baseline main.c)   # Replace main.c with your source files
+add_executable(zfp_baseline ${SOURCES})
 
-# Include HDF5 headers
-target_include_directories(my_app PRIVATE ${HDF5_INCLUDE_DIRS})
+target_include_directories(zfp_baseline PRIVATE ${HDF5_INCLUDE_DIRS})
+target_link_libraries(zfp_baseline PRIVATE ${HDF5_LIBRARIES} m z)
 
-# Link HDF5 libraries
-target_link_libraries(my_app PRIVATE ${HDF5_LIBRARIES})
-
-# Optional: enable compiler warnings
-target_compile_options(my_app PRIVATE -Wall -Wextra)
-
+target_compile_options(zfp_baseline PRIVATE -Wall -Wextra)
