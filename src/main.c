@@ -3,10 +3,13 @@
 #include <stdbool.h>
 #include <mpi.h>
 #include "hdf5.h"
+#include "H5Zzfp_plugin.h"
+
+#define H5Z_FILTER_ZFP 32013
 
 #define CSV_FILENAME "output.csv"
 
-#define MB_PER_CHUNK 64
+#define ELEMENTS_PER_CHUNK 64
 #define DATASET_NAME "dataset"
 #define USE_COLLECTIVE_IO 1
 
@@ -49,6 +52,18 @@ static double timer_accumulated[TIMER_TAGS_COUNT] = {0};
         timer_accumulated[(tag)] += elapsed; \
     } while(0)
 
+
+#define H5_ASSERT(val)                                      \
+    do {                                                   \
+        if ((val) < 0) {                                   \
+            fprintf(stderr,                                 \
+                    "H5_ASSERT failed: %s < 0 at %s:%d\n", \
+                    #val, __FILE__, __LINE__);             \
+            abort();                                       \
+        }                                                  \
+    } while(0)
+
+
 static void print_all_timers_csv(const char *filename, int chunks_per_rank, int num_ranks, bool scale_by_rank) {
     int rank; 
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -89,15 +104,16 @@ static void print_all_timers_csv(const char *filename, int chunks_per_rank, int 
     }
 }
 
-#define USAGE "./zfp_baseline <collective_io> <chunks_per_rank> <scale_by_rank>\n"
+#define USAGE "./zfp_baseline <collective_io_enable:bool> <chunks_per_rank:int> <scale_by_rank_enable:bool> <zfp_filter_enable:bool>\n"
 
 int main(int argc, char** argv) {
     int chunks_per_rank = 0;
     bool collective_io = 0;
     bool scale_by_rank = 0;
+    bool zfp_compress = 0;
 
-    if(argc < 4) {
-        fprintf(stderr, "Invalid number of program arguments\n");
+    if(argc < 5) {
+        fprintf(stderr, "Invalid number of program arguments %d\n", argc);
         fprintf(stderr, USAGE);
         return 1;
     }
@@ -112,15 +128,20 @@ int main(int argc, char** argv) {
     }
     // third arg is the scale type
     scale_by_rank = atoi(argv[3]);
+    zfp_compress = atoi(argv[4]);
 
     MPI_Init(&argc, &argv);
     H5open();
+
+    int filter_avail = H5Zfilter_avail(H5Z_FILTER_ZFP);
+    PRINT_RANK0("ZFP filter available? %s\n", filter_avail ? "YES" : "NO");
 
     int rank, nprocs;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
     PRINT_RANK0("Running with %d rank(s)\n", nprocs);
+    PRINT_RANK0("Chunks per rank %d\n", chunks_per_rank);
 
 #if USE_COLLECTIVE_IO
     PRINT_RANK0("Using collective I/O\n");
@@ -134,32 +155,50 @@ int main(int argc, char** argv) {
     MPI_Barrier(MPI_COMM_WORLD);
     PRINT_RANK0("\n========= Starting WRITE phase =========\n");
 
-    const hsize_t chunk_bytes = MB_PER_CHUNK * 1024 * 1024;
     const hsize_t total_chunks = nprocs * chunks_per_rank;
-    const hsize_t total_bytes = total_chunks * chunk_bytes;
 
     hid_t fapl = H5Pcreate(H5P_FILE_ACCESS);
-    H5Pset_fapl_mpio(fapl, MPI_COMM_WORLD, MPI_INFO_NULL);
+    H5_ASSERT(H5Pset_fapl_mpio(fapl, MPI_COMM_WORLD, MPI_INFO_NULL));
 
     hid_t file = H5Fcreate("output.h5", H5F_ACC_TRUNC, H5P_DEFAULT, fapl);
+    H5_ASSERT(file);
     H5Pclose(fapl);
 
-    hsize_t dims[1] = { total_bytes };
-    hsize_t chunk_dims[1] = { chunk_bytes };
+    hsize_t dims[2] = { total_chunks * ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK };
+    hsize_t chunk_dims[2] = { ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK };
+    uint32_t chunk_bytes = ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK * sizeof(float);
 
-    hid_t space = H5Screate_simple(1, dims, NULL);
+    hid_t space = H5Screate_simple(2, dims, NULL);
 
     hid_t dcpl = H5Pcreate(H5P_DATASET_CREATE);
-    H5Pset_chunk(dcpl, 1, chunk_dims);
+    H5_ASSERT(dcpl);
+    H5_ASSERT(H5Pset_chunk(dcpl, 2, chunk_dims));
 
-    hid_t dset = H5Dcreate(file, DATASET_NAME, H5T_NATIVE_CHAR, space, H5P_DEFAULT, dcpl, H5P_DEFAULT);
-    H5Pclose(dcpl);
-    H5Sclose(space);
+    if(zfp_compress) {
+        PRINT_RANK0("ZFP Compression filter enabled\n");
+
+        unsigned int cd_values[6];
+        size_t cd_nelmts = 6;
+
+        // Example: use rate mode with rate=8.0 (adjust as needed)
+        double rate = 8.0;
+        H5Pset_zfp_rate_cdata(rate, cd_nelmts, cd_values);
+
+        H5_ASSERT(H5Pset_filter(dcpl, H5Z_FILTER_ZFP, H5Z_FLAG_MANDATORY, cd_nelmts, cd_values));
+    } else
+        PRINT_RANK0("ZFP Compression filter disabled\n");
+
+    hid_t dset = H5Dcreate(file, DATASET_NAME, H5T_NATIVE_FLOAT, space, H5P_DEFAULT, dcpl, H5P_DEFAULT);
+    H5_ASSERT(dset);
+    H5_ASSERT(H5Pclose(dcpl));
+    H5_ASSERT(H5Sclose(space));
 
     // Allocate write buffer
-    char *buffer = (char*) malloc(chunk_bytes);
-    for (hsize_t i = 0; i < chunk_bytes; i++) {
-        buffer[i] = (char)(rank % 256);
+    float *buffer = (float*) malloc(chunk_bytes);
+    for (hsize_t i = 0; i < ELEMENTS_PER_CHUNK; i++) {
+        for (hsize_t j = 0; j < ELEMENTS_PER_CHUNK; j++) {
+            buffer[i * ELEMENTS_PER_CHUNK + j] = (float)rank;
+        }
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -167,93 +206,108 @@ int main(int argc, char** argv) {
 
     START_TIMER(H5_WRITE_ALL_CHUNKS);
     for (int c = 0; c < chunks_per_rank; c++) {
-        hsize_t offset[1] = { (rank * chunks_per_rank + c) * chunk_bytes };
-        hsize_t size[1] = { chunk_bytes };
+        hsize_t offset[2] = { (rank * chunks_per_rank + c) * ELEMENTS_PER_CHUNK, 0 };
+        hsize_t size[2] = { ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK };
+
 
         hid_t filespace = H5Dget_space(dset);
-        H5Sselect_hyperslab(filespace, H5S_SELECT_SET, offset, NULL, size, NULL);
+        H5_ASSERT(filespace);
+        H5_ASSERT(H5Sselect_hyperslab(filespace, H5S_SELECT_SET, offset, NULL, size, NULL));
 
-        hid_t memspace = H5Screate_simple(1, size, NULL);
+        hid_t memspace = H5Screate_simple(2, size, NULL);
+        H5_ASSERT(memspace);
 
         hid_t dxpl = H5Pcreate(H5P_DATASET_XFER);
+        H5_ASSERT(dxpl);
+
+
 #if USE_COLLECTIVE_IO
-        H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE);
+        H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE));
 #else
-        H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT);
+        H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT));
 #endif
 
         printf("Rank %d: Starting chunk write %d\n", rank, c + 1);
         START_TIMER(H5_WRITE_CHUNK);
-        H5Dwrite(dset, H5T_NATIVE_CHAR, memspace, filespace, dxpl, buffer);
-        H5Fflush(file, H5F_SCOPE_GLOBAL);
+        H5_ASSERT(H5Dwrite(dset, H5T_NATIVE_FLOAT, memspace, filespace, dxpl, buffer));
         STOP_TIMER(H5_WRITE_CHUNK);
         printf("Rank %d: Finished chunk write %d\n", rank, c + 1);
 
-        H5Pclose(dxpl);
-        H5Sclose(memspace);
-        H5Sclose(filespace);
+        H5_ASSERT(H5Pclose(dxpl));
+        H5_ASSERT(H5Sclose(memspace));
+        H5_ASSERT(H5Sclose(filespace));
     }
+    H5_ASSERT(H5Fflush(file, H5F_SCOPE_GLOBAL));
     STOP_TIMER(H5_WRITE_ALL_CHUNKS);
 
     printf("Rank %d: Finished write\n", rank);
     MPI_Barrier(MPI_COMM_WORLD);
 
     free(buffer);
-    H5Dclose(dset);
-    H5Fclose(file);
+    H5_ASSERT(H5Dclose(dset));
+    H5_ASSERT(H5Fclose(file));
 
     MPI_Barrier(MPI_COMM_WORLD);
     PRINT_RANK0("\n========= Starting READ phase =========\n");
 
     // Reopen file and dataset
     fapl = H5Pcreate(H5P_FILE_ACCESS);
-    H5Pset_fapl_mpio(fapl, MPI_COMM_WORLD, MPI_INFO_NULL);
+    H5_ASSERT(fapl);
+    H5_ASSERT(H5Pset_fapl_mpio(fapl, MPI_COMM_WORLD, MPI_INFO_NULL));
     file = H5Fopen("output.h5", H5F_ACC_RDONLY, fapl);
-    H5Pclose(fapl);
+    H5_ASSERT(file);
+    H5_ASSERT(H5Pclose(fapl));
 
     dset = H5Dopen(file, DATASET_NAME, H5P_DEFAULT);
+    H5_ASSERT(dset);
 
     // Allocate read buffer
-    char *read_buf = (char*) malloc(chunk_bytes);
+    float *read_buf = (float*) malloc(chunk_bytes);
 
     START_TIMER(H5_READ_ALL_CHUNKS);
     for (int c = 0; c < chunks_per_rank; c++) {
-        hsize_t offset[1] = { (rank * chunks_per_rank + c) * chunk_bytes };
-        hsize_t size[1] = { chunk_bytes };
+        hsize_t offset[2] = { (rank * chunks_per_rank + c) * ELEMENTS_PER_CHUNK, 0 };
+        hsize_t size[2] = { ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK };
+
 
         hid_t filespace = H5Dget_space(dset);
-        H5Sselect_hyperslab(filespace, H5S_SELECT_SET, offset, NULL, size, NULL);
+        H5_ASSERT(filespace);
+        H5_ASSERT(H5Sselect_hyperslab(filespace, H5S_SELECT_SET, offset, NULL, size, NULL));
 
-        hid_t memspace = H5Screate_simple(1, size, NULL);
+        hid_t memspace = H5Screate_simple(2, size, NULL);
+        H5_ASSERT(memspace);
 
         hid_t dxpl = H5Pcreate(H5P_DATASET_XFER);
+        H5_ASSERT(dxpl);
 
         if(collective_io)
-            H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE);
+            H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE));
         else
-            H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT);
+            H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT));
 
         printf("Rank %d: Starting chunk read %d\n", rank, c + 1);
         START_TIMER(H5_READ_CHUNK);
-        H5Dread(dset, H5T_NATIVE_CHAR, memspace, filespace, dxpl, read_buf);
+        H5_ASSERT(H5Dread(dset, H5T_NATIVE_FLOAT, memspace, filespace, dxpl, read_buf));
         STOP_TIMER(H5_READ_CHUNK);
         printf("Rank %d: Finished chunk read %d\n", rank, c + 1);
 
         // Optionally verify or print first few bytes
-        if(read_buf[0] != rank)
-            fprintf(stderr, "Chunk had invalid value expected %d got %d\n", rank, read_buf[0]);
+        for (int i = 0; i < 4; i++) {
+            if ((int)read_buf[i] != rank)
+                fprintf(stderr, "Read mismatch at index %d: expected %d got %d\n", i, rank, (int)read_buf[i]);
+        }
 
-        H5Pclose(dxpl);
-        H5Sclose(memspace);
-        H5Sclose(filespace);
+        H5_ASSERT(H5Pclose(dxpl));
+        H5_ASSERT(H5Sclose(memspace));
+        H5_ASSERT(H5Sclose(filespace));
     }
     STOP_TIMER(H5_READ_ALL_CHUNKS);
 
     free(read_buf);
-    H5Dclose(dset);
-    H5Fclose(file);
+    H5_ASSERT(H5Dclose(dset));
+    H5_ASSERT(H5Fclose(file));
 
-    H5close();
+    H5_ASSERT(H5close());
 
     print_all_timers_csv(CSV_FILENAME, chunks_per_rank, nprocs, scale_by_rank);
 

@@ -13,7 +13,18 @@ set(SOURCES
 
 add_executable(zfp_baseline ${SOURCES})
 
-target_include_directories(zfp_baseline PRIVATE ${HDF5_INCLUDE_DIRS})
-target_link_libraries(zfp_baseline PRIVATE ${HDF5_LIBRARIES} m z)
+# Add H5Z-ZFP include directory
+target_include_directories(zfp_baseline PRIVATE
+    ${HDF5_INCLUDE_DIRS}
+    /home/ta1/src/H5Z-ZFP/install/include
+)
+
+# Link with HDF5 and zfp library
+target_link_libraries(zfp_baseline PRIVATE
+    ${HDF5_LIBRARIES}
+    /home/ta1/src/H5Z-ZFP/install/lib/libh5zzfp.a
+    m
+    z
+)
 
 target_compile_options(zfp_baseline PRIVATE -Wall -Wextra)

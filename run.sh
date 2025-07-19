@@ -15,6 +15,9 @@ DONT_SCALE_BY_RANK=0
 COLLECTIVE_IO=1
 DONT_COLLECTIVE_IO=0
 
+ZFP_FILTER=1
+DONT_ZFP_FILTER=0
+
 # scale by rank static chunk
 pushd ./build
 
@@ -33,13 +36,13 @@ mkdir collective
 echo "=== Scaling by rank with fixed chunk count ==="
 for ((rank=1; rank<=STATIC_RANK; rank*=2)); do
     echo "Running with ranks=$rank, chunks=$STATIC_CHUNK"
-    mpirun --mca btl_tcp_if_include lo --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $rank ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK
+    mpirun --mca btl_tcp_if_include lo --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $rank ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $ZFP_FILTER
 done
 
 echo "=== Scaling by chunk count with fixed rank count ==="
 for ((chunks=1; chunks<=STATIC_CHUNK; chunks*=2)); do
     echo "Running with ranks=$STATIC_RANK, chunks=$chunks"
-    mpirun --mca btl_tcp_if_include lo  --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $STATIC_RANK ./zfp_baseline $DONT_COLLECTIVE_IO $chunks $DONT_SCALE_BY_RANK
+    mpirun --mca btl_tcp_if_include lo  --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $STATIC_RANK ./zfp_baseline $DONT_COLLECTIVE_IO $chunks $DONT_SCALE_BY_RANK $ZFP_FILTER
 done
 
 popd 
@@ -52,13 +55,13 @@ mv *.png independent
 echo "=== Scaling by rank with fixed chunk count ==="
 for ((rank=1; rank<=STATIC_RANK; rank*=2)); do
     echo "Running with ranks=$rank, chunks=$STATIC_CHUNK"
-    mpirun --mca btl_tcp_if_include lo --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $rank ./zfp_baseline $COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK
+    mpirun --mca btl_tcp_if_include lo --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $rank ./zfp_baseline $COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $ZFP_FILTER
 done
 
 echo "=== Scaling by chunk count with fixed rank count ==="
 for ((chunks=1; chunks<=STATIC_CHUNK; chunks*=2)); do
     echo "Running with ranks=$STATIC_RANK, chunks=$chunks"
-    mpirun --mca btl_tcp_if_include lo  --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $STATIC_RANK ./zfp_baseline $COLLECTIVE_IO $chunks $DONT_SCALE_BY_RANK
+    mpirun --mca btl_tcp_if_include lo  --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $STATIC_RANK ./zfp_baseline $COLLECTIVE_IO $chunks $DONT_SCALE_BY_RANK $ZFP_FILTER
 done
 
 popd
