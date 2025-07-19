@@ -4,10 +4,15 @@
 
 1. cmake  
 2. mpi
+3. gawk
+4. gnuplot
 
 ### Build HDF5
 
 ```bash
+git clone https://github.com/HDFGroup/hdf5
+git switch --detach hdf5-1.14.6
+
 export HDF5_INSTALL_DIR=/home/ta1/src/hdf5/install
 
 cmake -G "Unix Makefiles" \

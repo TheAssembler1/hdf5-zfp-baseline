@@ -3,6 +3,8 @@ cmake_policy(SET CMP0074 NEW)
 
 project(hdf5-zfp-baseline C)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 find_package(HDF5 REQUIRED COMPONENTS C)
 
 set(SOURCES
