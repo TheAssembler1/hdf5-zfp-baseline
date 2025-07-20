@@ -27,9 +27,10 @@ export HDF5_PLUGIN_PATH=/home/ta1/src/H5Z-ZFP/install/plugin
 ```bash
 git clone https://github.com/LLNL/zfp.git
 
-export ZFP_INSTALL_DIR=/home/ta1/src/zfp/install
-
-cmake .. -DCMAKE_INSTALL_PREFIX=$ZFP_INSTALL_DIR -DZFP_WITH_CMAKE_CONFIG=ON
+cmake .. \
+  -DCMAKE_INSTALL_PREFIX=$ZFP_INSTALL_DIR \
+  -DCMAKE_C_FLAGS="-DBIT_STREAM_WORD_TYPE=uint8" \
+  -DCMAKE_CXX_FLAGS="-DBIT_STREAM_WORD_TYPE=uint8"
 make -j$(nproc)
 make install
 ```
@@ -52,7 +53,7 @@ git switch --detach hdf5-1.14.6
 
 cmake -G "Unix Makefiles" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DBUILD_SHARED_LIBS=OFF \
+  -DBUILD_SHARED_LIBS=ON \
   -DBUILD_TESTING=ON \
   -DHDF5_BUILD_TOOLS=ON \
   -DHDF5_ENABLE_PARALLEL=ON \

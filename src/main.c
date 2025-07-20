@@ -3,15 +3,18 @@
 #include <stdbool.h>
 #include <mpi.h>
 #include "hdf5.h"
+#include "H5Zzfp.h"
+#include "H5Zzfp_lib.h"
 #include "H5Zzfp_plugin.h"
+#include "H5Zzfp_props.h"
+#include "H5Zzfp_version.h"
 
 #define H5Z_FILTER_ZFP 32013
 
 #define CSV_FILENAME "output.csv"
 
-#define ELEMENTS_PER_CHUNK 64
+#define ELEMENTS_PER_CHUNK 4096
 #define DATASET_NAME "dataset"
-#define USE_COLLECTIVE_IO 1
 
 #define PRINT_RANK0(fmt, ...) \
     do { \
@@ -143,11 +146,11 @@ int main(int argc, char** argv) {
     PRINT_RANK0("Running with %d rank(s)\n", nprocs);
     PRINT_RANK0("Chunks per rank %d\n", chunks_per_rank);
 
-#if USE_COLLECTIVE_IO
-    PRINT_RANK0("Using collective I/O\n");
-#else
-    PRINT_RANK0("Using independent I/O\n");
-#endif
+    if(collective_io)
+        PRINT_RANK0("Using collective I/O\n");
+    else
+        PRINT_RANK0("Using independent I/O\n");
+
 
     if(scale_by_rank)
         PRINT_RANK0("Detected scale by rank\n");
@@ -221,11 +224,10 @@ int main(int argc, char** argv) {
         H5_ASSERT(dxpl);
 
 
-#if USE_COLLECTIVE_IO
-        H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE));
-#else
+        if(collective_io)
+            H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_COLLECTIVE));
+        else
         H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT));
-#endif
 
         printf("Rank %d: Starting chunk write %d\n", rank, c + 1);
         START_TIMER(H5_WRITE_CHUNK);
