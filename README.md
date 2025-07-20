@@ -1,8 +1,37 @@
 # HDF5 ZFP Baseline
 
-## FIXME
+## Current Results (Just on Local Machine)
 
-1. H5Z-ZFP dependencies requires manually specifying path int `CMakeLists.txt`
+### ZFP Filter Enabled
+
+![Scaling of all chunks by chunk size with ZFP compression enabled](res/collective/zfp/all_chunk_chunk_scaling.png)  
+*Figure 1: All-chunk scaling performance by chunk size with ZFP filter enabled.*
+
+![Scaling of all chunks by rank count with ZFP compression enabled](res/collective/zfp/all_chunk_rank_scaling.png)  
+*Figure 2: All-chunk scaling performance by number of ranks with ZFP filter enabled.*
+
+![Scaling per chunk by chunk size with ZFP compression enabled](res/collective/zfp/per_chunk_chunk_scaling.png)  
+*Figure 3: Per-chunk scaling performance by chunk size with ZFP filter enabled.*
+
+![Scaling per chunk by rank count with ZFP compression enabled](res/collective/zfp/per_chunk_rank_scaling.png)  
+*Figure 4: Per-chunk scaling performance by number of ranks with ZFP filter enabled.*
+
+---
+
+### ZFP Filter Disabled
+
+![Scaling of all chunks by chunk size without ZFP compression](res/collective/raw/all_chunk_chunk_scaling.png)  
+*Figure 5: All-chunk scaling performance by chunk size without ZFP filter.*
+
+![Scaling of all chunks by rank count without ZFP compression](res/collective/raw/all_chunk_rank_scaling.png)  
+*Figure 6: All-chunk scaling performance by number of ranks without ZFP filter.*
+
+![Scaling per chunk by chunk size without ZFP compression](res/collective/raw/per_chunk_chunk_scaling.png)  
+*Figure 7: Per-chunk scaling performance by chunk size without ZFP filter.*
+
+![Scaling per chunk by rank count without ZFP compression](res/collective/raw/per_chunk_rank_scaling.png)  
+*Figure 8: Per-chunk scaling performance by number of ranks without ZFP filter.*
+
 
 ### Dependencies
 
