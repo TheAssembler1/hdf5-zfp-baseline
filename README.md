@@ -8,33 +8,50 @@ This project provides a baseline implementation and benchmarking framework for e
 
 ### ZFP Filter Enabled
 
-![Scaling of all chunks by chunk size with ZFP compression enabled](res/collective/zfp/all_chunk_chunk_scaling.png)  
-*Figure 1: All-chunk scaling performance by chunk size with ZFP filter enabled.*
+<p align="center">
+  <img src="res/collective/zfp/all_chunk_chunk_scaling.png" alt="Scaling of all chunks by chunk size with ZFP compression enabled" />
+</p>
+<p align="center"><em>Figure 1: All-chunk scaling performance by chunk size with ZFP filter enabled.</em></p>
 
-![Scaling of all chunks by rank count with ZFP compression enabled](res/collective/zfp/all_chunk_rank_scaling.png)  
-*Figure 2: All-chunk scaling performance by number of ranks with ZFP filter enabled.*
+<p align="center">
+  <img src="res/collective/zfp/all_chunk_rank_scaling.png" alt="Scaling of all chunks by rank count with ZFP compression enabled" />
+</p>
+<p align="center"><em>Figure 2: All-chunk scaling performance by number of ranks with ZFP filter enabled.</em></p>
 
-![Scaling per chunk by chunk size with ZFP compression enabled](res/collective/zfp/per_chunk_chunk_scaling.png)  
-*Figure 3: Per-chunk scaling performance by chunk size with ZFP filter enabled.*
+<p align="center">
+  <img src="res/collective/zfp/per_chunk_chunk_scaling.png" alt="Scaling per chunk by chunk size with ZFP compression enabled" />
+</p>
+<p align="center"><em>Figure 3: Per-chunk scaling performance by chunk size with ZFP filter enabled.</em></p>
 
-![Scaling per chunk by rank count with ZFP compression enabled](res/collective/zfp/per_chunk_rank_scaling.png)  
-*Figure 4: Per-chunk scaling performance by number of ranks with ZFP filter enabled.*
+<p align="center">
+  <img src="res/collective/zfp/per_chunk_rank_scaling.png" alt="Scaling per chunk by rank count with ZFP compression enabled" />
+</p>
+<p align="center"><em>Figure 4: Per-chunk scaling performance by number of ranks with ZFP filter enabled.</em></p>
 
 ---
 
 ### ZFP Filter Disabled
 
-![Scaling of all chunks by chunk size without ZFP compression](res/collective/raw/all_chunk_chunk_scaling.png)  
-*Figure 5: All-chunk scaling performance by chunk size without ZFP filter.*
+<p align="center">
+  <img src="res/collective/raw/all_chunk_chunk_scaling.png" alt="Scaling of all chunks by chunk size without ZFP compression" />
+</p>
+<p align="center"><em>Figure 5: All-chunk scaling performance by chunk size without ZFP filter.</em></p>
 
-![Scaling of all chunks by rank count without ZFP compression](res/collective/raw/all_chunk_rank_scaling.png)  
-*Figure 6: All-chunk scaling performance by number of ranks without ZFP filter.*
+<p align="center">
+  <img src="res/collective/raw/all_chunk_rank_scaling.png" alt="Scaling of all chunks by rank count without ZFP compression" />
+</p>
+<p align="center"><em>Figure 6: All-chunk scaling performance by number of ranks without ZFP filter.</em></p>
 
-![Scaling per chunk by chunk size without ZFP compression](res/collective/raw/per_chunk_chunk_scaling.png)  
-*Figure 7: Per-chunk scaling performance by chunk size without ZFP filter.*
+<p align="center">
+  <img src="res/collective/raw/per_chunk_chunk_scaling.png" alt="Scaling per chunk by chunk size without ZFP compression" />
+</p>
+<p align="center"><em>Figure 7: Per-chunk scaling performance by chunk size without ZFP filter.</em></p>
 
-![Scaling per chunk by rank count without ZFP compression](res/collective/raw/per_chunk_rank_scaling.png)  
-*Figure 8: Per-chunk scaling performance by number of ranks without ZFP filter.*
+<p align="center">
+  <img src="res/collective/raw/per_chunk_rank_scaling.png" alt="Scaling per chunk by rank count without ZFP compression" />
+</p>
+<p align="center"><em>Figure 8: Per-chunk scaling performance by number of ranks without ZFP filter.</em></p>
+
 
 
 ### Dependencies
