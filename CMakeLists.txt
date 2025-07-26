@@ -45,18 +45,16 @@ include_directories(${HDF5_INCLUDE_DIRS} ${ZFP_INCLUDE_DIR} ${H5ZZFP_INCLUDE_DIR
 link_directories(${ZFP_LIBRARY} ${H5ZZFP_LIBRARY})
 
 # List your executables and sources
-set(SOURCES1 src/main.c)
-set(SOURCES2 src/simple_main.c)
+set(ZFP_BASELINE_SOURCES src/main.c)
+set(SIMPLE_ZFP_SOURCES src/simple_main.c)
+set(PDC_BASELINE_SOURCES pdc_src/main.c)
 
-add_executable(zfp_baseline ${SOURCES1})
-add_executable(simple_zfp ${SOURCES2})
+add_executable(zfp_baseline ${ZFP_BASELINE_SOURCES})
+add_executable(simple_zfp ${SIMPLE_ZFP_SOURCES})
+add_executable(pdc_baseline ${PDC_BASELINE_SOURCES})
 
-# Common compile options
-target_compile_options(zfp_baseline PRIVATE -Wall -Wextra)
-target_compile_options(simple_zfp PRIVATE -Wall -Wextra)
-
-# Link libraries
-foreach(target zfp_baseline simple_zfp)
+foreach(target zfp_baseline simple_zfp pdc_baseline)
+  target_compile_options(${target} PRIVATE -Wall -Wextra)
   target_link_libraries(${target} PRIVATE
     ${HDF5_LIBRARIES}
     ${H5ZZFP_LIBRARY}
