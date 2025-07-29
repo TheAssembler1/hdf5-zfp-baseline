@@ -1,7 +1,13 @@
+#include <mpi.h>
+
 #include "pdc_io_impl.h"
 #include "../common/common.h"
 
 #include "pdc.h"
+
+/**
+ * NOTE: we don't close and reopen the container
+ */
 
 static pdcid_t pdc_g;
 static pdcid_t cont_g;
@@ -17,23 +23,36 @@ void pdc_io_init() {
 
 void pdc_io_deinit() { PDC_NEG_ASSERT(PDCclose(pdc_g)); }
 
-void pdc_io_init_dataset(int num_ranks, int chunks_per_rank) {
+void pdc_io_init_dataset(MPI_Comm comm, int my_rank, int num_ranks, int chunks_per_rank) {
     uint64_t total_chunks = num_ranks * chunks_per_rank;
 
     cont_prop_g = PDCprop_create(PDC_CONT_CREATE, pdc_g);
-    cont_g = PDCcont_create("pdc_container", cont_prop_g);
+    cont_g = PDCcont_create_col("pdc_container", cont_prop_g);
+
+    PDC_ZERO_ASSERT(cont_prop_g);
+    PDC_ZERO_ASSERT(cont_g);
 
     dims[0] = total_chunks * ELEMENTS_PER_CHUNK;
     dims[1] = ELEMENTS_PER_CHUNK;
 
     obj_prop_g = PDCprop_create(PDC_OBJ_CREATE, pdc_g);
-    PDCprop_set_obj_dims(obj_prop_g, 2, dims);
-    PDCprop_set_obj_type(obj_prop_g, PDC_FLOAT);
-    PDCprop_set_obj_time_step(obj_prop_g, 0);
-    PDCprop_set_obj_user_id(obj_prop_g, getuid());
-    PDCprop_set_obj_app_name(obj_prop_g, "zfp-baseline");
+    PDC_ZERO_ASSERT(obj_prop_g);
+    PDC_NEG_ASSERT(PDCprop_set_obj_dims(obj_prop_g, 2, dims));
+    PDC_NEG_ASSERT(PDCprop_set_obj_type(obj_prop_g, PDC_FLOAT));
+    PDC_NEG_ASSERT(PDCprop_set_obj_time_step(obj_prop_g, 0));
+    PDC_NEG_ASSERT(PDCprop_set_obj_user_id(obj_prop_g, getuid()));
+    PDC_NEG_ASSERT(PDCprop_set_obj_app_name(obj_prop_g, "zfp-baseline"));
 
-    obj_g = PDCobj_create(cont_g, DATASET_NAME, obj_prop_g);
+    if(my_rank == 0) {
+        obj_g = PDCobj_create(cont_g, DATASET_NAME, obj_prop_g);
+        PDC_ZERO_ASSERT(obj_g);
+        PDC_NEG_ASSERT(PDCobj_close(obj_g));
+    }
+
+    MPI_Barrier(comm);
+
+    obj_g = PDCobj_open_col(DATASET_NAME, cont_g);
+    PDC_ZERO_ASSERT(obj_g);
 }
 
 void pdc_io_create_dataset() {
@@ -60,12 +79,16 @@ void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
     pdcid_t transfer =
         PDCregion_transfer_create(buffer, PDC_WRITE, obj_g, reg, reg_global);
 
-    PDCregion_transfer_start(transfer);
-    PDCregion_transfer_wait(transfer);
-    PDCregion_transfer_close(transfer);
+    PDC_ZERO_ASSERT(reg);
+    PDC_ZERO_ASSERT(reg_global);
+    PDC_ZERO_ASSERT(transfer);
 
-    PDCregion_close(reg);
-    PDCregion_close(reg_global);
+    PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    PDC_NEG_ASSERT(PDCregion_transfer_wait(transfer));
+    PDC_NEG_ASSERT(PDCregion_transfer_close(transfer));
+
+    PDC_NEG_ASSERT(PDCregion_close(reg));
+    PDC_NEG_ASSERT(PDCregion_close(reg_global));
 }
 
 void pdc_io_read_chunk(float *buffer, bool collective_io, int rank,
@@ -84,31 +107,27 @@ void pdc_io_read_chunk(float *buffer, bool collective_io, int rank,
     pdcid_t transfer =
         PDCregion_transfer_create(buffer, PDC_READ, obj_g, reg, reg_global);
 
-    PDCregion_transfer_start(transfer);
-    PDCregion_transfer_wait(transfer);
-    PDCregion_transfer_close(transfer);
+    PDC_ZERO_ASSERT(reg);
+    PDC_ZERO_ASSERT(reg_global);
+    PDC_ZERO_ASSERT(transfer);
 
-    PDCregion_close(reg);
-    PDCregion_close(reg_global);
+    PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    PDC_NEG_ASSERT(PDCregion_transfer_wait(transfer));
+    PDC_NEG_ASSERT(PDCregion_transfer_close(transfer));
+
+    PDC_NEG_ASSERT(PDCregion_close(reg));
+    PDC_NEG_ASSERT(PDCregion_close(reg_global));
 }
 
 void pdc_io_flush() {
-    // No explicit flush API in PDC (PDC is eventually consistent by design)
+    // No explicit flush API in PDC
 }
 
 void pdc_io_close_dataset() {
-    PDCobj_close(obj_g);
-    PDCcont_close(cont_g);
-    PDCprop_close(obj_prop_g);
-    PDCprop_close(cont_prop_g);
+    PDC_NEG_ASSERT(PDCobj_close(obj_g));
 }
 
 void pdc_io_reopen_dataset() {
-    // Recreate or reopen properties
-    cont_prop_g = PDCprop_create(PDC_CONT_CREATE, pdc_g);
-    obj_prop_g = PDCprop_create(PDC_OBJ_CREATE, pdc_g);
-
-    // Reopen or recreate the container and object
-    cont_g = PDCcont_open("cont", pdc_g);
-    obj_g = PDCobj_open(DATASET_NAME, cont_g);
+    obj_g = PDCobj_open_col(DATASET_NAME, cont_g);
+    PDC_ZERO_ASSERT(obj_g);
 }

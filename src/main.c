@@ -41,7 +41,7 @@ typedef struct io_impl_funcs_t {
      *  - num_ranks: number of parallel processes
      *  - chunks_per_rank: number of data chunks each process will handle
      */
-    void (*init_dataset)(int num_ranks, int chunks_per_rank);
+    void (*init_dataset)(MPI_Comm comm, int my_rank, int num_ranks, int chunks_per_rank);
     /**
      * Creates the dataset within the file, using the configuration set during
      * initialization. Allocate storage, set chunking, compression, and other
@@ -184,15 +184,18 @@ int main(int argc, char **argv) {
     PRINT_RANK0("\n========= Starting WRITE phase =========\n");
 
     // init dataset
-    io_impl_funcs[cur_io_impl].init_dataset(num_ranks, chunks_per_rank);
+    PRINT_RANK0("Calling init_dataset on impl\n");
+    io_impl_funcs[cur_io_impl].init_dataset(MPI_COMM_WORLD, rank, num_ranks, chunks_per_rank);
 
     if (zfp_compress) {
         PRINT_RANK0("ZFP Compression filter enabled\n");
         // FIXME: need a global config with compression settings
+        PRINT_RANK0("Calling enable_compression_on_dataset on impl\n");
         io_impl_funcs[cur_io_impl].enable_compression_on_dataset();
     } else
         PRINT_RANK0("ZFP Compression filter disabled\n");
 
+    PRINT_RANK0("Calling create_dataset on impl\n");
     io_impl_funcs[cur_io_impl].create_dataset();
 
     // Allocate write buffer
@@ -212,11 +215,13 @@ int main(int argc, char **argv) {
     for (int c = 0; c < chunks_per_rank; c++) {
         printf("Rank %d: Starting chunk write %d\n", rank, c + 1);
         START_TIMER(WRITE_CHUNK);
+        PRINT_RANK0("Calling wrte_chunk on impl\n");
         io_impl_funcs[cur_io_impl].write_chunk(buffer, collective_io, rank,
                                                chunks_per_rank, c);
         STOP_TIMER(WRITE_CHUNK);
         printf("Rank %d: Finished chunk write %d\n", rank, c + 1);
     }
+    PRINT_RANK0("Calling flush on impl\n");
     io_impl_funcs[cur_io_impl].flush();
     STOP_TIMER(WRITE_ALL_CHUNKS);
 
@@ -225,11 +230,13 @@ int main(int argc, char **argv) {
 
     // close dataset
     free(buffer);
+    PRINT_RANK0("Calling close_dataset on impl\n");
     io_impl_funcs[cur_io_impl].close_dataset();
 
     MPI_Barrier(MPI_COMM_WORLD);
     PRINT_RANK0("\n========= Starting READ phase =========\n");
 
+    PRINT_RANK0("Calling reopen on impl\n");
     io_impl_funcs[cur_io_impl].reopen_dataset();
 
     // Allocate read buffer
@@ -245,6 +252,7 @@ int main(int argc, char **argv) {
     for (int c = 0; c < chunks_per_rank; c++) {
         printf("Rank %d: Starting chunk read %d\n", rank, c + 1);
         START_TIMER(READ_CHUNK);
+        PRINT_RANK0("Calling read_chunk on impl\n");
         io_impl_funcs[cur_io_impl].read_chunk(read_buf, collective_io, rank,
                                               chunks_per_rank, c);
 #ifdef VALIDATE_DATA_READ
@@ -265,7 +273,9 @@ int main(int argc, char **argv) {
 
     free(read_buf);
 
+    PRINT_RANK0("Calling close_dataset on impl\n");
     io_impl_funcs[cur_io_impl].close_dataset();
+    PRINT_RANK0("Calling deinit on impl\n");
     io_impl_funcs[cur_io_impl].deinit();
 
     if (chunks_read_valid)

@@ -19,7 +19,7 @@ void hdf5_io_init() {
 
 void hdf5_io_deinit() { H5_ASSERT(H5close()); }
 
-void hdf5_io_init_dataset(int num_ranks, int chunks_per_rank) {
+void hdf5_io_init_dataset(MPI_Comm comm, int my_rank, int num_ranks, int chunks_per_rank) {
     const hsize_t total_chunks = num_ranks * chunks_per_rank;
 
     fapl_g = H5Pcreate(H5P_FILE_ACCESS);

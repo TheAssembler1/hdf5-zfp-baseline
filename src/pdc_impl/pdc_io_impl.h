@@ -23,7 +23,7 @@
 
 void pdc_io_init();
 void pdc_io_deinit();
-void pdc_io_init_dataset(int num_ranks, int chunks_per_rank);
+void pdc_io_init_dataset(MPI_Comm comm, int my_rank, int num_ranks, int chunks_per_rank);
 void pdc_io_create_dataset();
 void pdc_io_enable_compression_on_dataset();
 void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
