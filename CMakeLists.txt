@@ -8,6 +8,37 @@ find_package(HDF5 REQUIRED COMPONENTS C)
 # For LSP
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Get PDC install directory from environment variable
+if(DEFINED ENV{PDC_INSTALL_DIR})
+    set(PDC_INSTALL_DIR $ENV{PDC_INSTALL_DIR})
+else()
+    message(FATAL_ERROR "Environment variable PDC_INSTALL_DIR is not set.")
+endif()
+
+# Include and library paths
+include_directories("${PDC_INSTALL_DIR}/include")
+link_directories("${PDC_INSTALL_DIR}/lib")
+
+# Optionally find the actual library
+find_library(PDC_LIBRARY pdc PATHS "${PDC_INSTALL_DIR}/lib")
+if(NOT PDC_LIBRARY)
+    message(FATAL_ERROR "PDC library not found in ${PDC_INSTALL_DIR}/lib")
+endif()
+
+# Check if MERCURY_INSTALL_DIR env var is set
+if(DEFINED ENV{MERCURY_INSTALL_DIR})
+    set(MERCURY_INSTALL_DIR $ENV{MERCURY_INSTALL_DIR})
+else()
+    message(FATAL_ERROR "Environment variable MERCURY_INSTALL_DIR is not set.")
+endif()
+
+# Add Mercury include and lib directories
+include_directories("${MERCURY_INSTALL_DIR}/include")
+link_directories("${MERCURY_INSTALL_DIR}/lib")
+
+# Find the mercury library
+find_library(MERCURY_LIBRARY mercury PATHS "${MERCURY_INSTALL_DIR}/lib")
+
 # Find ZFP library and include directories (allow user to specify)
 find_path(ZFP_INCLUDE_DIR zfp.h
   HINTS ENV ZFP_INSTALL_DIR
@@ -56,6 +87,8 @@ target_link_libraries(zfp_baseline PRIVATE
   ${HDF5_LIBRARIES}
   ${H5ZZFP_LIBRARY}
   ${ZFP_LIBRARY}
+  ${PDC_LIBRARY}
+  ${MERCURY_LIBRARY}
   m
   z
   stdc++

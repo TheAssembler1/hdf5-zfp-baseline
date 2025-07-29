@@ -120,8 +120,19 @@ int main(int argc, char** argv) {
             .flush = hdf5_io_flush,
             .close_dataset = hdf5_io_close_dataset,
             .reopen_dataset = hdf5_io_reopen_dataset
+        },
+        [PDC_IMPL] = {
+            .init = pdc_io_init,
+            .deinit = pdc_io_deinit,
+            .init_dataset = pdc_io_init_dataset,
+            .create_dataset = pdc_io_create_dataset,
+            .enable_compression_on_dataset = pdc_io_enable_compression_on_dataset,
+            .write_chunk = pdc_io_write_chunk,
+            .read_chunk = pdc_io_read_chunk,
+            .flush = pdc_io_flush,
+            .close_dataset = pdc_io_close_dataset,
+            .reopen_dataset = pdc_io_reopen_dataset
         }
-        // FIXME: add PDC backend
     };
 
     if(argc < 5) {
@@ -152,6 +163,8 @@ int main(int argc, char** argv) {
 
     PRINT_RANK0("Running with %d rank(s)\n", nprocs);
     PRINT_RANK0("Chunks per rank %d\n", chunks_per_rank);
+    PRINT_RANK0("Total data to be written: %.2f MB\n",
+        (chunks_per_rank * nprocs * ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK * sizeof(float)) / (1024.0 * 1024.0));
 
     if(collective_io)
         PRINT_RANK0("Using collective I/O\n");
@@ -214,12 +227,21 @@ int main(int argc, char** argv) {
 
     // Allocate read buffer
     float *read_buf = (float*) malloc(chunk_bytes);
+    bool chunks_read_valid = true;
 
     START_TIMER(READ_ALL_CHUNKS);
     for (int c = 0; c < chunks_per_rank; c++) {
         printf("Rank %d: Starting chunk read %d\n", rank, c + 1);
         START_TIMER(READ_CHUNK);
         io_impl_funcs[cur_io_impl].read_chunk(read_buf, collective_io, rank, chunks_per_rank, c);
+#ifdef VALIDATE_DATA_READ
+    for (int i = 0; i < ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK; i++) {
+        if ((int)read_buf[i] != rank) {
+            fprintf(stderr, "Read mismatch at index %d: expected %d got %d\n", i, rank, (int)read_buf[i]);
+            chunks_read_valid = false;
+        }
+    }
+#endif
         STOP_TIMER(READ_CHUNK);
         printf("Rank %d: Finished chunk read %d\n", rank, c + 1);
     }
@@ -229,6 +251,11 @@ int main(int argc, char** argv) {
 
     io_impl_funcs[cur_io_impl].close_dataset();
     io_impl_funcs[cur_io_impl].deinit();
+
+    if(chunks_read_valid)
+        PRINT_RANK0("All chunk reads were valid\n");
+    else 
+        PRINT_RANK0("ERROR: Not all chunks reads were valid\n");
 
     print_all_timers_csv(CSV_FILENAME, chunks_per_rank, nprocs, scale_by_rank);
 

@@ -97,13 +97,6 @@ void hdf5_io_read_chunk(float* read_buf, bool collective_io, int rank, int chunk
 
     H5_ASSERT(H5Dread(dset_g, H5T_NATIVE_FLOAT, memspace, filespace_g, dxpl, read_buf));
 
-#ifdef VALIDATE_DATA_READ
-    for (int i = 0; i < 4; i++) {
-        if ((int)read_buf[i] != rank)
-            fprintf(stderr, "Read mismatch at index %d: expected %d got %d\n", i, rank, (int)read_buf[i]);
-    }
-#endif
-
     H5_ASSERT(H5Pclose(dxpl));
     H5_ASSERT(H5Sclose(memspace));
     H5_ASSERT(H5Sclose(filespace_g));

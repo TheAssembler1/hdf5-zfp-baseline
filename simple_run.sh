@@ -6,8 +6,8 @@ set -u
 
 ./rebuild.sh
 
-STATIC_CHUNK=4
-STATIC_RANK=4
+STATIC_CHUNK=1
+STATIC_RANK=8
 
 SCALE_BY_RANK=1
 DONT_SCALE_BY_RANK=0
@@ -21,5 +21,5 @@ DONT_ZFP_FILTER=0
 export HDF5_PLUGIN_PATH=/home/ta1/src/H5Z-ZFP/install/plugin
 
 pushd ./build
-mpirun -np 1 ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $ZFP_FILTER
+mpirun -np $STATIC_RANK ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $DONT_ZFP_FILTER
 popd
