@@ -1,6 +1,0 @@
-scale_type,chunks_per_rank,num_ranks,timer_tag,elapsed_seconds
-rank,32,1,h5_write_all_chunks,2.983587
-rank,32,2,h5_write_all_chunks,13.865653
-rank,32,4,h5_write_all_chunks,16.204299
-rank,32,8,h5_write_all_chunks,18.195729
-rank,32,16,h5_write_all_chunks,56.254520

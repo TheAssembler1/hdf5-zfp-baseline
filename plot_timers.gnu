@@ -19,8 +19,8 @@ set xlabel "Number of Ranks"
 set ylabel "Elapsed Time (s)"
 set logscale x 2
 plot \
-    'rank_write_all_chunks.csv' using 3:5 title 'h5 write all chunks' ls 1, \
-    'rank_read_all_chunks.csv'  using 3:5 title 'h5 read all chunks'  ls 2
+    'rank_write_all_chunks.csv' using 3:5 title 'write all chunks' ls 1, \
+    'rank_read_all_chunks.csv'  using 3:5 title 'read all chunks'  ls 2
 
 # Plot for rank scaling
 set output "per_chunk_rank_scaling.png"
@@ -29,8 +29,8 @@ set xlabel "Number of Ranks"
 set ylabel "Elapsed Time (s)"
 set logscale x 2
 plot \
-    'rank_write_chunk.csv' using 3:5 title 'h5 write chunk' ls 1, \
-    'rank_read_chunk.csv'  using 3:5 title 'h5 read chunk'  ls 2
+    'rank_write_chunk.csv' using 3:5 title 'write chunk' ls 1, \
+    'rank_read_chunk.csv'  using 3:5 title 'read chunk'  ls 2
 
 # Plot for chunk scaling
 set output "all_chunk_chunk_scaling.png"
@@ -39,8 +39,8 @@ set xlabel "Chunks Per Rank"
 set ylabel "Elapsed Time (s)"
 set logscale x 2
 plot \
-    'chunk_write_all_chunks.csv' using 2:5 title 'h5 write all chunks' ls 1, \
-    'chunk_read_all_chunks.csv'  using 2:5 title 'h5 read all chunks'  ls 2
+    'chunk_write_all_chunks.csv' using 2:5 title 'write all chunks' ls 1, \
+    'chunk_read_all_chunks.csv'  using 2:5 title 'read all chunks'  ls 2
 
 # Plot for chunk scaling
 set output "per_chunk_chunk_scaling.png"
@@ -49,5 +49,5 @@ set xlabel "Chunks Per Rank"
 set ylabel "Elapsed Time (s)"
 set logscale x 2
 plot \
-    'chunk_write_chunk.csv' using 2:5 title 'h5 write chunk' ls 1, \
-    'chunk_read_chunk.csv'  using 2:5 title 'h5 read chunk'  ls 2
+    'chunk_write_chunk.csv' using 2:5 title 'write chunk' ls 1, \
+    'chunk_read_chunk.csv'  using 2:5 title 'read chunk'  ls 2
