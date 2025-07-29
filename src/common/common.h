@@ -5,6 +5,7 @@
 
 #define ELEMENTS_PER_CHUNK 4096
 #define DATASET_NAME "dataset"
+#undef VALIDATE_DATA_READ
 
 #define PRINT_RANK0(fmt, ...) \
     do { \
