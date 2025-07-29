@@ -1,46 +1,114 @@
 #include "pdc_io_impl.h"
+#include "../common/common.h"
 
 #include "pdc.h"
 
-pdcid_t pdc_id_g;
+static pdcid_t pdc_g;
+static pdcid_t cont_g;
+static pdcid_t cont_prop_g;
+static pdcid_t obj_prop_g;
+static pdcid_t obj_g;
+static uint64_t dims[2];
 
 void pdc_io_init() {
-    pdc_id_g = PDCinit("pdc");
-    PDC_ZERO_ASSERT(pdc_id_g);
+    pdc_g = PDCinit("pdc");
+    PDC_ZERO_ASSERT(pdc_g);
 }
 
-void pdc_io_deinit() {
-    PDC_NEG_ASSERT(PDCclose(pdc_id_g));
-}
+void pdc_io_deinit() { PDC_NEG_ASSERT(PDCclose(pdc_g)); }
 
-void pdc_io_init_dataset(int nprocs, int chunks_per_rank) {
+void pdc_io_init_dataset(int num_ranks, int chunks_per_rank) {
+    uint64_t total_chunks = num_ranks * chunks_per_rank;
 
+    cont_prop_g = PDCprop_create(PDC_CONT_CREATE, pdc_g);
+    cont_g = PDCcont_create("pdc_container", cont_prop_g);
+
+    dims[0] = total_chunks * ELEMENTS_PER_CHUNK;
+    dims[1] = ELEMENTS_PER_CHUNK;
+
+    obj_prop_g = PDCprop_create(PDC_OBJ_CREATE, pdc_g);
+    PDCprop_set_obj_dims(obj_prop_g, 2, dims);
+    PDCprop_set_obj_type(obj_prop_g, PDC_FLOAT);
+    PDCprop_set_obj_time_step(obj_prop_g, 0);
+    PDCprop_set_obj_user_id(obj_prop_g, getuid());
+    PDCprop_set_obj_app_name(obj_prop_g, "zfp-baseline");
+
+    obj_g = PDCobj_create(cont_g, DATASET_NAME, obj_prop_g);
 }
 
 void pdc_io_create_dataset() {
-
+    // Already created during init (obj_g)
 }
 
 void pdc_io_enable_compression_on_dataset() {
-
+    // Enabled at compilation time
 }
 
-void pdc_io_write_chunk(float* buffer, bool collective_io, int rank, int chunks_per_rank, int chunk) {
+void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
+                        int chunks_per_rank, int chunk) {
+    uint64_t local_offset[2], global_offset[2], offset_length[2];
+    local_offset[0] = 0;
+    local_offset[1] = 0;
+    global_offset[0] =
+        (uint64_t) (rank * chunks_per_rank + chunk) * ELEMENTS_PER_CHUNK;
+    global_offset[1] = 0;
+    offset_length[0] = ELEMENTS_PER_CHUNK;
+    offset_length[1] = ELEMENTS_PER_CHUNK;
 
+    pdcid_t reg = PDCregion_create(2, local_offset, offset_length);
+    pdcid_t reg_global = PDCregion_create(2, global_offset, offset_length);
+    pdcid_t transfer =
+        PDCregion_transfer_create(buffer, PDC_WRITE, obj_g, reg, reg_global);
+
+    PDCregion_transfer_start(transfer);
+    PDCregion_transfer_wait(transfer);
+    PDCregion_transfer_close(transfer);
+
+    PDCregion_close(reg);
+    PDCregion_close(reg_global);
 }
 
-void pdc_io_read_chunk(float* buffer, bool collective_io, int rank, int chunks_per_rank, int chunk) {
+void pdc_io_read_chunk(float *buffer, bool collective_io, int rank,
+                       int chunks_per_rank, int chunk) {
+    uint64_t local_offset[2], global_offset[2], offset_length[2];
+    local_offset[0] = 0;
+    local_offset[1] = 0;
+    global_offset[0] =
+        (uint64_t) (rank * chunks_per_rank + chunk) * ELEMENTS_PER_CHUNK;
+    global_offset[1] = 0;
+    offset_length[0] = ELEMENTS_PER_CHUNK;
+    offset_length[1] = ELEMENTS_PER_CHUNK;
 
+    pdcid_t reg = PDCregion_create(2, local_offset, offset_length);
+    pdcid_t reg_global = PDCregion_create(2, global_offset, offset_length);
+    pdcid_t transfer =
+        PDCregion_transfer_create(buffer, PDC_READ, obj_g, reg, reg_global);
+
+    PDCregion_transfer_start(transfer);
+    PDCregion_transfer_wait(transfer);
+    PDCregion_transfer_close(transfer);
+
+    PDCregion_close(reg);
+    PDCregion_close(reg_global);
 }
 
 void pdc_io_flush() {
-
+    // No explicit flush API in PDC (PDC is eventually consistent by design)
 }
 
 void pdc_io_close_dataset() {
-
+    PDCobj_close(obj_g);
+    PDCcont_close(cont_g);
+    PDCprop_close(obj_prop_g);
+    PDCprop_close(cont_prop_g);
 }
 
 void pdc_io_reopen_dataset() {
+    // Recreate or reopen properties
+    cont_prop_g = PDCprop_create(PDC_CONT_CREATE, pdc_g);
+    obj_prop_g = PDCprop_create(PDC_OBJ_CREATE, pdc_g);
 
+    // Reopen or recreate the container and object
+    cont_g = PDCcont_open("cont", pdc_g);
+    obj_g = PDCobj_open(DATASET_NAME, cont_g);
 }

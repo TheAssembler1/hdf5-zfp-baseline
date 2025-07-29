@@ -1,0 +1,24 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Keep opening braces on the same line
+BreakBeforeBraces: Attach
+
+# Optional: control spaces inside parentheses, etc.
+SpacesInParentheses: false
+SpaceAfterCStyleCast: true
+SpaceBeforeParens: ControlStatements
+AllowShortIfStatementsOnASingleLine: true
+
+# Optional: keep constructor initializer list on single line if short
+AllowShortBlocksOnASingleLine: Always
+
+# Optional: better readability of function declarations
+AlignAfterOpenBracket: Align
+AlignOperands: true
+
+# Optional: format includes
+SortIncludes: false
+IncludeBlocks: Preserve

@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(hdf5-zfp-baseline C)
 
+# Get compiler to shutup
+add_compile_options(-Wno-unused-parameter -Wno-unused-variable -Wno-unused-function)
+
 # Require MPI for CC as per your readme
 find_package(MPI REQUIRED)
 find_package(HDF5 REQUIRED COMPONENTS C)
@@ -94,4 +97,3 @@ target_link_libraries(zfp_baseline PRIVATE
   stdc++
   MPI::MPI_C
 )
-

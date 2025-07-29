@@ -10,23 +10,24 @@
 
 #define H5Z_FILTER_ZFP 32013
 
-#define H5_ASSERT(val)                                      \
-    do {                                                   \
-        if ((val) < 0) {                                   \
-            fprintf(stderr,                                 \
-                    "H5_ASSERT failed: %s < 0 at %s:%d\n", \
-                    #val, __FILE__, __LINE__);             \
-            abort();                                       \
-        }                                                  \
-    } while(0)
+#define H5_ASSERT(val)                                                         \
+    do {                                                                       \
+        if ((val) < 0) {                                                       \
+            fprintf(stderr, "H5_ASSERT failed: %s < 0 at %s:%d\n", #val,       \
+                    __FILE__, __LINE__);                                       \
+            abort();                                                           \
+        }                                                                      \
+    } while (0)
 
 void hdf5_io_init();
 void hdf5_io_deinit();
-void hdf5_io_init_dataset(int nprocs, int chunks_per_rank);
+void hdf5_io_init_dataset(int num_ranks, int chunks_per_rank);
 void hdf5_io_create_dataset();
 void hdf5_io_enable_compression_on_dataset();
-void hdf5_io_write_chunk(float* buffer, bool collective_io, int rank, int chunks_per_rank, int chunk);
-void hdf5_io_read_chunk(float* buffer, bool collective_io, int rank, int chunks_per_rank, int chunk);
+void hdf5_io_write_chunk(float *buffer, bool collective_io, int rank,
+                         int chunks_per_rank, int chunk);
+void hdf5_io_read_chunk(float *buffer, bool collective_io, int rank,
+                        int chunks_per_rank, int chunk);
 void hdf5_io_flush();
 void hdf5_io_close_dataset();
 void hdf5_io_reopen_dataset();
