@@ -1,9 +1,8 @@
 set datafile separator ","
 set key outside bottom center horizontal
-set key box
-set grid
+set grid xtics ytics mxtics mytics
 set style data linespoints
-set term pngcairo size 400,350
+set term pngcairo size 400,400
 
 # Define line styles explicitly:
 # 1 = solid line
