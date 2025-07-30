@@ -1,0 +1,10 @@
+scale_type,chunks_per_rank,num_ranks,timer_tag,elapsed_seconds,io_impl
+rank,1,1,read_chunk,0.019372,pdc
+rank,1,2,read_chunk,0.118816,pdc
+rank,1,4,read_chunk,0.118278,pdc
+rank,1,8,read_chunk,0.118099,pdc
+rank,1,16,read_chunk,0.033944,pdc
+rank,1,32,read_chunk,0.122906,pdc
+rank,1,64,read_chunk,0.031768,pdc
+rank,1,128,read_chunk,0.043139,pdc
+rank,1,256,read_chunk,0.124537,pdc

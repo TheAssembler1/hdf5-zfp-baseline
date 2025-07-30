@@ -7,11 +7,12 @@ set -u
 ./rebuild.sh
 
 STATIC_CHUNK=1
-STATIC_RANK=8
+STATIC_RANK=256
 SCALE_TO_CHUNK=4
-SCALE_TO_RANK=8
-NUM_NODES=1
-LAUNCHER=mpirun
+SCALE_TO_RANK=256
+NUM_NODES=8
+RANKS_PER_NODE=32
+LAUNCHER=srun
 
 if [[ "$LAUNCHER" == "mpirun" ]]; then
   static_launcher="mpirun --mca btl_tcp_if_include lo --use-hwthread-cpus --map-by :OVERSUBSCRIBE -np $STATIC_RANK"
@@ -19,7 +20,7 @@ if [[ "$LAUNCHER" == "mpirun" ]]; then
 else
   echo "Launcher is srun"
   static_launcher="srun -N $NUM_NODES --ntasks=$STATIC_RANK"
-  launcher='srun -N $NUM_NODES --ntasks=$rank'
+  launcher='srun -N $NUM_NODES -n $rank'
 fi
 
 SCALE_BY_RANK=1
@@ -106,16 +107,13 @@ function store_csv_png() {
 
 start_pdc_server() {
   echo "Starting $NUM_NODES PDC server(s)"
-  pkill pdc_server || true 
-  mpirun -np 1 pdc_server > pdc_server.log 2>&1 &
-
+  srun -N $NUM_NODES -n $NUM_NODES pdc_server > pdc_server.log 2>&1 &
   sleep 4
 }
 
 stop_pdc_server() {
-  echo "Closing $NUM_NODES PDC server(s)"
-  pkill pdc_server || true 
-  rm -rf ./pdc_tmp || true
+  echo "Stopping $NUM_NODES PDC server(s)"
+  srun -N "$NUM_NODES" -n "$NUM_NODES" pkill -f pdc_server > /dev/null 2>&1 || true
 }
 
 function run_scaling_rank() {
@@ -134,10 +132,8 @@ function run_scaling_rank() {
     fi
     eval "$launcher ./zfp_baseline \"$collective_io_flag\" \"$STATIC_CHUNK\" \"$scale_by_rank_flag\" \"$zfp_filter_flag\" \"$io_impl_flag\" 2>&1 | tee client.log"
     if [[ $io_impl_flag -eq 1 ]]; then
-      stop_pdc_server
+     stop_pdc_server 
     fi
-    rm ./pdc_tmp || true
-    rm output.h5 || true
   done
 }
 
@@ -158,10 +154,8 @@ function run_chunk_scaling() {
       "$collective_io_flag" "$chunk" "$scale_by_rank_flag" "$zfp_filter_flag" "$io_impl_flag" \
     2>&1 | tee client.log
     if [[ $io_impl_flag -eq 1 ]]; then
-      stop_pdc_server
+     stop_pdc_server 
     fi
-    rm ./pdc_tmp || true
-    rm output.h5 || true
   done
 }
 

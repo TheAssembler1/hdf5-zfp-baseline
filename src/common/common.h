@@ -13,10 +13,10 @@
 #define CHUNK_SIZE_32KB  (90)     // 90 x 90 floats × 4 bytes = 32 KB
 #define CHUNK_SIZE_1KB   (16)     // 16 x 16 floats × 4 bytes = 1 KB
 
-#define ELEMENTS_PER_CHUNK CHUNK_SIZE_64MB
+#define ELEMENTS_PER_CHUNK CHUNK_SIZE_32MB
 
 #define DATASET_NAME "dataset"
-#define VALIDATE_DATA_READ
+#undef VALIDATE_DATA_READ
 
 typedef enum io_impl_t { HDF5_IMPL, PDC_IMPL, NUM_IMPL } io_impl_t;
 

@@ -1,0 +1,11 @@
+export CC=mpicc
+export CMAKE_PREFIX_PATH=/pscratch/sd/n/nlewi26/src/hdf5/install:/pscratch/sd/n/nlewi26/src/zfp/install:/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
+export HDF5_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/hdf5/install
+export ZFP_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/zfp/install
+export ZFP_FILTER_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install
+export HDF5_PLUGIN_PATH=/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install/plugin
+export PDC_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/work_space/install/pdc
+export PDC_SOURCE_DIR=/pscratch/sd/n/nlewi26/src/work_space/source/pdc
+export MERCURY_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/work_space/install/mercury
+export PATH=/pscratch/sd/n/nlewi26/src/work_space/install/pdc/bin:$PATH
+export LD_LIBRARY_PATH=/pscratch/sd/n/nlewi26/src/work_space/install/pdc/lib:$LD_LIBRARY_PATH

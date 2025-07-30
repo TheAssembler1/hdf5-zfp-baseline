@@ -16,6 +16,8 @@ void hdf5_io_init() {
 
     int filter_avail = H5Zfilter_avail(H5Z_FILTER_ZFP);
     PRINT_RANK0("ZFP filter available? %s\n", filter_avail ? "YES" : "NO");
+    if(!filter_avail)
+	    abort();
 }
 
 void hdf5_io_deinit() { H5_ASSERT(H5close()); }

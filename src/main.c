@@ -92,10 +92,12 @@ int main(int argc, char **argv) {
 
     PRINT_RANK0("Running with %d rank(s)\n", num_ranks);
     PRINT_RANK0("Chunks per rank %d\n", chunks_per_rank);
-    PRINT_RANK0("Total data to be written: %.2f MB\n",
-                (chunks_per_rank * num_ranks * ELEMENTS_PER_CHUNK *
-                 ELEMENTS_PER_CHUNK * sizeof(float)) /
-                    (1024.0 * 1024.0));
+    uint64_t total_bytes = (uint64_t)chunks_per_rank * num_ranks *
+                       ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK *
+                       sizeof(float);
+    uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
+    PRINT_RANK0("Total data to be written: %" PRIu64 " GB (%" PRIu64 " bytes)\n",
+		    total_GB, total_bytes);
 
     if (collective_io)
         PRINT_RANK0("Using collective I/O\n");

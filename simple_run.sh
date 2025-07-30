@@ -6,8 +6,10 @@ set -u
 
 ./rebuild.sh
 
-STATIC_CHUNK=4
-STATIC_RANK=4
+NUM_NODES=1
+
+STATIC_CHUNK=1
+STATIC_RANK=1
 
 SCALE_BY_RANK=1
 DONT_SCALE_BY_RANK=0
@@ -22,8 +24,6 @@ HDF5_IMPL=0
 PDC_IMPL=1
 IO_IMPL=$HDF5_IMPL
 
-export HDF5_PLUGIN_PATH=/home/ta1/src/H5Z-ZFP/install/plugin
-
 pushd ./build
 if [[ $IO_IMPL -eq $PDC_IMPL ]]; then
     mpirun -np $STATIC_RANK close_server || true
@@ -31,7 +31,7 @@ if [[ $IO_IMPL -eq $PDC_IMPL ]]; then
     mpirun -np $STATIC_RANK pdc_server > pdc_server.log 2>&1 &
 fi
 
-mpirun -np $STATIC_RANK ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $DONT_ZFP_FILTER $HDF5_IMPL
+srun -N $NUM_NODES -n $STATIC_RANK ./zfp_baseline $DONT_COLLECTIVE_IO $STATIC_CHUNK $SCALE_BY_RANK $ZFP_FILTER $HDF5_IMPL
 
 if [[ $IO_IMPL -eq $PDC_IMPL ]]; then
     mpirun -np $STATIC_RANK close_server || true

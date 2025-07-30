@@ -1,5 +1,5 @@
 set datafile separator ","
-set key outside bottom center horizontal offset 0,-0.2
+set key outside bottom center horizontal
 set key box
 set grid
 set style data linespoints
@@ -26,7 +26,7 @@ plot \
     'pdc_rank_write_all_chunks.csv' using 3:5 title 'pdc write' ls 3,   \
     'pdc_rank_read_all_chunks.csv'  using 3:5 title 'pdc read'  ls 4
 
-# Plot for rank scaling
+# Plot for per chunk rank scaling
 set output "per_chunk_rank_scaling.png"
 set title "Per Chunk Scaling by Rank"
 set xlabel "Number of Ranks"
@@ -50,7 +50,7 @@ plot \
     'pdc_chunk_write_all_chunks.csv' using 2:5 title 'pdc write' ls 3,   \
     'pdc_chunk_read_all_chunks.csv'  using 2:5 title 'pdc read'  ls 4
 
-# Plot for chunk scaling
+# Plot for per chunk, chunk scaling
 set output "per_chunk_chunk_scaling.png"
 set title "Per Chunk Scaling by Chunks"
 set xlabel "Chunks Per Rank"
