@@ -5,6 +5,7 @@ export ZFP_INSTALL_DIR=/home/ta1/src/zfp/install
 export ZFP_FILTER_INSTALL_DIR=/home/ta1/src/H5Z-ZFP/install 
 export HDF5_PLUGIN_PATH=/home/ta1/src/H5Z-ZFP/install/plugin
 export PDC_INSTALL_DIR=/home/ta1/src/workspace/install/pdc
+export PDC_SOURCE_DIR=/home/ta1/src/workspace/source/pdc
 export MERCURY_INSTALL_DIR=/home/ta1/src/workspace/install/mercury
 export PATH=/home/ta1/src/workspace/install/pdc/bin:$PATH
 export LD_LIBRARY_PATH=/home/ta1/src/workspace/install/pdc/lib:$LD_LIBRARY_PATH

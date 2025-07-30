@@ -25,9 +25,9 @@ void hdf5_io_init_dataset(MPI_Comm comm, int my_rank, int num_ranks, int chunks_
 void hdf5_io_create_dataset();
 void hdf5_io_enable_compression_on_dataset();
 void hdf5_io_write_chunk(float *buffer, bool collective_io, int rank,
-                         int chunks_per_rank, int chunk);
+                         int chunks_per_rank, int chunk, MPI_Comm comm);
 void hdf5_io_read_chunk(float *buffer, bool collective_io, int rank,
-                        int chunks_per_rank, int chunk);
+                        int chunks_per_rank, int chunk, MPI_Comm comm);
 void hdf5_io_flush();
 void hdf5_io_close_dataset();
 void hdf5_io_reopen_dataset();

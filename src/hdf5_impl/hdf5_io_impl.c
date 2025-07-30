@@ -3,12 +3,13 @@
 #include "hdf5_io_impl.h"
 #include "../common/common.h"
 
-hid_t dcpl_g;
-hid_t dset_g;
-hid_t filespace_g;
-hid_t file_g;
-hid_t space_g;
-hid_t fapl_g;
+hid_t dcpl_g = -1;
+hid_t dset_g = -1;
+hid_t filespace_g = -1;
+hid_t file_g = -1;
+hid_t space_g = -1;
+hid_t fapl_g = -1;
+
 
 void hdf5_io_init() {
     H5_ASSERT(H5open());
@@ -48,7 +49,7 @@ void hdf5_io_create_dataset() {
 }
 
 void hdf5_io_write_chunk(float *buffer, bool collective_io, int rank,
-                         int chunks_per_rank, int chunk) {
+                         int chunks_per_rank, int chunk, MPI_Comm comm) {
     hsize_t offset[2] = {(rank * chunks_per_rank + chunk) * ELEMENTS_PER_CHUNK,
                          0};
     hsize_t size[2] = {ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK};
@@ -78,7 +79,7 @@ void hdf5_io_write_chunk(float *buffer, bool collective_io, int rank,
 }
 
 void hdf5_io_read_chunk(float *read_buf, bool collective_io, int rank,
-                        int chunks_per_rank, int chunk) {
+                        int chunks_per_rank, int chunk, MPI_Comm comm) {
     hsize_t offset[2] = {(rank * chunks_per_rank + chunk) * ELEMENTS_PER_CHUNK,
                          0};
     hsize_t size[2] = {ELEMENTS_PER_CHUNK, ELEMENTS_PER_CHUNK};
@@ -112,11 +113,14 @@ void hdf5_io_flush() { H5_ASSERT(H5Fflush(file_g, H5F_SCOPE_GLOBAL)); }
 void hdf5_io_enable_compression_on_dataset() {
     unsigned int cd_values[6];
     size_t cd_nelmts = 6;
-    // Example: use rate mode with rate=8.0 (adjust as needed)
-    double rate = 8.0;
-    H5Pset_zfp_rate_cdata(rate, cd_nelmts, cd_values);
-    H5_ASSERT(H5Pset_filter(dcpl_g, H5Z_FILTER_ZFP, H5Z_FLAG_MANDATORY,
-                            cd_nelmts, cd_values));
+    double precision = 0.01;  // target max error (or accuracy) you want
+
+    // Encode precision mode parameters into client data array
+    H5Pset_zfp_precision_cdata(precision, cd_nelmts, cd_values);
+
+    // Set the ZFP filter on the dataset creation property list
+    herr_t status = H5Pset_filter(dcpl_g, H5Z_FILTER_ZFP, H5Z_FLAG_MANDATORY,
+                                  cd_nelmts, cd_values);
 }
 
 void hdf5_io_close_dataset() {

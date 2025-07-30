@@ -11,7 +11,7 @@ double timer_start_times[TIMER_TAGS_COUNT];
 double timer_accumulated[TIMER_TAGS_COUNT] = {0};
 
 void print_all_timers_csv(const char *filename, int chunks_per_rank,
-                          int num_ranks, bool scale_by_rank) {
+                          int num_ranks, bool scale_by_rank, io_impl_t impl) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
@@ -32,7 +32,20 @@ void print_all_timers_csv(const char *filename, int chunks_per_rank,
         // If file did not exist, print header
         if (!file_exists) {
             fprintf(fp, "scale_type,chunks_per_rank,num_ranks,timer_tag,"
-                        "elapsed_seconds\n");
+                        "elapsed_seconds,io_impl\n");
+        }
+
+        char* impl_str;
+        switch(impl) {
+            case HDF5_IMPL:
+                impl_str = "hdf5";
+                break;
+            case PDC_IMPL:
+                impl_str = "pdc";
+                break;
+            default:
+                abort();
+                break;
         }
 
         for (int i = 0; i < TIMER_TAGS_COUNT; i++) {
@@ -43,12 +56,12 @@ void print_all_timers_csv(const char *filename, int chunks_per_rank,
                 scale_type = "chunk";
 
             if (i == WRITE_ALL_CHUNKS || i == READ_ALL_CHUNKS)
-                fprintf(fp, "%s,%d,%d,%s,%f\n", scale_type, chunks_per_rank,
-                        num_ranks, timer_tags[i], timer_accumulated[i]);
+                fprintf(fp, "%s,%d,%d,%s,%f,%s\n", scale_type, chunks_per_rank,
+                        num_ranks, timer_tags[i], timer_accumulated[i], impl_str);
             else
-                fprintf(fp, "%s,%d,%d,%s,%f\n", scale_type, chunks_per_rank,
+                fprintf(fp, "%s,%d,%d,%s,%f,%s\n", scale_type, chunks_per_rank,
                         num_ranks, timer_tags[i],
-                        timer_accumulated[i] / chunks_per_rank);
+                        timer_accumulated[i] / chunks_per_rank, impl_str);
         }
 
         fclose(fp);

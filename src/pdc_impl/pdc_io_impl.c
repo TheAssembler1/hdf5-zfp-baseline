@@ -9,11 +9,11 @@
  * NOTE: we don't close and reopen the container
  */
 
-static pdcid_t pdc_g;
-static pdcid_t cont_g;
-static pdcid_t cont_prop_g;
-static pdcid_t obj_prop_g;
-static pdcid_t obj_g;
+static pdcid_t pdc_g = 0;
+static pdcid_t cont_g = 0;
+static pdcid_t cont_prop_g = 0;
+static pdcid_t obj_prop_g = 0;
+static pdcid_t obj_g = 0;
 static uint64_t dims[2];
 
 void pdc_io_init() {
@@ -64,7 +64,7 @@ void pdc_io_enable_compression_on_dataset() {
 }
 
 void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
-                        int chunks_per_rank, int chunk) {
+                        int chunks_per_rank, int chunk, MPI_Comm comm) {
     uint64_t local_offset[2], global_offset[2], offset_length[2];
     local_offset[0] = 0;
     local_offset[1] = 0;
@@ -78,12 +78,14 @@ void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
     pdcid_t reg_global = PDCregion_create(2, global_offset, offset_length);
     pdcid_t transfer =
         PDCregion_transfer_create(buffer, PDC_WRITE, obj_g, reg, reg_global);
-
     PDC_ZERO_ASSERT(reg);
     PDC_ZERO_ASSERT(reg_global);
     PDC_ZERO_ASSERT(transfer);
 
-    PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    if(collective_io)
+        PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    else 
+        PDC_NEG_ASSERT(PDCregion_transfer_start_mpi(transfer, comm));
     PDC_NEG_ASSERT(PDCregion_transfer_wait(transfer));
     PDC_NEG_ASSERT(PDCregion_transfer_close(transfer));
 
@@ -92,7 +94,7 @@ void pdc_io_write_chunk(float *buffer, bool collective_io, int rank,
 }
 
 void pdc_io_read_chunk(float *buffer, bool collective_io, int rank,
-                       int chunks_per_rank, int chunk) {
+                       int chunks_per_rank, int chunk, MPI_Comm comm) {
     uint64_t local_offset[2], global_offset[2], offset_length[2];
     local_offset[0] = 0;
     local_offset[1] = 0;
@@ -110,8 +112,11 @@ void pdc_io_read_chunk(float *buffer, bool collective_io, int rank,
     PDC_ZERO_ASSERT(reg);
     PDC_ZERO_ASSERT(reg_global);
     PDC_ZERO_ASSERT(transfer);
-
-    PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    
+    if(collective_io)
+        PDC_NEG_ASSERT(PDCregion_transfer_start(transfer));
+    else 
+        PDC_NEG_ASSERT(PDCregion_transfer_start_mpi(transfer, comm));
     PDC_NEG_ASSERT(PDCregion_transfer_wait(transfer));
     PDC_NEG_ASSERT(PDCregion_transfer_close(transfer));
 
