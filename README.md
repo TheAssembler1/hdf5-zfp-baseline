@@ -2,7 +2,7 @@
 
 This project provides a baseline implementation and benchmarking framework for evaluating the performance impact of the ZFP compression filter when applied to chunked HDF5 datasets. The benchmarks measure I/O scalability by varying chunk sizes and the number of MPI ranks, comparing throughput and latency with the ZFP filter enabled and disabled. This helps assess the trade-offs between compression efficiency and parallel I/O performance in HPC environments.
 
-## Example Results (Just on Local Machine)
+## Example Results
 
 > **Note:** The current benchmark results shown below are from runs on Perlmutter. The region size used is 1 MB.
 
