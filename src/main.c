@@ -96,6 +96,7 @@ int main(int argc, char **argv) {
                        ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK *
                        sizeof(float);
     uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
+    PRINT_RANK0("Chunk size %" PRIu64 " bytes\n", ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK * sizeof(float));
     PRINT_RANK0("Total data to be written: %" PRIu64 " GB (%" PRIu64 " bytes)\n",
 		    total_GB, total_bytes);
 
@@ -141,7 +142,7 @@ int main(int argc, char **argv) {
     for (int c = 0; c < chunks_per_rank; c++) {
         printf("Rank %d: Starting chunk write %d\n", rank, c + 1);
         START_TIMER(WRITE_CHUNK);
-        PRINT_RANK0("Calling wrte_chunk on impl\n");
+        PRINT_RANK0("Calling write_chunk on impl\n");
         io_impl_funcs[cur_io_impl].write_chunk(buffer, collective_io, rank,
                                                chunks_per_rank, c, MPI_COMM_WORLD);
         STOP_TIMER(WRITE_CHUNK);

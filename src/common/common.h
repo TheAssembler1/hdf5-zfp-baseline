@@ -12,8 +12,9 @@
 #define CHUNK_SIZE_64KB  (128)    // 128 x 128 floats × 4 bytes = 64 KB
 #define CHUNK_SIZE_32KB  (90)     // 90 x 90 floats × 4 bytes = 32 KB
 #define CHUNK_SIZE_1KB   (16)     // 16 x 16 floats × 4 bytes = 1 KB
+#define CHUNK_SIZE_4B    (1)	  // 1  x 1  floats x 4 bytes = 4 B
 
-#define ELEMENTS_PER_CHUNK CHUNK_SIZE_32MB
+#define ELEMENTS_PER_CHUNK CHUNK_SIZE_64KB
 
 #define DATASET_NAME "dataset"
 #undef VALIDATE_DATA_READ

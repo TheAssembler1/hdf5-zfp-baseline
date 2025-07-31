@@ -1,0 +1,10 @@
+scale_type,chunks_per_rank,num_ranks,timer_tag,elapsed_seconds,io_impl
+rank,64,1,read_all_chunks,0.003621,hdf5
+rank,64,2,read_all_chunks,0.045325,hdf5
+rank,64,4,read_all_chunks,0.154728,hdf5
+rank,64,8,read_all_chunks,0.512056,hdf5
+rank,64,16,read_all_chunks,0.293955,hdf5
+rank,64,32,read_all_chunks,0.503887,hdf5
+rank,64,64,read_all_chunks,0.969646,hdf5
+rank,64,128,read_all_chunks,2.016208,hdf5
+rank,64,256,read_all_chunks,4.779870,hdf5

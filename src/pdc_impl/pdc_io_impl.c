@@ -43,6 +43,11 @@ void pdc_io_init_dataset(MPI_Comm comm, int my_rank, int num_ranks, int chunks_p
     PDC_NEG_ASSERT(PDCprop_set_obj_user_id(obj_prop_g, getuid()));
     PDC_NEG_ASSERT(PDCprop_set_obj_app_name(obj_prop_g, "zfp-baseline"));
 
+    //PDCprop_set_obj_transfer_region_type(obj_prop_g, PDC_OBJ_STATIC);
+    //PDCprop_set_obj_transfer_region_type(obj_prop_g, PDC_REGION_STATIC);
+    PDCprop_set_obj_transfer_region_type(obj_prop_g, PDC_REGION_DYNAMIC);
+    //PDCprop_set_obj_transfer_region_type(obj_prop_g, PDC_REGION_LOCAL);
+
     if(my_rank == 0) {
         obj_g = PDCobj_create(cont_g, DATASET_NAME, obj_prop_g);
         PDC_ZERO_ASSERT(obj_g);

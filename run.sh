@@ -128,6 +128,7 @@ function run_scaling_rank() {
   for (( rank=1; rank<=max_rank; rank*=2 )); do
     echo "Running with ranks=$rank, chunks=$chunk_count"
     if [[ $io_impl_flag -eq 1 ]]; then
+      stop_pdc_server
       start_pdc_server
     fi
     eval "$launcher ./zfp_baseline \"$collective_io_flag\" \"$STATIC_CHUNK\" \"$scale_by_rank_flag\" \"$zfp_filter_flag\" \"$io_impl_flag\" 2>&1 | tee client.log"
@@ -148,6 +149,7 @@ function run_chunk_scaling() {
   for (( chunk=1; chunk<=max_chunk; chunk*=2 )); do
     echo "Running with ranks=$STATIC_RANK, chunks=$chunk"
     if [[ $io_impl_flag -eq 1 ]]; then
+      stop_pdc_server
       start_pdc_server
     fi
     $static_launcher  ./zfp_baseline \
@@ -159,13 +161,15 @@ function run_chunk_scaling() {
   done
 }
 
+#./complete_rebuild.sh
+
 pushd ./build
 
 init
 
-for collective_io in 0 1; do
-  for scale_by_rank in 0 1; do
-    for zfp_filter in 0 1; do
+for collective_io in 1; do
+  for scale_by_rank in 1; do
+    for zfp_filter in 0; do
       for io_impl in 0 1; do
         # Skip if independent IO and zfp filter enabled
         # Not supported by HDF5
@@ -176,12 +180,12 @@ for collective_io in 0 1; do
         if [[ $zfp_filter -eq 1 && $io_impl -eq 1 ]]; then
           echo "enabling PDC compression"
           popd 
-          ./pdc_enable_compression.sh
+          #./pdc_enable_compression.sh
           pushd ./build
         elif [[ $zfp_filter -eq 0 && $io_impl -eq 1 ]]; then
           echo "disabling PDC compression"
           popd 
-          ./pdc_disable_compression.sh
+          #./pdc_disable_compression.sh
           pushd ./build
         fi
         run_scaling_rank $SCALE_TO_RANK $SCALE_TO_CHUNK $collective_io $scale_by_rank $zfp_filter $io_impl
