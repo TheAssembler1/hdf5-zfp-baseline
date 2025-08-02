@@ -65,6 +65,18 @@ This project provides a baseline implementation and benchmarking framework for e
 
 Before running anything do `source env.sh`.
 
+### Install JSON-C
+
+```bash
+sudo apt install libjson-c-dev
+```
+
+### Python Depdenencies
+
+```bash
+python3.8 -m pip install -r requirements.txt
+```
+
 ### Build ZFP
 
 ```bash

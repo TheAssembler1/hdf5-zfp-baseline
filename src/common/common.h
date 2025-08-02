@@ -1,27 +1,34 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#define CSV_FILENAME "output.csv"
+#include <stdint.h>
+#include <mpi.h>
 
+extern char *io_impl_strings[];
+typedef enum io_impl_t {
+    HDF5_IMPL,
+    HDF5_ZFP_IMPL,
+    PDC_IMPL,
+    PDC_ZFP_IMPL,
+    NUM_IO_IMPL
+} io_impl_t;
 
-#define CHUNK_SIZE_64MB  (4096)   // 4096 x 4096 floats × 4 bytes = 64 MB
-#define CHUNK_SIZE_32MB  (2896)   // 2896 x 2896 floats × 4 bytes = 32 MB
-#define CHUNK_SIZE_16MB  (2048)   // 2048 x 2048 floats × 4 bytes = 16 MB
-#define CHUNK_SIZE_1MB   (512)    // 512 x 512 floats × 4 bytes = 1 MB
-#define CHUNK_SIZE_512KB (362)    // 362 x 362 floats × 4 bytes ≈ 512 KB
-#define CHUNK_SIZE_64KB  (128)    // 128 x 128 floats × 4 bytes = 64 KB
-#define CHUNK_SIZE_32KB  (90)     // 90 x 90 floats × 4 bytes = 32 KB
-#define CHUNK_SIZE_1KB   (16)     // 16 x 16 floats × 4 bytes = 1 KB
-#define CHUNK_SIZE_4B    (1)	  // 1  x 1  floats x 4 bytes = 4 B
+extern char* io_filter_strings[];
+typedef enum io_filter_t {
+    IO_FILTER_RAW,
+    IO_FILTER_ZFP_COMPRESS,
+    NUM_IO_FILTERS
+} io_filter_t;
 
-#define ELEMENTS_PER_CHUNK CHUNK_SIZE_64KB
-
-#define DATASET_NAME "dataset"
-#undef VALIDATE_DATA_READ
-
-typedef enum io_impl_t { HDF5_IMPL, PDC_IMPL, NUM_IMPL } io_impl_t;
+extern const char *io_participation_strings[];
+typedef enum io_participation_t {
+    COLLECTIVE_IO,
+    INDEPENDENT_IO,
+    NUM_IO_PARTICIPATIONS
+} io_participation_t;
 
 typedef struct io_impl_funcs_t {
+    io_filter_t io_filter;
     /**
      * Initializes the I/O library or backend.
      * Perform any necessary global or library-wide setup before any dataset or
@@ -45,7 +52,8 @@ typedef struct io_impl_funcs_t {
      *  - num_ranks: number of parallel processes
      *  - chunks_per_rank: number of data chunks each process will handle
      */
-    void (*init_dataset)(MPI_Comm comm, int my_rank, int num_ranks, int chunks_per_rank);
+    void (*init_dataset)(MPI_Comm comm, uint32_t elements_per_dim, int my_rank,
+                         int num_ranks, int chunks_per_rank);
     /**
      * Creates the dataset within the file, using the configuration set during
      * initialization. Allocate storage, set chunking, compression, and other
@@ -75,7 +83,8 @@ typedef struct io_impl_funcs_t {
      * The implementation should select the appropriate region in the dataset
      * and write the data from the buffer according to the provided parameters.
      */
-    void (*write_chunk)(float *buffer, bool collective_io, int rank,
+    void (*write_chunk)(uint32_t elements_per_dim, float *buffer,
+                        io_participation_t io_participation, int rank,
                         int chunks_per_rank, int chunk, MPI_Comm comm);
     /**
      * Reads a chunk of data from the dataset.
@@ -91,7 +100,8 @@ typedef struct io_impl_funcs_t {
      * The implementation should select the appropriate region in the dataset
      * and read the data into the provided buffer according to the parameters.
      */
-    void (*read_chunk)(float *buffer, bool collective_io, int rank,
+    void (*read_chunk)(uint32_t elements_per_dim, float *buffer,
+                       io_participation_t io_participation, int rank,
                        int chunks_per_rank, int chunk, MPI_Comm comm);
     /**
      * Flushes any buffered writes to storage.
@@ -112,16 +122,6 @@ typedef struct io_impl_funcs_t {
      */
     void (*reopen_dataset)();
 } io_impl_funcs_t;
-
-#define PRINT_RANK0(fmt, ...)                                                  \
-    do {                                                                       \
-        int __rank;                                                            \
-        MPI_Comm_rank(MPI_COMM_WORLD, &__rank);                                \
-        if (__rank == 0) {                                                     \
-            printf(fmt, ##__VA_ARGS__);                                        \
-            fflush(stdout);                                                    \
-        }                                                                      \
-    } while (0)
 
 typedef enum timer_tags_t {
     WRITE_CHUNK,
@@ -149,6 +149,9 @@ extern double timer_accumulated[TIMER_TAGS_COUNT];
     } while (0)
 
 void print_all_timers_csv(const char *filename, int chunks_per_rank,
-                          int num_ranks, bool scale_by_rank, io_impl_t impl);
+                          int num_ranks, char *workload_name, 
+                          uint64_t chunk_size_bytes, 
+                          io_participation_t io_participation,
+                          io_filter_t io_filter);
 
 #endif

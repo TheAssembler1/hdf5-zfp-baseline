@@ -39,6 +39,9 @@ endif()
 include_directories("${MERCURY_INSTALL_DIR}/include")
 link_directories("${MERCURY_INSTALL_DIR}/lib")
 
+# JSON-C 
+find_package(json-c REQUIRED)
+
 # Find the mercury library
 find_library(MERCURY_LIBRARY mercury PATHS "${MERCURY_INSTALL_DIR}/lib")
 
@@ -81,8 +84,11 @@ link_directories(${ZFP_LIBRARY} ${H5ZZFP_LIBRARY})
 # List your executables and sources
 set(ZFP_BASELINE_SOURCES src/main.c 
                          src/common/common.c 
+                         src/common/config.c
+                         src/common/util.c
                          src/hdf5_impl/hdf5_io_impl.c 
-                         src/pdc_impl/pdc_io_impl.c)
+                         src/pdc_impl/pdc_io_impl.c
+                         src/exec_io_impl.c)
 
 add_executable(zfp_baseline ${ZFP_BASELINE_SOURCES})
 target_compile_options(zfp_baseline PRIVATE -Wall -Wextra)
@@ -96,4 +102,5 @@ target_link_libraries(zfp_baseline PRIVATE
   z
   stdc++
   MPI::MPI_C
+  json-c::json-c
 )

@@ -6,26 +6,35 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <math.h>
+#include <string.h>
 
 #include "common/common.h"
+#include "common/log.h"
+#include "common/config.h"
 #include "hdf5_impl/hdf5_io_impl.h"
 #include "pdc_impl/pdc_io_impl.h"
+#include "exec_io_impl.h"
 
-#define USAGE                                                                  \
-    "./zfp_baseline <collective_io_enable:bool> "                              \
-    "<chunks_per_rank:int> <scale_by_rank_enable:bool> "                       \
-    "<zfp_filter_enable:bool>" \
-    "<io_impl:0, 1 - PDC, HDF5>"
+#define USAGE "./zfp_baseline <json_config_path>"
 
-int main(int argc, char **argv) {
-    int chunks_per_rank = 0;
-    bool collective_io = 0;
-    bool scale_by_rank = 0;
-    bool zfp_compress = 0;
-    io_impl_t cur_io_impl;
+int main(int argc, char **argv) {  
+    // 0 disabled, 1 enabled compression
+    static bool is_compressed = false;
+    ASSERT(system("../pdc_disable_compression.sh") != -1, "Failed to launch pdc disable compression script");
 
-    io_impl_funcs_t io_impl_funcs[NUM_IMPL] = {
-        [HDF5_IMPL] = {.init = hdf5_io_init,
+    MPI_Init(&argc, &argv);
+
+    int rank, num_ranks;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &num_ranks);
+
+    char *config_path = argv[1];
+    config_t *config = init_config(config_path);
+
+    io_impl_funcs_t io_impl_funcs[NUM_IO_IMPL] = {
+        [HDF5_IMPL] = {.io_filter = IO_FILTER_RAW,
+                       .init = hdf5_io_init,
                        .deinit = hdf5_io_deinit,
                        .init_dataset = hdf5_io_init_dataset,
                        .create_dataset = hdf5_io_create_dataset,
@@ -36,7 +45,8 @@ int main(int argc, char **argv) {
                        .flush = hdf5_io_flush,
                        .close_dataset = hdf5_io_close_dataset,
                        .reopen_dataset = hdf5_io_reopen_dataset},
-        [PDC_IMPL] = {.init = pdc_io_init,
+        [PDC_IMPL] = {.io_filter = IO_FILTER_RAW,
+                      .init = pdc_io_init,
                       .deinit = pdc_io_deinit,
                       .init_dataset = pdc_io_init_dataset,
                       .create_dataset = pdc_io_create_dataset,
@@ -48,172 +58,112 @@ int main(int argc, char **argv) {
                       .close_dataset = pdc_io_close_dataset,
                       .reopen_dataset = pdc_io_reopen_dataset}};
 
-    if (argc < 6) {
-        fprintf(stderr, "Invalid number of program arguments %d\n", argc);
-        fprintf(stderr, USAGE);
-        return 1;
-    }
-    // first arg is collective io
-    collective_io = atoi(argv[1]);
-    // second arg is chunks per rank
-    chunks_per_rank = atoi(argv[2]);
-    if (chunks_per_rank <= 0) {
-        fprintf(stderr, "chunks per rank must be greater than 0\n");
-        return 1;
-    }
-    // third arg is the scale type
-    scale_by_rank = atoi(argv[3]);
-    zfp_compress = atoi(argv[4]);
-    cur_io_impl = atoi(argv[5]);
-
-    if(cur_io_impl > 2 || cur_io_impl < 0) {
-        fprintf(stderr, "Invalid io impl %d\n", cur_io_impl);
-        fprintf(stderr, USAGE);
-        return 1;
-    }
-    MPI_Init(&argc, &argv);
-
-    int rank, num_ranks;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &num_ranks);
-
-    switch(cur_io_impl) {
-        case HDF5_IMPL:
-            PRINT_RANK0("Using HDF5 IO implementation\n");
-            break;
-        case PDC_IMPL:
-            PRINT_RANK0("Using PDC IO implementation\n");
-            break;
-        default:
-            abort();
-    }
-
-    io_impl_funcs[cur_io_impl].init();
-
-    PRINT_RANK0("Running with %d rank(s)\n", num_ranks);
-    PRINT_RANK0("Chunks per rank %d\n", chunks_per_rank);
-    uint64_t total_bytes = (uint64_t)chunks_per_rank * num_ranks *
-                       ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK *
-                       sizeof(float);
-    uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
-    PRINT_RANK0("Chunk size %" PRIu64 " bytes\n", ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK * sizeof(float));
-    PRINT_RANK0("Total data to be written: %" PRIu64 " GB (%" PRIu64 " bytes)\n",
-		    total_GB, total_bytes);
-
-    if (collective_io)
-        PRINT_RANK0("Using collective I/O\n");
-    else
-        PRINT_RANK0("Using independent I/O\n");
-
-    if (scale_by_rank) PRINT_RANK0("Detected scale by rank\n");
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    PRINT_RANK0("\n========= Starting WRITE phase =========\n");
-
-    // init dataset
-    PRINT_RANK0("Calling init_dataset on impl\n");
-    io_impl_funcs[cur_io_impl].init_dataset(MPI_COMM_WORLD, rank, num_ranks, chunks_per_rank);
-
-    if (zfp_compress) {
-        PRINT_RANK0("ZFP Compression filter enabled\n");
-        // FIXME: need a global config with compression settings
-        PRINT_RANK0("Calling enable_compression_on_dataset on impl\n");
-        io_impl_funcs[cur_io_impl].enable_compression_on_dataset();
-    } else
-        PRINT_RANK0("ZFP Compression filter disabled\n");
-
-    PRINT_RANK0("Calling create_dataset on impl\n");
-    io_impl_funcs[cur_io_impl].create_dataset();
-
-    // Allocate write buffer
-    uint32_t chunk_bytes =
-        ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK * sizeof(float);
-    float *buffer = (float *) malloc(chunk_bytes);
-    for (hsize_t i = 0; i < ELEMENTS_PER_CHUNK; i++) {
-        for (hsize_t j = 0; j < ELEMENTS_PER_CHUNK; j++) {
-            buffer[i * ELEMENTS_PER_CHUNK + j] = (float) rank;
-        }
-    }
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    printf("Rank %d: Starting write\n", rank);
-
-    START_TIMER(WRITE_ALL_CHUNKS);
-    for (int c = 0; c < chunks_per_rank; c++) {
-        printf("Rank %d: Starting chunk write %d\n", rank, c + 1);
-        START_TIMER(WRITE_CHUNK);
-        PRINT_RANK0("Calling write_chunk on impl\n");
-        io_impl_funcs[cur_io_impl].write_chunk(buffer, collective_io, rank,
-                                               chunks_per_rank, c, MPI_COMM_WORLD);
-        STOP_TIMER(WRITE_CHUNK);
-        printf("Rank %d: Finished chunk write %d\n", rank, c + 1);
-    }
-    PRINT_RANK0("Calling flush on impl\n");
-    io_impl_funcs[cur_io_impl].flush();
-    STOP_TIMER(WRITE_ALL_CHUNKS);
-
-    printf("Rank %d: Finished write\n", rank);
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    // close dataset
-    free(buffer);
-    PRINT_RANK0("Calling close_dataset on impl\n");
-    io_impl_funcs[cur_io_impl].close_dataset();
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    PRINT_RANK0("\n========= Starting READ phase =========\n");
-
-    PRINT_RANK0("Calling reopen on impl\n");
-    io_impl_funcs[cur_io_impl].reopen_dataset();
-
-    // Allocate read buffer
-    float *read_buf = (float *) malloc(chunk_bytes);
-    // set init random value that's invalid rank
-    for (int i = 0; i < ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK; i++) {
-        read_buf[i] = -1;
-    }
-
-    bool chunks_read_valid = true;
-
-    START_TIMER(READ_ALL_CHUNKS);
-    for (int c = 0; c < chunks_per_rank; c++) {
-        printf("Rank %d: Starting chunk read %d\n", rank, c + 1);
-        START_TIMER(READ_CHUNK);
-        PRINT_RANK0("Calling read_chunk on impl\n");
-        io_impl_funcs[cur_io_impl].read_chunk(read_buf, collective_io, rank,
-                                              chunks_per_rank, c, MPI_COMM_WORLD);
-#ifdef VALIDATE_DATA_READ
-        for (int i = 0; i < ELEMENTS_PER_CHUNK * ELEMENTS_PER_CHUNK; i++) {
-            if ((int) read_buf[i] != rank) {
-                fprintf(stderr,
-                        "Read mismatch at index %d: expected %d got %d\n", i,
-                        rank, (int) read_buf[i]);
-                chunks_read_valid = false;
+    for (uint32_t i = 0; i < config->num_workloads; i++) {
+        io_impl_t cur_io_impl = -1;
+        for (int j = 0; j < NUM_IO_IMPL; j++) {
+            if (strcmp(config->workloads[i].implementation,
+                       io_impl_strings[j]) == 0) {
+                cur_io_impl = j;
                 break;
             }
         }
-#endif
-        STOP_TIMER(READ_CHUNK);
-        printf("Rank %d: Finished chunk read %d\n", rank, c + 1);
+        ASSERT((int) cur_io_impl != -1,
+               "Failed to find io implementation for workload %s\n",
+               config->workloads[i].implementation);
+
+        for (uint32_t j = 0; j < config->workloads[i].num_io_participations;
+             j++) {
+            const char *cur_participation_str =
+                config->workloads[i].io_participations[j];
+            io_participation_t cur_io_participation = -1;
+            for (int k = 0; k < NUM_IO_IMPL; k++) {
+                if (strcmp(cur_participation_str,
+                           io_participation_strings[k]) == 0) {
+                    cur_io_participation = k;
+                    break;
+                }
+            }
+            ASSERT((int) cur_io_participation != -1,
+                   "Failed to find io participation for workload %s\n",
+                   cur_participation_str);
+
+            uint32_t elements_per_dim =
+                (config->chunk_size_bytes / sizeof(float)) /
+                (uint32_t) sqrt(config->chunk_size_bytes);
+
+            uint64_t total_bytes = (uint64_t) config->chunks_per_rank *
+                                   num_ranks * elements_per_dim *
+                                   elements_per_dim * sizeof(float);
+            uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
+
+            io_filter_t cur_io_filter = -1;
+            for(int k = 0; k < NUM_IO_FILTERS; k++) {
+                if(strcmp(io_filter_strings[k], config->workloads[i].io_filter) == 0) {
+                    cur_io_filter = k;
+                    break;
+                }
+            }
+            ASSERT((int) cur_io_filter != -1,
+                   "Failed to find io filter for workload %s\n",
+                   config->workloads[i].io_filter);
+            io_impl_funcs[cur_io_impl].io_filter = cur_io_filter;
+
+            // print workload run information
+            MPI_Barrier(MPI_COMM_WORLD);
+            TOGGLE_COLOR(COLOR_GREEN);
+            PRINT_RANK0("==============================================\n");
+            PRINT_RANK0("Starting workload %s\n", config->workloads[i].name);
+            PRINT_RANK0("Running with %d rank(s)\n", num_ranks);
+            PRINT_RANK0("Chunks per rank %lu\n", config->chunks_per_rank);
+            if (cur_io_participation == COLLECTIVE_IO)
+                PRINT_RANK0("Using collective I/O\n");
+            else
+                PRINT_RANK0("Using independent I/O\n");
+            PRINT_RANK0("Requested chunk size %lu bytes\n",
+                        config->chunk_size_bytes);
+            PRINT_RANK0("Rounded chunk size %lu bytes\n",
+                        elements_per_dim * elements_per_dim * sizeof(float));
+            PRINT_RANK0("Total data to be written: %lu GB (%lu) bytes\n",
+                        total_GB, total_bytes);
+            PRINT_RANK0("==============================================\n");
+            TOGGLE_COLOR(COLOR_RESET);
+            MPI_Barrier(MPI_COMM_WORLD);
+
+            char* shell_path = NULL;
+
+            // check if we need to recompile PDC
+            if(cur_io_impl == PDC_IMPL && cur_io_filter == IO_FILTER_ZFP_COMPRESS && !is_compressed) {
+                shell_path = "../pdc_enable_compression.sh";
+                is_compressed = true;
+            }  else if(cur_io_impl == PDC_IMPL && cur_io_filter != IO_FILTER_ZFP_COMPRESS && is_compressed) {
+                shell_path = "../pdc_disable_compression.sh";
+                is_compressed = true;
+            }
+
+            int res = system(shell_path);
+            ASSERT(res != -1, "Failed to recompile PDC for ZFP compress/decompression\n");
+
+            // start workload
+            exec_io_impl(cur_io_impl, io_impl_funcs[cur_io_impl],
+                         elements_per_dim, num_ranks, config->chunks_per_rank,
+                         rank, cur_io_participation, config->validate_read);
+
+            // print workload finished information
+            MPI_Barrier(MPI_COMM_WORLD);
+            TOGGLE_COLOR(COLOR_GREEN);
+            PRINT_RANK0("==============================================\n");
+            print_all_timers_csv(CSV_FILENAME, config->chunks_per_rank,
+                                 num_ranks, config->workloads[i].name, config->chunk_size_bytes, 
+                                 cur_io_participation, cur_io_filter);
+            PRINT_RANK0("Finished workload %s\n", config->workloads[i].name);
+            PRINT_RANK0("==============================================\n");
+            TOGGLE_COLOR(COLOR_RESET);
+            MPI_Barrier(MPI_COMM_WORLD);
+        }
     }
-    STOP_TIMER(READ_ALL_CHUNKS);
-
-    free(read_buf);
-
-    PRINT_RANK0("Calling close_dataset on impl\n");
-    io_impl_funcs[cur_io_impl].close_dataset();
-    PRINT_RANK0("Calling deinit on impl\n");
-    io_impl_funcs[cur_io_impl].deinit();
-
-    if (chunks_read_valid)
-        PRINT_RANK0("All chunk reads were valid\n");
-    else
-        PRINT_RANK0("ERROR: Not all chunks reads were valid\n");
-
-    print_all_timers_csv(CSV_FILENAME, chunks_per_rank, num_ranks,
-                         scale_by_rank, cur_io_impl);
 
     MPI_Finalize();
+    free(config);
 
     return 0;
 }

@@ -4,14 +4,22 @@
 #include <mpi.h>
 
 #include "common.h"
+#include "log.h"
 
+char* io_filter_strings[] = {"raw", "zfp_compress"};
+const char *io_participation_strings[] = {"collective", "indepdendent"};
+char *io_impl_strings[] = {"hdf5", "hdf5_zfp", "pdc", "pdc_zfp"};
 const char *timer_tags[] = {"write_chunk", "write_all_chunks", "read_chunk",
                             "read_all_chunks"};
+
 double timer_start_times[TIMER_TAGS_COUNT];
 double timer_accumulated[TIMER_TAGS_COUNT] = {0};
 
 void print_all_timers_csv(const char *filename, int chunks_per_rank,
-                          int num_ranks, bool scale_by_rank, io_impl_t impl) {
+                          int num_ranks, char *workload_name, 
+                          uint64_t chunk_size_bytes, 
+                          io_participation_t io_participation,
+                          io_filter_t io_filter) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
@@ -24,47 +32,33 @@ void print_all_timers_csv(const char *filename, int chunks_per_rank,
         // Open file in append mode
         FILE *fp = fopen(filename, "a");
         if (!fp) {
-            fprintf(stderr, "Error: could not open file %s for appending\n",
-                    filename);
+            PRINT_ERROR("Could not open file %s for appending\n", filename);
             return;
         }
 
         // If file did not exist, print header
         if (!file_exists) {
-            fprintf(fp, "scale_type,chunks_per_rank,num_ranks,timer_tag,"
-                        "elapsed_seconds,io_impl\n");
+            fprintf(fp, "[0]workload_name,[1]chunks_per_rank,[2]num_ranks,[3]timer_tag,"
+                        "[4]elapsed_seconds,[5]chunk_size_bytes,[6]io_participation,[7]filter\n");
         }
 
-        char* impl_str;
-        switch(impl) {
-            case HDF5_IMPL:
-                impl_str = "hdf5";
-                break;
-            case PDC_IMPL:
-                impl_str = "pdc";
-                break;
-            default:
-                abort();
-                break;
-        }
+        
 
         for (int i = 0; i < TIMER_TAGS_COUNT; i++) {
-            char *scale_type;
-            if (scale_by_rank)
-                scale_type = "rank";
-            else
-                scale_type = "chunk";
-
+            double time;
             if (i == WRITE_ALL_CHUNKS || i == READ_ALL_CHUNKS)
-                fprintf(fp, "%s,%d,%d,%s,%f,%s\n", scale_type, chunks_per_rank,
-                        num_ranks, timer_tags[i], timer_accumulated[i], impl_str);
-            else
-                fprintf(fp, "%s,%d,%d,%s,%f,%s\n", scale_type, chunks_per_rank,
-                        num_ranks, timer_tags[i],
-                        timer_accumulated[i] / chunks_per_rank, impl_str);
+                time = timer_accumulated[i];
+            else 
+                time = timer_accumulated[i] / chunks_per_rank;
+
+            fprintf(fp, "%s,%d,%d,%s,%f,%lu,%s,%s\n", workload_name, chunks_per_rank,
+                    num_ranks, timer_tags[i],
+                    time, chunk_size_bytes,
+                    io_participation_strings[io_participation],
+                    io_filter_strings[io_filter]);
         }
 
         fclose(fp);
-        printf("Timer results appended to %s\n", filename);
+        PRINT_RANK0("Timer results appended to %s\n", filename);
     }
 }
