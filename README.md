@@ -4,55 +4,53 @@ This project provides a baseline implementation and benchmarking framework for e
 
 ## Example Results
 
-> **Note:** The current benchmark results shown below are from runs on Perlmutter. The region size used is 32 MB. When scaling by rank there is 1 region per rank. When scaling by chunk there are 256 ranks.
-
-### ZFP Filter Enabled
-
-<p align="center">
-  <img src="32MB/collective/zfp/all_chunk_chunk_scaling.png" alt="Scaling of all chunks by chunk size with ZFP compression enabled" />
-</p>
-<p align="center"><em>Figure 1: All-chunk scaling performance by chunk size with ZFP filter enabled.</em></p>
-
-<p align="center">
-  <img src="32MB/collective/zfp/all_chunk_rank_scaling.png" alt="Scaling of all chunks by rank count with ZFP compression enabled" />
-</p>
-<p align="center"><em>Figure 2: All-chunk scaling performance by number of ranks with ZFP filter enabled.</em></p>
-
-<p align="center">
-  <img src="32MB/collective/zfp/per_chunk_chunk_scaling.png" alt="Scaling per chunk by chunk size with ZFP compression enabled" />
-</p>
-<p align="center"><em>Figure 3: Per-chunk scaling performance by chunk size with ZFP filter enabled.</em></p>
-
-<p align="center">
-  <img src="32MB/collective/zfp/per_chunk_rank_scaling.png" alt="Scaling per chunk by rank count with ZFP compression enabled" />
-</p>
-<p align="center"><em>Figure 4: Per-chunk scaling performance by number of ranks with ZFP filter enabled.</em></p>
-
----
+> **Note:** The current benchmark results shown below are from runs on my local machine. The region size used is 32 MB. When scaling by rank there is 1 region per rank.
 
 ### ZFP Filter Disabled
 
 <p align="center">
-  <img src="32MB/collective/raw/all_chunk_chunk_scaling.png" alt="Scaling of all chunks by chunk size without ZFP compression" />
+  <img src="res/read_all_chunks_raw.png"/>
 </p>
-<p align="center"><em>Figure 5: All-chunk scaling performance by chunk size without ZFP filter.</em></p>
+<p align="center"><em>Figure 1: Time to read all chunks no filter.</em></p>
 
 <p align="center">
-  <img src="32MB/collective/raw/all_chunk_rank_scaling.png" alt="Scaling of all chunks by rank count without ZFP compression" />
+  <img src="res/read_chunk_raw.png"/>
 </p>
-<p align="center"><em>Figure 6: All-chunk scaling performance by number of ranks without ZFP filter.</em></p>
+<p align="center"><em>Figure 2: Time to read 1 chunk on average no filter.</em></p>
 
 <p align="center">
-  <img src="32MB/collective/raw/per_chunk_chunk_scaling.png" alt="Scaling per chunk by chunk size without ZFP compression" />
+  <img src="res/write_all_chunks_raw.png"/>
 </p>
-<p align="center"><em>Figure 7: Per-chunk scaling performance by chunk size without ZFP filter.</em></p>
+<p align="center"><em>Figure 3: Time to write all chunks no filter.</em></p>
 
 <p align="center">
-  <img src="32MB/collective/raw/per_chunk_rank_scaling.png" alt="Scaling per chunk by rank count without ZFP compression" />
+  <img src="res/write_chunk_raw.png"/>
 </p>
-<p align="center"><em>Figure 8: Per-chunk scaling performance by number of ranks without ZFP filter.</em></p>
+<p align="center"><em>Figure 4: Time to write 1 chunk on average no filter.</em></p>
 
+### ZFP Filter Enabled
 
+<p align="center">
+  <img src="res/read_all_chunks_zfp_compress.png"/>
+</p>
+<p align="center"><em>Figure 5: Time to read all chunks ZFP compression enabled.</em></p>
+
+<p align="center">
+  <img src="res/read_chunk_zfp_compress.png"/>
+</p>
+<p align="center"><em>Figure 6: Time to read 1 chunk on average ZFP compression enabled</em></p>
+
+<p align="center">
+  <img src="res/write_all_chunks_zfp_compress.png"/>
+</p>
+<p align="center"><em>Figure 7: Time to write all chunks ZFP compression enabled.</em></p>
+
+<p align="center">
+  <img src="res/write_chunk_zfp_compress.png"/>
+</p>
+<p align="center"><em>Figure 8: Time to write 1 chunk on average ZFP compression enabled.</em></p>
+
+---
 
 ### Dependencies
 

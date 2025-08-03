@@ -30,7 +30,10 @@ def main():
                 lambda: defaultdict(list)
             )
         )
-    )
+    )   
+
+    # this is picked up in output.csv
+    chunks_per_rank = -1
 
     # Attempt to read and parse the CSV input file line by line
     try:
@@ -45,6 +48,18 @@ def main():
                 
                 # Split CSV line into components
                 parts = line.strip().split(',')
+
+                # Here is the layout of the header
+                # [0]workload_name
+                # [1]chunks_per_rank
+                # [2]num_ranks
+                # [3]timer_tag
+                # [4]elapsed_seconds
+                # [5]chunk_size_bytes
+                # [6]io_participation
+                # [7]filter
+                if chunks_per_rank == -1:
+                    chunks_per_rank = parts[1]
 
                 # Extract relevant fields
                 workload_name = parts[0]
@@ -167,7 +182,9 @@ def main():
                 g.set(
                     terminal='pngcairo size 1600,1600 font "Consolas,28" crop',
                     output=f'"{output_path}"',
-                    title=f'"{timer_tag.replace("_", " ").title()} | {filter_key.replace("_", " ").title()}"',
+                    title=(
+                        f'"{timer_tag.replace("_", " ").title()} ({filter_key.replace("_", " ").title()})"'
+                    ),
                     xlabel='"Number of Ranks"',
                     ylabel='"Elapsed Time (s)"',
                     key='Left top left reverse box vertical font ",28"',  # Legend position and style
