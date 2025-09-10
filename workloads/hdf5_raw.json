@@ -4,20 +4,11 @@
             "name": "HDF5",
             "implementation": "hdf5",
             "io_participations": [
-                "collective",
-                "independent"
+                "independent",
+                "collective"
             ],
             "filter": "raw",
             "params": "none"
-        },
-        {
-            "name": "PDC",
-            "implementation": "pdc",
-            "io_participations": [
-                "independent"
-            ],
-            "filter": "raw",
-            "params": "batch"
         }
     ],
     "chunk_size_bytes": 1048576,

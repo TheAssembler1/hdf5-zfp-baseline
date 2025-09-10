@@ -1,0 +1,16 @@
+{
+    "workloads": [
+        {
+            "name": "PDC",
+            "implementation": "pdc",
+            "io_participations": [
+                "independent"
+            ],
+            "filter": "raw",
+            "params": "batch"
+        }
+    ],
+    "chunk_size_bytes": 1048576,
+    "chunks_per_rank": 4,
+    "validate_read": false
+}
