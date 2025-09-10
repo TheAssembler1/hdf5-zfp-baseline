@@ -72,6 +72,6 @@ function run_benchmark() {
 
 clean_old_files
 run_benchmark "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_raw.json" "pdc_raw"
-run_benchmark "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/hdf5_raw.json" "hdf5_raw"
 run_benchmark "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_zfp.json" "pdc_zfp"
+run_benchmark "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/hdf5_raw.json" "hdf5_raw"
 run_benchmark "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/hdf5_zfp.json" "hdf5_zfp"
