@@ -5,38 +5,22 @@
             "implementation": "hdf5",
             "io_participations": [
                 "collective",
-                "indepdendent"
+                "independent"
             ],
-            "filter": "raw"
-        },
-        {
-            "name": "HDF5-ZFP",
-            "implementation": "hdf5",
-            "io_participations": [
-                "collective"
-            ],
-            "filter": "zfp_compress"
+            "filter": "raw",
+            "params": "none"
         },
         {
             "name": "PDC",
             "implementation": "pdc",
             "io_participations": [
-                "collective",
-                "indepdendent"
+                "independent"
             ],
-            "filter": "raw"
-        },
-        {
-            "name": "PDC-ZFP",
-            "implementation": "pdc",
-            "io_participations": [
-                "collective",
-                "indepdendent"
-            ],
-            "filter": "zfp_compress"
+            "filter": "raw",
+            "params": "batch"
         }
     ],
-    "chunk_size_bytes": 33554432,
+    "chunk_size_bytes": 1048576,
     "chunks_per_rank": 4,
     "validate_read": false
 }

@@ -1,5 +1,5 @@
 export CC=mpicc
-export CMAKE_PREFIX_PATH=/pscratch/sd/n/nlewi26/src/hdf5/install:/pscratch/sd/n/nlewi26/src/zfp/install:/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
+export CMAKE_PREFIX_PATH=/pscratch/sd/n/nlewi26/src/work_space/install/json-c:/pscratch/sd/n/nlewi26/src/hdf5/install:/pscratch/sd/n/nlewi26/src/zfp/install:/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
 export HDF5_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/hdf5/install
 export ZFP_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/zfp/install
 export ZFP_FILTER_INSTALL_DIR=/pscratch/sd/n/nlewi26/src/H5Z-ZFP/install

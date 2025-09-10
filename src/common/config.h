@@ -12,6 +12,7 @@
 
 typedef struct config_workload_t {
     char name[MAX_CONFIG_STRING_SIZE];
+    char params[MAX_CONFIG_STRING_SIZE];
     char implementation[MAX_CONFIG_STRING_SIZE];
     char io_filter[MAX_CONFIG_STRING_SIZE];
     uint32_t num_io_participations;

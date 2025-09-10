@@ -21,16 +21,16 @@
         }                                                                      \
     } while (0)
 
-void hdf5_io_init();
+void hdf5_io_init(char* params);
 void hdf5_io_deinit();
 void hdf5_io_init_dataset(MPI_Comm comm, uint32_t elements_per_dim, int my_rank,
                           int num_ranks, int chunks_per_rank);
 void hdf5_io_create_dataset();
 void hdf5_io_enable_compression_on_dataset();
-void hdf5_io_write_chunk(uint32_t elements_per_dim, float *buffer,
+void hdf5_io_write_chunk(uint32_t elements_per_dim, double *buffer,
                          io_participation_t io_participation, int rank,
                          int chunks_per_rank, int chunk, MPI_Comm comm);
-void hdf5_io_read_chunk(uint32_t elements_per_dim, float *buffer,
+void hdf5_io_read_chunk(uint32_t elements_per_dim, double *buffer,
                         io_participation_t io_participation, int rank,
                         int chunks_per_rank, int chunk, MPI_Comm comm);
 void hdf5_io_flush();

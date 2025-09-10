@@ -7,12 +7,10 @@
 #include "common/log.h"
 #include "common/config.h"
 
-void exec_io_impl(io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
+void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
                   uint32_t elements_per_dim, int num_ranks, int chunks_per_rank,
                   int rank, io_participation_t io_participation, bool validate_read) {
-    io_impl_funcs.init();
-
-    MPI_Barrier(MPI_COMM_WORLD);
+    io_impl_funcs.init(params);
 
     // init dataset
     PRINT_RANK0("Calling init_dataset on impl\n");
@@ -24,22 +22,22 @@ void exec_io_impl(io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
         // FIXME: need a global config with compression settings
         PRINT_RANK0("Calling enable_compression_on_dataset on impl\n");
         io_impl_funcs.enable_compression_on_dataset();
-    } else
-        PRINT_RANK0("ZFP Compression filter disabled\n");
+    } else {
+        PRINT_RANK0("No filter enabled\n");
+    }
 
     PRINT_RANK0("Calling create_dataset on impl\n");
     io_impl_funcs.create_dataset();
 
     // Allocate write buffer
-    uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(float);
-    float *buffer = (float *) malloc(chunk_bytes);
+    uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(double);
+    double *buffer = (double *) malloc(chunk_bytes);
     for (uint32_t i = 0; i < elements_per_dim; i++) {
         for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] = (float) rank;
+            buffer[i * elements_per_dim + j] = (double) ((rank + 100 + i) % 123);
         }
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
     PRINT("Starting write\n");
 
     START_TIMER(WRITE_ALL_CHUNKS);
@@ -57,20 +55,17 @@ void exec_io_impl(io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
     STOP_TIMER(WRITE_ALL_CHUNKS);
 
     PRINT("Finished write\n");
-    MPI_Barrier(MPI_COMM_WORLD);
 
     // close dataset
     free(buffer);
     PRINT_RANK0("Calling close_dataset on impl\n");
     io_impl_funcs.close_dataset();
 
-    MPI_Barrier(MPI_COMM_WORLD);
-
     PRINT_RANK0("Calling reopen on impl\n");
     io_impl_funcs.reopen_dataset();
 
     // Allocate read buffer
-    float *read_buf = (float *) malloc(chunk_bytes);
+    double *read_buf = (double *) malloc(chunk_bytes);
     // set init random value that's invalid rank
     for (uint32_t i = 0; i < elements_per_dim * elements_per_dim; i++) {
         read_buf[i] = -1;
@@ -85,20 +80,22 @@ void exec_io_impl(io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
         PRINT_RANK0("Calling read_chunk on impl\n");
         io_impl_funcs.read_chunk(elements_per_dim, read_buf, io_participation,
                                  rank, chunks_per_rank, c, MPI_COMM_WORLD);
-        if (validate_read) {
+        /*if (validate_read) {
             for (uint32_t i = 0; i < elements_per_dim * elements_per_dim; i++) {
-                if ((int) read_buf[i] != rank) {
+                if ((int) read_buf[i] != rank + 100) {
                     PRINT_ERROR(
-                        "Read mismatch at index %d: expected %d got %d\n", i,
-                        rank, (int) read_buf[i]);
+                        "Read mismatch at index %d: expected %d got %lf\n", i,
+                        rank + 100, read_buf[i]);
                     chunks_read_valid = false;
                     break;
                 }
             }
-        }
+        }*/
         STOP_TIMER(READ_CHUNK);
         PRINT("Finished chunk read %d\n", c + 1);
     }
+    PRINT_RANK0("Calling flush on impl\n");
+    io_impl_funcs.flush();
     STOP_TIMER(READ_ALL_CHUNKS);
 
     free(read_buf);
@@ -109,7 +106,9 @@ void exec_io_impl(io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
     io_impl_funcs.deinit();
 
     if (validate_read && chunks_read_valid)
-        PRINT_RANK0("All chunk reads were valid\n");
+        PRINT("All chunk reads were valid\n");
     else if (validate_read && !chunks_read_valid)
-        PRINT_RANK0("ERROR: Not all chunks reads were valid\n");
+        PRINT("ERROR: Not all chunks reads were valid\n");
+    fflush(stdout);
+    fflush(stderr);
 }

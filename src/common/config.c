@@ -18,7 +18,7 @@
  *             "implementation": "hdf5",
  *             "io_participations": [
  *                 "collective",
- *                 "indepdendent"
+ *                 "independent"
  *             ]
  *         },
  *         {
@@ -33,7 +33,7 @@
  *             "implementation": "pdc",
  *             "io_participations": [
  *                 "collective",
- *                 "indepdendent"
+ *                 "independent"
  *             ]
  *         },
  *         {
@@ -41,7 +41,7 @@
  *             "implementation": "pdc_zfp",
  *             "io_participations": [
  *                 "collective",
- *                 "indepdendent"
+ *                 "independent"
  *             ]
  *         }
  *     ],
@@ -124,7 +124,7 @@ config_t *init_config(char *config_path) {
 
     // make sure we can access file
     if (access(config_path, R_OK) != 0)
-        ASSERT(false, "Failed to access config file\n");
+        ASSERT(false, "Failed to access config file %s\n", config_path);
 
     // open file
     int fd = open(config_path, O_RDONLY);
@@ -181,6 +181,9 @@ config_t *init_config(char *config_path) {
         const char* workload_io_filter = validate_json_string(
             workload, "filter", MAX_CONFIG_STRING_SIZE);
         strcpy(config->workloads[i].io_filter, workload_io_filter);
+        const char* params = validate_json_string(
+            workload, "params", MAX_CONFIG_STRING_SIZE);
+        strcpy(config->workloads[i].params, params);
 
         // validate and pull out io participations
         struct array_list *workload_io_participations = validate_json_array(

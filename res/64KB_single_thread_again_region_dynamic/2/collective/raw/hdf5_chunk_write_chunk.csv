@@ -1,4 +1,0 @@
-scale_type,chunks_per_rank,num_ranks,timer_tag,elapsed_seconds,io_impl
-chunk,1,256,write_chunk,0.021638,hdf5
-chunk,2,256,write_chunk,0.037941,hdf5
-chunk,4,256,write_chunk,0.053617,hdf5

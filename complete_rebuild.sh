@@ -7,6 +7,6 @@ rm -rf ./build || true
 mkdir build
 
 pushd ./build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 popd

@@ -16,7 +16,7 @@ static char *dataset_name = NULL;
 
 #define MAX_NAME_SIZE 255
 
-void hdf5_io_init() {
+void hdf5_io_init(char* params) {
     static int num_init = 0;
 
     dataset_name = malloc(MAX_NAME_SIZE * sizeof(char));
@@ -34,7 +34,6 @@ void hdf5_io_init() {
 
 void hdf5_io_deinit() {
     free(dataset_name);
-
     H5_ASSERT(H5close());
 }
 
@@ -60,14 +59,14 @@ void hdf5_io_init_dataset(MPI_Comm comm, uint32_t elements_per_dim, int my_rank,
 }
 
 void hdf5_io_create_dataset() {
-    dset_g = H5Dcreate(file_g, dataset_name, H5T_NATIVE_FLOAT, space_g,
+    dset_g = H5Dcreate(file_g, dataset_name, H5T_NATIVE_DOUBLE, space_g,
                        H5P_DEFAULT, dcpl_g, H5P_DEFAULT);
     H5_ASSERT(dset_g);
     H5_ASSERT(H5Pclose(dcpl_g));
     H5_ASSERT(H5Sclose(space_g));
 }
 
-void hdf5_io_write_chunk(uint32_t elements_per_dim, float *buffer,
+void hdf5_io_write_chunk(uint32_t elements_per_dim, double *buffer,
                          io_participation_t io_participation, int rank,
                          int chunks_per_rank, int chunk, MPI_Comm comm) {
     hsize_t offset[2] = {(rank * chunks_per_rank + chunk) * elements_per_dim,
@@ -90,7 +89,7 @@ void hdf5_io_write_chunk(uint32_t elements_per_dim, float *buffer,
     else
         H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT));
 
-    H5_ASSERT(H5Dwrite(dset_g, H5T_NATIVE_FLOAT, memspace, filespace_g, dxpl,
+    H5_ASSERT(H5Dwrite(dset_g, H5T_NATIVE_DOUBLE, memspace, filespace_g, dxpl,
                        buffer));
 
     H5_ASSERT(H5Pclose(dxpl));
@@ -98,7 +97,7 @@ void hdf5_io_write_chunk(uint32_t elements_per_dim, float *buffer,
     H5_ASSERT(H5Sclose(filespace_g));
 }
 
-void hdf5_io_read_chunk(uint32_t elements_per_dim, float *read_buf,
+void hdf5_io_read_chunk(uint32_t elements_per_dim, double *read_buf,
                         io_participation_t io_participation, int rank,
                         int chunks_per_rank, int chunk, MPI_Comm comm) {
     hsize_t offset[2] = {(rank * chunks_per_rank + chunk) * elements_per_dim,
@@ -121,7 +120,7 @@ void hdf5_io_read_chunk(uint32_t elements_per_dim, float *read_buf,
     else
         H5_ASSERT(H5Pset_dxpl_mpio(dxpl, H5FD_MPIO_INDEPENDENT));
 
-    H5_ASSERT(H5Dread(dset_g, H5T_NATIVE_FLOAT, memspace, filespace_g, dxpl,
+    H5_ASSERT(H5Dread(dset_g, H5T_NATIVE_DOUBLE, memspace, filespace_g, dxpl,
                       read_buf));
 
     H5_ASSERT(H5Pclose(dxpl));
@@ -134,14 +133,15 @@ void hdf5_io_flush() { H5_ASSERT(H5Fflush(file_g, H5F_SCOPE_GLOBAL)); }
 void hdf5_io_enable_compression_on_dataset() {
     unsigned int cd_values[6];
     size_t cd_nelmts = 6;
-    double precision = 0.01; // target max error (or accuracy) you want
 
-    // Encode precision mode parameters into client data array
-    H5Pset_zfp_precision_cdata(precision, cd_nelmts, cd_values);
+    H5Pset_zfp_reversible_cdata(cd_nelmts, cd_values);
 
-    // Set the ZFP filter on the dataset creation property list
+    // Apply ZFP filter to dataset creation property list
     herr_t status = H5Pset_filter(dcpl_g, H5Z_FILTER_ZFP, H5Z_FLAG_MANDATORY,
                                   cd_nelmts, cd_values);
+    if (status < 0) {
+        fprintf(stderr, "Error setting ZFP filter\n");
+    }
 }
 
 void hdf5_io_close_dataset() {

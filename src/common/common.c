@@ -6,8 +6,8 @@
 #include "common.h"
 #include "log.h"
 
-char* io_filter_strings[] = {"raw", "zfp_compress"};
-const char *io_participation_strings[] = {"collective", "indepdendent"};
+char* io_filter_strings[] = {"raw", "zfp_compress", "zfp_compress_transform"};
+const char *io_participation_strings[] = {"collective", "independent"};
 char *io_impl_strings[] = {"hdf5", "hdf5_zfp", "pdc", "pdc_zfp"};
 const char *timer_tags[] = {"write_chunk", "write_all_chunks", "read_chunk",
                             "read_all_chunks"};
@@ -41,8 +41,6 @@ void print_all_timers_csv(const char *filename, int chunks_per_rank,
             fprintf(fp, "[0]workload_name,[1]chunks_per_rank,[2]num_ranks,[3]timer_tag,"
                         "[4]elapsed_seconds,[5]chunk_size_bytes,[6]io_participation,[7]filter\n");
         }
-
-        
 
         for (int i = 0; i < TIMER_TAGS_COUNT; i++) {
             double time;

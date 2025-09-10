@@ -19,9 +19,7 @@
 #define USAGE "./zfp_baseline <json_config_path>"
 
 int main(int argc, char **argv) {  
-    // 0 disabled, 1 enabled compression
-    static bool is_compressed = false;
-    ASSERT(system("../pdc_disable_compression.sh") != -1, "Failed to launch pdc disable compression script");
+    printf("Entered main\n");
 
     MPI_Init(&argc, &argv);
 
@@ -88,12 +86,12 @@ int main(int argc, char **argv) {
                    cur_participation_str);
 
             uint32_t elements_per_dim =
-                (config->chunk_size_bytes / sizeof(float)) /
+                (config->chunk_size_bytes / sizeof(double)) /
                 (uint32_t) sqrt(config->chunk_size_bytes);
 
             uint64_t total_bytes = (uint64_t) config->chunks_per_rank *
                                    num_ranks * elements_per_dim *
-                                   elements_per_dim * sizeof(float);
+                                   elements_per_dim * sizeof(double);
             uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
 
             io_filter_t cur_io_filter = -1;
@@ -115,6 +113,7 @@ int main(int argc, char **argv) {
             PRINT_RANK0("Starting workload %s\n", config->workloads[i].name);
             PRINT_RANK0("Running with %d rank(s)\n", num_ranks);
             PRINT_RANK0("Chunks per rank %lu\n", config->chunks_per_rank);
+            PRINT_RANK0("Params %s", config->workloads[i].params);
             if (cur_io_participation == COLLECTIVE_IO)
                 PRINT_RANK0("Using collective I/O\n");
             else
@@ -122,7 +121,7 @@ int main(int argc, char **argv) {
             PRINT_RANK0("Requested chunk size %lu bytes\n",
                         config->chunk_size_bytes);
             PRINT_RANK0("Rounded chunk size %lu bytes\n",
-                        elements_per_dim * elements_per_dim * sizeof(float));
+                        elements_per_dim * elements_per_dim * sizeof(double));
             PRINT_RANK0("Total data to be written: %lu GB (%lu) bytes\n",
                         total_GB, total_bytes);
             PRINT_RANK0("==============================================\n");
@@ -131,20 +130,11 @@ int main(int argc, char **argv) {
 
             char* shell_path = NULL;
 
-            // check if we need to recompile PDC
-            if(cur_io_impl == PDC_IMPL && cur_io_filter == IO_FILTER_ZFP_COMPRESS && !is_compressed) {
-                shell_path = "../pdc_enable_compression.sh";
-                is_compressed = true;
-            }  else if(cur_io_impl == PDC_IMPL && cur_io_filter != IO_FILTER_ZFP_COMPRESS && is_compressed) {
-                shell_path = "../pdc_disable_compression.sh";
-                is_compressed = true;
-            }
-
             int res = system(shell_path);
             ASSERT(res != -1, "Failed to recompile PDC for ZFP compress/decompression\n");
 
             // start workload
-            exec_io_impl(cur_io_impl, io_impl_funcs[cur_io_impl],
+            exec_io_impl(config->workloads[i].params, cur_io_impl, io_impl_funcs[cur_io_impl],
                          elements_per_dim, num_ranks, config->chunks_per_rank,
                          rank, cur_io_participation, config->validate_read);
 

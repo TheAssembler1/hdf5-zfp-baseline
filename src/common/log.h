@@ -68,6 +68,12 @@
 #define BOLD_CYAN "\033[1;36m"
 #define BOLD_WHITE "\033[1;37m"
 
+#undef ENABLE_COLOR
+
+#ifdef ENABLE_COLOR
 #define TOGGLE_COLOR(color) printf("%s", color)
+#else 
+#define TOGGLE_COLOR(color)
+#endif
 
 #endif

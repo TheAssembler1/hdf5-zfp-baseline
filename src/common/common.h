@@ -17,6 +17,7 @@ extern char* io_filter_strings[];
 typedef enum io_filter_t {
     IO_FILTER_RAW,
     IO_FILTER_ZFP_COMPRESS,
+    IO_FILTER_ZFP_COMPRESS_TRANSFORM,
     NUM_IO_FILTERS
 } io_filter_t;
 
@@ -35,7 +36,7 @@ typedef struct io_impl_funcs_t {
      * file operations. This may include initializing internal state, setting up
      * parallel I/O contexts, or checking for available features or filters.
      */
-    void (*init)();
+    void (*init)(char* params);
     /**
      * Deinitializes the I/O library or backend.
      * Clean up any global state or resources allocated during initialization.
@@ -83,7 +84,7 @@ typedef struct io_impl_funcs_t {
      * The implementation should select the appropriate region in the dataset
      * and write the data from the buffer according to the provided parameters.
      */
-    void (*write_chunk)(uint32_t elements_per_dim, float *buffer,
+    void (*write_chunk)(uint32_t elements_per_dim, double *buffer,
                         io_participation_t io_participation, int rank,
                         int chunks_per_rank, int chunk, MPI_Comm comm);
     /**
@@ -100,7 +101,7 @@ typedef struct io_impl_funcs_t {
      * The implementation should select the appropriate region in the dataset
      * and read the data into the provided buffer according to the parameters.
      */
-    void (*read_chunk)(uint32_t elements_per_dim, float *buffer,
+    void (*read_chunk)(uint32_t elements_per_dim, double *buffer,
                        io_participation_t io_participation, int rank,
                        int chunks_per_rank, int chunk, MPI_Comm comm);
     /**

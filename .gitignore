@@ -10,6 +10,8 @@ pdc_tmp
 /Makefile
 /install_manifest.txt
 
+myenv
+
 # Executables and libraries
 *.exe
 *.out
