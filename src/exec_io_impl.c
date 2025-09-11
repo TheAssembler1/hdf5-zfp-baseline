@@ -41,6 +41,7 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     PRINT("Starting write\n");
 
     START_TIMER(WRITE_ALL_CHUNKS);
+    MPI_Barrier(MPI_COMM_WORLD);
     for (int c = 0; c < chunks_per_rank; c++) {
         PRINT("Starting chunk write %d\n", c + 1);
         START_TIMER(WRITE_CHUNK);
@@ -52,6 +53,7 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     }
     PRINT_RANK0("Calling flush on impl\n");
     io_impl_funcs.flush();
+    MPI_Barrier(MPI_COMM_WORLD);
     STOP_TIMER(WRITE_ALL_CHUNKS);
 
     PRINT("Finished write\n");
@@ -74,6 +76,7 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     bool chunks_read_valid = true;
 
     START_TIMER(READ_ALL_CHUNKS);
+    MPI_Barrier(MPI_COMM_WORLD);
     for (int c = 0; c < chunks_per_rank; c++) {
         PRINT("Starting chunk read %d\n", c + 1);
         START_TIMER(READ_CHUNK);
@@ -96,6 +99,7 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     }
     PRINT_RANK0("Calling flush on impl\n");
     io_impl_funcs.flush();
+    MPI_Barrier(MPI_COMM_WORLD);
     STOP_TIMER(READ_ALL_CHUNKS);
 
     free(read_buf);
