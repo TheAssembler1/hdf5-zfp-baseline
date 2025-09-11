@@ -1,0 +1,351 @@
+1 NODE(S) from pdc_server_1_pdc_zfp.log
+	open:
+		Count: 8
+		Average: 0.00017825 s
+		Minimum: 0.000125 s
+		Maximum: 0.000305 s
+		Standard Deviation open: 5.85233e-05 s
+	close:
+		Count: 8
+		Average: 5.1125e-05 s
+		Minimum: 0.000004 s
+		Maximum: 0.000103 s
+		Standard Deviation close: 4.69639e-05 s
+	read:
+		Count: 4
+		Average: 3.75e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000005 s
+		Standard Deviation read: 8.29156e-07 s
+	write:
+		Count: 4
+		Average: 0.000177 s
+		Minimum: 0.000125 s
+		Maximum: 0.000216 s
+		Standard Deviation write: 3.38157e-05 s
+	zfp_compress:
+		Count: 4
+		Average: 0.00053575 s
+		Minimum: 0.000183 s
+		Maximum: 0.001592 s
+		Standard Deviation zfp_compress: 0.000609826 s
+	zfp_decompress:
+		Count: 4
+		Average: 0.00014 s
+		Minimum: 0.000122 s
+		Maximum: 0.000172 s
+		Standard Deviation zfp_decompress: 2.00499e-05 s
+	PDCtf_exec_graph:
+		Count: 8
+		Average: 0.000345375 s
+		Minimum: 0.000127 s
+		Maximum: 0.001613 s
+		Standard Deviation PDCtf_exec_graph: 0.000479763 s
+2 NODE(S) from pdc_server_2_pdc_zfp.log
+	open:
+		Count: 16
+		Average: 0.000421812 s
+		Minimum: 0.000153 s
+		Maximum: 0.001931 s
+		Standard Deviation open: 0.000417661 s
+	close:
+		Count: 16
+		Average: 5.31875e-05 s
+		Minimum: 0.000004 s
+		Maximum: 0.000122 s
+		Standard Deviation close: 4.96238e-05 s
+	read:
+		Count: 8
+		Average: 4.875e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000009 s
+		Standard Deviation read: 1.89983e-06 s
+	write:
+		Count: 8
+		Average: 0.00010475 s
+		Minimum: 0.000030 s
+		Maximum: 0.000196 s
+		Standard Deviation write: 7.21454e-05 s
+	zfp_compress:
+		Count: 8
+		Average: 0.0003475 s
+		Minimum: 0.000181 s
+		Maximum: 0.001449 s
+		Standard Deviation zfp_compress: 0.000416482 s
+	zfp_decompress:
+		Count: 8
+		Average: 0.000130375 s
+		Minimum: 0.000124 s
+		Maximum: 0.000145 s
+		Standard Deviation zfp_decompress: 7.24463e-06 s
+	PDCtf_exec_graph:
+		Count: 16
+		Average: 0.000245437 s
+		Minimum: 0.000129 s
+		Maximum: 0.001468 s
+		Standard Deviation PDCtf_exec_graph: 0.000317289 s
+4 NODE(S) from pdc_server_4_pdc_zfp.log
+	open:
+		Count: 32
+		Average: 0.000335344 s
+		Minimum: 0.000008 s
+		Maximum: 0.001421 s
+		Standard Deviation open: 0.000342228 s
+	close:
+		Count: 32
+		Average: 4.34688e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000150 s
+		Standard Deviation close: 5.1855e-05 s
+	read:
+		Count: 16
+		Average: 4.375e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000009 s
+		Standard Deviation read: 1.65359e-06 s
+	write:
+		Count: 16
+		Average: 0.00010625 s
+		Minimum: 0.000030 s
+		Maximum: 0.000215 s
+		Standard Deviation write: 7.36739e-05 s
+	zfp_compress:
+		Count: 16
+		Average: 0.000354062 s
+		Minimum: 0.000180 s
+		Maximum: 0.001542 s
+		Standard Deviation zfp_compress: 0.000436966 s
+	zfp_decompress:
+		Count: 16
+		Average: 0.0001325 s
+		Minimum: 0.000123 s
+		Maximum: 0.000195 s
+		Standard Deviation zfp_decompress: 1.73674e-05 s
+	PDCtf_exec_graph:
+		Count: 32
+		Average: 0.000249344 s
+		Minimum: 0.000127 s
+		Maximum: 0.001562 s
+		Standard Deviation PDCtf_exec_graph: 0.0003321 s
+8 NODE(S) from pdc_server_8_pdc_zfp.log
+	open:
+		Count: 64
+		Average: 0.000303016 s
+		Minimum: 0.000008 s
+		Maximum: 0.001488 s
+		Standard Deviation open: 0.000282717 s
+	close:
+		Count: 64
+		Average: 5.19687e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000319 s
+		Standard Deviation close: 6.13647e-05 s
+	read:
+		Count: 32
+		Average: 4.375e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000008 s
+		Standard Deviation read: 1.31695e-06 s
+	write:
+		Count: 32
+		Average: 9.99688e-05 s
+		Minimum: 0.000029 s
+		Maximum: 0.000229 s
+		Standard Deviation write: 6.93447e-05 s
+	zfp_compress:
+		Count: 32
+		Average: 0.000352719 s
+		Minimum: 0.000180 s
+		Maximum: 0.001536 s
+		Standard Deviation zfp_compress: 0.000416536 s
+	zfp_decompress:
+		Count: 32
+		Average: 0.00013375 s
+		Minimum: 0.000119 s
+		Maximum: 0.000190 s
+		Standard Deviation zfp_decompress: 1.56723e-05 s
+	PDCtf_exec_graph:
+		Count: 64
+		Average: 0.000249688 s
+		Minimum: 0.000124 s
+		Maximum: 0.001555 s
+		Standard Deviation PDCtf_exec_graph: 0.000318047 s
+16 NODE(S) from pdc_server_16_pdc_zfp.log
+	open:
+		Count: 128
+		Average: 0.000834766 s
+		Minimum: 0.000008 s
+		Maximum: 0.064618 s
+		Standard Deviation open: 0.00566884 s
+	close:
+		Count: 128
+		Average: 4.70703e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000158 s
+		Standard Deviation close: 5.25903e-05 s
+	read:
+		Count: 64
+		Average: 4.57813e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000012 s
+		Standard Deviation read: 1.647e-06 s
+	write:
+		Count: 64
+		Average: 0.000106469 s
+		Minimum: 0.000029 s
+		Maximum: 0.000240 s
+		Standard Deviation write: 7.52916e-05 s
+	zfp_compress:
+		Count: 64
+		Average: 0.000372844 s
+		Minimum: 0.000180 s
+		Maximum: 0.001857 s
+		Standard Deviation zfp_compress: 0.000482067 s
+	zfp_decompress:
+		Count: 64
+		Average: 0.000135453 s
+		Minimum: 0.000116 s
+		Maximum: 0.000199 s
+		Standard Deviation zfp_decompress: 1.65038e-05 s
+	PDCtf_exec_graph:
+		Count: 128
+		Average: 0.000260523 s
+		Minimum: 0.000120 s
+		Maximum: 0.001875 s
+		Standard Deviation PDCtf_exec_graph: 0.00036449 s
+32 NODE(S) from pdc_server_32_pdc_zfp.log
+	open:
+		Count: 256
+		Average: 0.000506816 s
+		Minimum: 0.000007 s
+		Maximum: 0.045756 s
+		Standard Deviation open: 0.00284994 s
+	close:
+		Count: 256
+		Average: 4.30547e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000195 s
+		Standard Deviation close: 5.13565e-05 s
+	read:
+		Count: 128
+		Average: 4.42969e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000008 s
+		Standard Deviation read: 1.41799e-06 s
+	write:
+		Count: 128
+		Average: 0.000108625 s
+		Minimum: 0.000029 s
+		Maximum: 0.000245 s
+		Standard Deviation write: 7.55814e-05 s
+	zfp_compress:
+		Count: 128
+		Average: 0.000842297 s
+		Minimum: 0.000180 s
+		Maximum: 0.019471 s
+		Standard Deviation zfp_compress: 0.00288697 s
+	zfp_decompress:
+		Count: 128
+		Average: 0.000130781 s
+		Minimum: 0.000111 s
+		Maximum: 0.000194 s
+		Standard Deviation zfp_decompress: 1.35462e-05 s
+	PDCtf_exec_graph:
+		Count: 256
+		Average: 0.000492816 s
+		Minimum: 0.000114 s
+		Maximum: 0.019494 s
+		Standard Deviation PDCtf_exec_graph: 0.00207437 s
+64 NODE(S) from pdc_server_64_pdc_zfp.log
+	open:
+		Count: 512
+		Average: 0.000239756 s
+		Minimum: 0.000008 s
+		Maximum: 0.001039 s
+		Standard Deviation open: 0.000120379 s
+	close:
+		Count: 512
+		Average: 7.45996e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000451 s
+		Standard Deviation close: 7.8318e-05 s
+	read:
+		Count: 256
+		Average: 3.89453e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000021 s
+		Standard Deviation read: 1.79205e-06 s
+	write:
+		Count: 256
+		Average: 0.000193547 s
+		Minimum: 0.000030 s
+		Maximum: 0.000507 s
+		Standard Deviation write: 5.48892e-05 s
+	zfp_compress:
+		Count: 256
+		Average: 0.000190813 s
+		Minimum: 0.000158 s
+		Maximum: 0.000272 s
+		Standard Deviation zfp_compress: 1.6908e-05 s
+	zfp_decompress:
+		Count: 256
+		Average: 0.000118551 s
+		Minimum: 0.000068 s
+		Maximum: 0.000189 s
+		Standard Deviation zfp_decompress: 2.20745e-05 s
+	PDCtf_exec_graph:
+		Count: 512
+		Average: 0.000160029 s
+		Minimum: 0.000073 s
+		Maximum: 0.000277 s
+		Standard Deviation PDCtf_exec_graph: 4.20793e-05 s
+128 NODE(S) from pdc_server_128_pdc_zfp.log
+	open:
+		Count: 1024
+		Average: 0.000245137 s
+		Minimum: 0.000008 s
+		Maximum: 0.036527 s
+		Standard Deviation open: 0.00113855 s
+	close:
+		Count: 1024
+		Average: 6.28486e-05 s
+		Minimum: 0.000003 s
+		Maximum: 0.000380 s
+		Standard Deviation close: 6.33097e-05 s
+	read:
+		Count: 512
+		Average: 3.7793e-06 s
+		Minimum: 0.000003 s
+		Maximum: 0.000015 s
+		Standard Deviation read: 1.42664e-06 s
+	write:
+		Count: 512
+		Average: 0.000186998 s
+		Minimum: 0.000029 s
+		Maximum: 0.000634 s
+		Standard Deviation write: 6.32313e-05 s
+	zfp_compress:
+		Count: 512
+		Average: 0.000186766 s
+		Minimum: 0.000159 s
+		Maximum: 0.000281 s
+		Standard Deviation zfp_compress: 1.55945e-05 s
+	zfp_decompress:
+		Count: 512
+		Average: 0.000123518 s
+		Minimum: 0.000066 s
+		Maximum: 0.000195 s
+		Standard Deviation zfp_decompress: 1.74227e-05 s
+	PDCtf_exec_graph:
+		Count: 1024
+		Average: 0.000160285 s
+		Minimum: 0.000070 s
+		Maximum: 0.000300 s
+		Standard Deviation PDCtf_exec_graph: 3.62162e-05 s
+256 NODE(S) from pdc_server_256_pdc_zfp.log
+	open:
+		Count: 2048
+		Average: 0.000223477 s
+		Minimum: 0.000008 s
+		Maximum: 0.047043 s
+		Standard Deviation open: 0.00103837 s
