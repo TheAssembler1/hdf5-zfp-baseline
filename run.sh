@@ -1,8 +1,6 @@
 #!/bin/bash
 
-set -e
-set -x
-set -u
+set -exu
 
 LAUNCHER="srun"
 
@@ -32,15 +30,15 @@ function run_benchmark() {
 	for ((i=1; i<=$TOTAL_TASKS; i*=2)); do
 		# Setup names of log files
 		CLIENT_LOG=client_${i}_$2.log
-		CLIENT_CLOSE_LOG=client_close_${i}_$2.log
-		SERVER_LOG=server_${i}_$2.log
 		CLIENT_LOG_ERR=client_${i}_$2.err
-		CLIENT_CLOSE_LOG_ERR=client_close_${i}_$2.err
-		SERVER_LOG_ERR=server_${i}_$2.err
 
-		# Print log info
-		echo "CLIENT_LOG=$CLIENT_LOG, SERVER_LOG=$SERVER_LOG, CLIENT_CLOSE_LOG=$CLIENT_CLOSE_LOG"
-		echo "CLIENT_LOG_ERR=$CLIENT_LOG_ERR, SERVER_LOG_ERR=$SERVER_LOG_ERR, CLIENT_CLOSE_LOG_ERR=$CLIENT_CLOSE_LOG_ERR"
+		# PDC specific log files
+		SERVER_LOG=server_${i}_$2.log
+		SERVER_LOG_ERR=server_${i}_$2.err
+		CLIENT_CLOSE_LOG=client_close_${i}_$2.log
+		CLIENT_CLOSE_LOG_ERR=client_close_${i}_$2.err
+
+		echo "CLIENT_LOG=$CLIENT_LOG, CLIENT_LOG_ERR=$CLIENT_LOG_ERR"
 
 		NUM_NODES=$(( (i + 31) / 32 ))
 		if [ $NUM_NODES -gt $TOTAL_NODES ]; then
@@ -51,6 +49,8 @@ function run_benchmark() {
 
 		# Launch the PDC server(s)
 		if [ "$3" = "true" ]; then
+			echo "CLIENT_CLOSE_LOG=$CLIENT_CLOSE_LOG, CLIENT_CLOSE_LOG_ERR=$CLIENT_CLOSE_LOG_ERR"
+			echo "SERVER_LOG=$SERVER_LOG, SERVER_LOG_ERR=$SERVER_LOG_ERR"
 			echo "Starting PDC servers"
 			srun --nodes=$NUM_NODES \
 				--ntasks-per-node=1 \

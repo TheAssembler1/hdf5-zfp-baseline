@@ -1,16 +1,17 @@
 #!/bin/bash
-#SBATCH --nodes=256
+
+#SBATCH --nodes=8
 #SBATCH --ntasks-per-node=33
 #SBATCH --cpus-per-task=1
 #SBATCH --account=m2621
-#SBATCH --time=01:00:00
+#SBATCH --time=00:30:00
 #SBATCH --constraint=cpu
-#SBATCH --qos=regular
+#SBATCH --qos=debug
 
 set -x
 set -u
 
-export TOTAL_NODES=256
+export TOTAL_NODES=8
 export TASKS_PER_NODE=32
 export TOTAL_TASKS=$((TOTAL_NODES * TASKS_PER_NODE))
 

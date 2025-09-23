@@ -10,7 +10,7 @@
             "params": "none"
         }
     ],
-    "chunk_size_bytes": 1048576,
+    "chunk_size_bytes": 4194304,
     "chunks_per_rank": 4,
     "validate_read": false
 }
