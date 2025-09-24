@@ -43,7 +43,9 @@ void pdc_io_init(char* params) {
 void pdc_io_deinit() {
     free(dataset_name);
     free(cont_name);
-    //PDC_NEG_ASSERT(PDCclose(pdc_g));
+
+    PDC_NEG_ASSERT(PDCobj_close(obj_g)); 
+    PDC_NEG_ASSERT(PDCclose(pdc_g));
     //num_init_g = 0;
 }
 
@@ -175,7 +177,7 @@ void pdc_io_flush() {
 }
 
 void pdc_io_close_dataset() { 
-    //PDC_NEG_ASSERT(PDCobj_close(obj_g)); 
+    // PDC_NEG_ASSERT(PDCobj_close(obj_g)); 
 }
 
 void pdc_io_reopen_dataset() {

@@ -1,7 +1,9 @@
 #include <stdint.h>
 #include <mpi.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "exec_io_impl.h"
 #include "common/log.h"
@@ -32,9 +34,11 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     // Allocate write buffer
     uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(double);
     double *buffer = (double *) malloc(chunk_bytes);
+    // Seed RNG
+    srand(time(NULL));
     for (uint32_t i = 0; i < elements_per_dim; i++) {
         for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] = (double) ((rank + 100 + i) % 123);
+            buffer[i * elements_per_dim + j] = rand();
         }
     }
 

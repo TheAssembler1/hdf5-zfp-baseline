@@ -22,6 +22,8 @@ fi
 sleep 1
 
 # Run the benchmark
-./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/hdf5_zfp.json"
+./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_zfp.json"
+
+close_server
 
 popd
