@@ -1,0 +1,670 @@
+Entered main
+Rank[0] {
+  "workloads":[
+    {
+      "name":"HDF5",
+      "implementation":"hdf5",
+      "io_participations":[
+        "independent",
+        "collective"
+      ],
+      "filter":"raw",
+      "params":"none"
+    }
+  ],
+  "chunk_size_bytes":1048576,
+  "chunks_per_rank":4,
+  "validate_read":false
+}
+Rank[0] ==============================================
+Rank[0] Starting workload HDF5
+Rank[0] Running with 16 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params noneRank[0] Using independent I/O
+Rank[0] Requested chunk size 1048576 bytes
+Rank[0] Rounded chunk size 131072 bytes
+Rank[0] Total data to be written: 0 GB (8388608) bytes
+Rank[0] ==============================================
+Rank[0] ZFP filter available? YES
+Rank[0] Calling init_dataset on impl
+Rank[0] No filter enabled
+Rank[0] Calling create_dataset on impl
+Rank[0] Starting write
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Entered main
+Rank[7] Starting write
+Entered main
+Rank[2] Starting write
+Rank[2] Starting chunk write 1
+Entered main
+Rank[13] Starting write
+Rank[13] Starting chunk write 1
+Entered main
+Rank[6] Starting write
+Rank[6] Starting chunk write 1
+Entered main
+Rank[4] Starting write
+Rank[4] Starting chunk write 1
+Entered main
+Rank[3] Starting write
+Rank[3] Starting chunk write 1
+Entered main
+Rank[10] Starting write
+Rank[10] Starting chunk write 1
+Rank[7] Starting chunk write 1
+Entered main
+Rank[12] Starting write
+Rank[12] Starting chunk write 1
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Entered main
+Rank[14] Starting write
+Rank[14] Starting chunk write 1
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Entered main
+Rank[15] Starting write
+Rank[15] Starting chunk write 1
+Entered main
+Rank[8] Starting write
+Rank[8] Starting chunk write 1
+Entered main
+Rank[9] Starting write
+Rank[9] Starting chunk write 1
+Entered main
+Rank[1] Starting write
+Rank[1] Starting chunk write 1
+Entered main
+Rank[5] Starting write
+Rank[5] Starting chunk write 1
+Entered main
+Rank[11] Starting write
+Rank[11] Starting chunk write 1
+Rank[1] Finished chunk write 1
+Rank[1] Starting chunk write 2
+Rank[2] Finished chunk write 1
+Rank[2] Starting chunk write 2
+Rank[4] Finished chunk write 1
+Rank[4] Starting chunk write 2
+Rank[3] Finished chunk write 1
+Rank[3] Starting chunk write 2
+Rank[6] Finished chunk write 1
+Rank[6] Starting chunk write 2
+Rank[2] Finished chunk write 2
+Rank[2] Starting chunk write 3
+Rank[5] Finished chunk write 1
+Rank[5] Starting chunk write 2
+Rank[7] Finished chunk write 1
+Rank[7] Starting chunk write 2
+Rank[4] Finished chunk write 2
+Rank[4] Starting chunk write 3
+Rank[3] Finished chunk write 2
+Rank[3] Starting chunk write 3
+Rank[6] Finished chunk write 2
+Rank[6] Starting chunk write 3
+Rank[2] Finished chunk write 3
+Rank[2] Starting chunk write 4
+Rank[5] Finished chunk write 2
+Rank[5] Starting chunk write 3
+Rank[7] Finished chunk write 2
+Rank[7] Starting chunk write 3
+Rank[4] Finished chunk write 3
+Rank[4] Starting chunk write 4
+Rank[3] Finished chunk write 3
+Rank[3] Starting chunk write 4
+Rank[6] Finished chunk write 3
+Rank[6] Starting chunk write 4
+Rank[5] Finished chunk write 3
+Rank[5] Starting chunk write 4
+Rank[7] Finished chunk write 3
+Rank[7] Starting chunk write 4
+Rank[8] Finished chunk write 1
+Rank[8] Starting chunk write 2
+Rank[12] Finished chunk write 1
+Rank[12] Starting chunk write 2
+Rank[10] Finished chunk write 1
+Rank[10] Starting chunk write 2
+Rank[9] Finished chunk write 1
+Rank[9] Starting chunk write 2
+Rank[13] Finished chunk write 1
+Rank[13] Starting chunk write 2
+Rank[1] Finished chunk write 2
+Rank[1] Starting chunk write 3
+Rank[14] Finished chunk write 1
+Rank[14] Starting chunk write 2
+Rank[11] Finished chunk write 1
+Rank[11] Starting chunk write 2
+Rank[15] Finished chunk write 1
+Rank[15] Starting chunk write 2
+Rank[8] Finished chunk write 2
+Rank[8] Starting chunk write 3
+Rank[10] Finished chunk write 2
+Rank[10] Starting chunk write 3
+Rank[9] Finished chunk write 2
+Rank[9] Starting chunk write 3
+Rank[13] Finished chunk write 2
+Rank[13] Starting chunk write 3
+Rank[14] Finished chunk write 2
+Rank[14] Starting chunk write 3
+Rank[12] Finished chunk write 2
+Rank[12] Starting chunk write 3
+Rank[15] Finished chunk write 2
+Rank[15] Starting chunk write 3
+Rank[1] Finished chunk write 3
+Rank[1] Starting chunk write 4
+Rank[11] Finished chunk write 2
+Rank[11] Starting chunk write 3
+Rank[13] Finished chunk write 3
+Rank[13] Starting chunk write 4
+Rank[10] Finished chunk write 3
+Rank[10] Starting chunk write 4
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[12] Finished chunk write 3
+Rank[12] Starting chunk write 4
+Rank[9] Finished chunk write 3
+Rank[9] Starting chunk write 4
+Rank[14] Finished chunk write 3
+Rank[14] Starting chunk write 4
+Rank[11] Finished chunk write 3
+Rank[11] Starting chunk write 4
+Rank[15] Finished chunk write 3
+Rank[15] Starting chunk write 4
+Rank[15] Finished chunk write 4
+Rank[5] Finished chunk write 4
+Rank[4] Finished chunk write 4
+Rank[2] Finished chunk write 4
+Rank[6] Finished chunk write 4
+Rank[3] Finished chunk write 4
+Rank[8] Finished chunk write 3
+Rank[8] Starting chunk write 4
+Rank[13] Finished chunk write 4
+Rank[7] Finished chunk write 4
+Rank[1] Finished chunk write 4
+Rank[12] Finished chunk write 4
+Rank[10] Finished chunk write 4
+Rank[11] Finished chunk write 4
+Rank[9] Finished chunk write 4
+Rank[14] Finished chunk write 4
+Rank[8] Finished chunk write 4
+Rank[3] Finished write
+Rank[8] Finished write
+Rank[9] Finished write
+Rank[13] Finished write
+Rank[10] Finished write
+Rank[1] Finished write
+Rank[14] Finished write
+Rank[5] Finished write
+Rank[11] Finished write
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[15] Finished write
+Rank[6] Finished write
+Rank[2] Finished write
+Rank[4] Finished write
+Rank[7] Finished write
+Rank[12] Finished write
+Rank[0] Calling reopen on impl
+Rank[3] Starting chunk read 1
+Rank[8] Starting chunk read 1
+Rank[9] Starting chunk read 1
+Rank[13] Starting chunk read 1
+Rank[10] Starting chunk read 1
+Rank[1] Starting chunk read 1
+Rank[14] Starting chunk read 1
+Rank[5] Starting chunk read 1
+Rank[11] Starting chunk read 1
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[15] Starting chunk read 1
+Rank[6] Starting chunk read 1
+Rank[2] Starting chunk read 1
+Rank[4] Starting chunk read 1
+Rank[7] Starting chunk read 1
+Rank[12] Starting chunk read 1
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[15] Finished chunk read 1
+Rank[15] Starting chunk read 2
+Rank[15] Finished chunk read 2
+Rank[15] Starting chunk read 3
+Rank[15] Finished chunk read 3
+Rank[15] Starting chunk read 4
+Rank[15] Finished chunk read 4
+Rank[14] Finished chunk read 1
+Rank[14] Starting chunk read 2
+Rank[14] Finished chunk read 2
+Rank[14] Starting chunk read 3
+Rank[13] Finished chunk read 1
+Rank[13] Starting chunk read 2
+Rank[14] Finished chunk read 3
+Rank[14] Starting chunk read 4
+Rank[13] Finished chunk read 2
+Rank[13] Starting chunk read 3
+Rank[14] Finished chunk read 4
+Rank[13] Finished chunk read 3
+Rank[13] Starting chunk read 4
+Rank[12] Finished chunk read 1
+Rank[12] Starting chunk read 2
+Rank[13] Finished chunk read 4
+Rank[11] Finished chunk read 1
+Rank[11] Starting chunk read 2
+Rank[12] Finished chunk read 2
+Rank[12] Starting chunk read 3
+Rank[12] Finished chunk read 3
+Rank[12] Starting chunk read 4
+Rank[12] Finished chunk read 4
+Rank[11] Finished chunk read 2
+Rank[11] Starting chunk read 3
+Rank[10] Finished chunk read 1
+Rank[10] Starting chunk read 2
+Rank[11] Finished chunk read 3
+Rank[11] Starting chunk read 4
+Rank[11] Finished chunk read 4
+Rank[10] Finished chunk read 2
+Rank[10] Starting chunk read 3
+Rank[9] Finished chunk read 1
+Rank[9] Starting chunk read 2
+Rank[10] Finished chunk read 3
+Rank[10] Starting chunk read 4
+Rank[10] Finished chunk read 4
+Rank[9] Finished chunk read 2
+Rank[9] Starting chunk read 3
+Rank[8] Finished chunk read 1
+Rank[8] Starting chunk read 2
+Rank[9] Finished chunk read 3
+Rank[9] Starting chunk read 4
+Rank[7] Finished chunk read 1
+Rank[7] Starting chunk read 2
+Rank[8] Finished chunk read 2
+Rank[8] Starting chunk read 3
+Rank[9] Finished chunk read 4
+Rank[8] Finished chunk read 3
+Rank[8] Starting chunk read 4
+Rank[7] Finished chunk read 2
+Rank[7] Starting chunk read 3
+Rank[6] Finished chunk read 1
+Rank[6] Starting chunk read 2
+Rank[8] Finished chunk read 4
+Rank[7] Finished chunk read 3
+Rank[7] Starting chunk read 4
+Rank[6] Finished chunk read 2
+Rank[6] Starting chunk read 3
+Rank[7] Finished chunk read 4
+Rank[6] Finished chunk read 3
+Rank[6] Starting chunk read 4
+Rank[5] Finished chunk read 1
+Rank[5] Starting chunk read 2
+Rank[6] Finished chunk read 4
+Rank[5] Finished chunk read 2
+Rank[5] Starting chunk read 3
+Rank[4] Finished chunk read 1
+Rank[4] Starting chunk read 2
+Rank[5] Finished chunk read 3
+Rank[5] Starting chunk read 4
+Rank[3] Finished chunk read 1
+Rank[3] Starting chunk read 2
+Rank[4] Finished chunk read 2
+Rank[4] Starting chunk read 3
+Rank[5] Finished chunk read 4
+Rank[4] Finished chunk read 3
+Rank[4] Starting chunk read 4
+Rank[3] Finished chunk read 2
+Rank[3] Starting chunk read 3
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[3] Finished chunk read 3
+Rank[3] Starting chunk read 4
+Rank[4] Finished chunk read 4
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[2] Finished chunk read 1
+Rank[2] Starting chunk read 2
+Rank[3] Finished chunk read 4
+Rank[2] Finished chunk read 2
+Rank[2] Starting chunk read 3
+Rank[1] Finished chunk read 1
+Rank[1] Starting chunk read 2
+Rank[2] Finished chunk read 3
+Rank[2] Starting chunk read 4
+Rank[1] Finished chunk read 2
+Rank[1] Starting chunk read 3
+Rank[2] Finished chunk read 4
+Rank[1] Finished chunk read 3
+Rank[1] Starting chunk read 4
+Rank[1] Finished chunk read 4
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Rank[0] ==============================================
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload HDF5
+Rank[0] ==============================================
+Rank[0] ==============================================
+Rank[0] Starting workload HDF5
+Rank[0] Running with 16 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params noneRank[0] Using collective I/O
+Rank[0] Requested chunk size 1048576 bytes
+Rank[0] Rounded chunk size 131072 bytes
+Rank[0] Total data to be written: 0 GB (8388608) bytes
+Rank[0] ==============================================
+Rank[0] Calling init_dataset on impl
+Rank[0] No filter enabled
+Rank[0] Calling create_dataset on impl
+Rank[3] Starting write
+Rank[8] Starting write
+Rank[9] Starting write
+Rank[13] Starting write
+Rank[13] Starting chunk write 1
+Rank[10] Starting write
+Rank[10] Starting chunk write 1
+Rank[1] Starting write
+Rank[14] Starting write
+Rank[5] Starting write
+Rank[11] Starting write
+Rank[0] Starting write
+Rank[15] Starting write
+Rank[6] Starting write
+Rank[2] Starting write
+Rank[4] Starting write
+Rank[7] Starting write
+Rank[7] Starting chunk write 1
+Rank[12] Starting write
+Rank[3] Starting chunk write 1
+Rank[8] Starting chunk write 1
+Rank[9] Starting chunk write 1
+Rank[1] Starting chunk write 1
+Rank[14] Starting chunk write 1
+Rank[5] Starting chunk write 1
+Rank[11] Starting chunk write 1
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Rank[15] Starting chunk write 1
+Rank[6] Starting chunk write 1
+Rank[2] Starting chunk write 1
+Rank[4] Starting chunk write 1
+Rank[12] Starting chunk write 1
+Rank[3] Finished chunk write 1
+Rank[3] Starting chunk write 2
+Rank[8] Finished chunk write 1
+Rank[8] Starting chunk write 2
+Rank[9] Finished chunk write 1
+Rank[9] Starting chunk write 2
+Rank[13] Finished chunk write 1
+Rank[13] Starting chunk write 2
+Rank[10] Finished chunk write 1
+Rank[10] Starting chunk write 2
+Rank[1] Finished chunk write 1
+Rank[1] Starting chunk write 2
+Rank[14] Finished chunk write 1
+Rank[14] Starting chunk write 2
+Rank[5] Finished chunk write 1
+Rank[5] Starting chunk write 2
+Rank[11] Finished chunk write 1
+Rank[11] Starting chunk write 2
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[15] Finished chunk write 1
+Rank[15] Starting chunk write 2
+Rank[6] Finished chunk write 1
+Rank[6] Starting chunk write 2
+Rank[2] Finished chunk write 1
+Rank[2] Starting chunk write 2
+Rank[4] Finished chunk write 1
+Rank[4] Starting chunk write 2
+Rank[7] Finished chunk write 1
+Rank[7] Starting chunk write 2
+Rank[12] Finished chunk write 1
+Rank[12] Starting chunk write 2
+Rank[3] Finished chunk write 2
+Rank[3] Starting chunk write 3
+Rank[8] Finished chunk write 2
+Rank[8] Starting chunk write 3
+Rank[9] Finished chunk write 2
+Rank[9] Starting chunk write 3
+Rank[13] Finished chunk write 2
+Rank[13] Starting chunk write 3
+Rank[10] Finished chunk write 2
+Rank[10] Starting chunk write 3
+Rank[1] Finished chunk write 2
+Rank[1] Starting chunk write 3
+Rank[14] Finished chunk write 2
+Rank[14] Starting chunk write 3
+Rank[5] Finished chunk write 2
+Rank[5] Starting chunk write 3
+Rank[11] Finished chunk write 2
+Rank[11] Starting chunk write 3
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Rank[15] Finished chunk write 2
+Rank[15] Starting chunk write 3
+Rank[6] Finished chunk write 2
+Rank[6] Starting chunk write 3
+Rank[2] Finished chunk write 2
+Rank[2] Starting chunk write 3
+Rank[4] Finished chunk write 2
+Rank[4] Starting chunk write 3
+Rank[7] Finished chunk write 2
+Rank[7] Starting chunk write 3
+Rank[12] Finished chunk write 2
+Rank[12] Starting chunk write 3
+Rank[3] Finished chunk write 3
+Rank[3] Starting chunk write 4
+Rank[8] Finished chunk write 3
+Rank[8] Starting chunk write 4
+Rank[9] Finished chunk write 3
+Rank[9] Starting chunk write 4
+Rank[13] Finished chunk write 3
+Rank[13] Starting chunk write 4
+Rank[10] Finished chunk write 3
+Rank[10] Starting chunk write 4
+Rank[1] Finished chunk write 3
+Rank[1] Starting chunk write 4
+Rank[14] Finished chunk write 3
+Rank[14] Starting chunk write 4
+Rank[5] Finished chunk write 3
+Rank[5] Starting chunk write 4
+Rank[11] Finished chunk write 3
+Rank[11] Starting chunk write 4
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Rank[15] Finished chunk write 3
+Rank[15] Starting chunk write 4
+Rank[6] Finished chunk write 3
+Rank[6] Starting chunk write 4
+Rank[2] Finished chunk write 3
+Rank[2] Starting chunk write 4
+Rank[4] Finished chunk write 3
+Rank[4] Starting chunk write 4
+Rank[7] Finished chunk write 3
+Rank[7] Starting chunk write 4
+Rank[12] Finished chunk write 3
+Rank[12] Starting chunk write 4
+Rank[3] Finished chunk write 4
+Rank[8] Finished chunk write 4
+Rank[9] Finished chunk write 4
+Rank[13] Finished chunk write 4
+Rank[10] Finished chunk write 4
+Rank[1] Finished chunk write 4
+Rank[14] Finished chunk write 4
+Rank[5] Finished chunk write 4
+Rank[11] Finished chunk write 4
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[15] Finished chunk write 4
+Rank[6] Finished chunk write 4
+Rank[2] Finished chunk write 4
+Rank[4] Finished chunk write 4
+Rank[7] Finished chunk write 4
+Rank[12] Finished chunk write 4
+Rank[3] Finished write
+Rank[8] Finished write
+Rank[1] Finished write
+Rank[5] Finished write
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[15] Finished write
+Rank[6] Finished write
+Rank[2] Finished write
+Rank[4] Finished write
+Rank[12] Finished write
+Rank[9] Finished write
+Rank[13] Finished write
+Rank[10] Finished write
+Rank[14] Finished write
+Rank[11] Finished write
+Rank[7] Finished write
+Rank[0] Calling reopen on impl
+Rank[3] Starting chunk read 1
+Rank[8] Starting chunk read 1
+Rank[9] Starting chunk read 1
+Rank[13] Starting chunk read 1
+Rank[10] Starting chunk read 1
+Rank[1] Starting chunk read 1
+Rank[14] Starting chunk read 1
+Rank[5] Starting chunk read 1
+Rank[11] Starting chunk read 1
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[15] Starting chunk read 1
+Rank[6] Starting chunk read 1
+Rank[2] Starting chunk read 1
+Rank[4] Starting chunk read 1
+Rank[7] Starting chunk read 1
+Rank[12] Starting chunk read 1
+Rank[3] Finished chunk read 1
+Rank[3] Starting chunk read 2
+Rank[8] Finished chunk read 1
+Rank[8] Starting chunk read 2
+Rank[9] Finished chunk read 1
+Rank[9] Starting chunk read 2
+Rank[13] Finished chunk read 1
+Rank[13] Starting chunk read 2
+Rank[10] Finished chunk read 1
+Rank[10] Starting chunk read 2
+Rank[1] Finished chunk read 1
+Rank[1] Starting chunk read 2
+Rank[14] Finished chunk read 1
+Rank[14] Starting chunk read 2
+Rank[5] Finished chunk read 1
+Rank[5] Starting chunk read 2
+Rank[11] Finished chunk read 1
+Rank[11] Starting chunk read 2
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[15] Finished chunk read 1
+Rank[15] Starting chunk read 2
+Rank[6] Finished chunk read 1
+Rank[6] Starting chunk read 2
+Rank[2] Finished chunk read 1
+Rank[2] Starting chunk read 2
+Rank[4] Finished chunk read 1
+Rank[4] Starting chunk read 2
+Rank[7] Finished chunk read 1
+Rank[7] Starting chunk read 2
+Rank[12] Finished chunk read 1
+Rank[12] Starting chunk read 2
+Rank[3] Finished chunk read 2
+Rank[3] Starting chunk read 3
+Rank[8] Finished chunk read 2
+Rank[8] Starting chunk read 3
+Rank[9] Finished chunk read 2
+Rank[9] Starting chunk read 3
+Rank[13] Finished chunk read 2
+Rank[13] Starting chunk read 3
+Rank[10] Finished chunk read 2
+Rank[10] Starting chunk read 3
+Rank[1] Finished chunk read 2
+Rank[1] Starting chunk read 3
+Rank[14] Finished chunk read 2
+Rank[14] Starting chunk read 3
+Rank[5] Finished chunk read 2
+Rank[5] Starting chunk read 3
+Rank[11] Finished chunk read 2
+Rank[11] Starting chunk read 3
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[15] Finished chunk read 2
+Rank[15] Starting chunk read 3
+Rank[6] Finished chunk read 2
+Rank[6] Starting chunk read 3
+Rank[2] Finished chunk read 2
+Rank[2] Starting chunk read 3
+Rank[4] Finished chunk read 2
+Rank[4] Starting chunk read 3
+Rank[7] Finished chunk read 2
+Rank[7] Starting chunk read 3
+Rank[12] Finished chunk read 2
+Rank[12] Starting chunk read 3
+Rank[3] Finished chunk read 3
+Rank[3] Starting chunk read 4
+Rank[8] Finished chunk read 3
+Rank[8] Starting chunk read 4
+Rank[9] Finished chunk read 3
+Rank[9] Starting chunk read 4
+Rank[13] Finished chunk read 3
+Rank[13] Starting chunk read 4
+Rank[10] Finished chunk read 3
+Rank[10] Starting chunk read 4
+Rank[1] Finished chunk read 3
+Rank[1] Starting chunk read 4
+Rank[14] Finished chunk read 3
+Rank[14] Starting chunk read 4
+Rank[5] Finished chunk read 3
+Rank[5] Starting chunk read 4
+Rank[11] Finished chunk read 3
+Rank[11] Starting chunk read 4
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[15] Finished chunk read 3
+Rank[15] Starting chunk read 4
+Rank[6] Finished chunk read 3
+Rank[6] Starting chunk read 4
+Rank[2] Finished chunk read 3
+Rank[2] Starting chunk read 4
+Rank[4] Finished chunk read 3
+Rank[4] Starting chunk read 4
+Rank[7] Finished chunk read 3
+Rank[7] Starting chunk read 4
+Rank[12] Finished chunk read 3
+Rank[12] Starting chunk read 4
+Rank[3] Finished chunk read 4
+Rank[8] Finished chunk read 4
+Rank[9] Finished chunk read 4
+Rank[13] Finished chunk read 4
+Rank[10] Finished chunk read 4
+Rank[1] Finished chunk read 4
+Rank[14] Finished chunk read 4
+Rank[5] Finished chunk read 4
+Rank[11] Finished chunk read 4
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[15] Finished chunk read 4
+Rank[6] Finished chunk read 4
+Rank[2] Finished chunk read 4
+Rank[4] Finished chunk read 4
+Rank[7] Finished chunk read 4
+Rank[12] Finished chunk read 4
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Rank[0] ==============================================
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload HDF5
+Rank[0] ==============================================

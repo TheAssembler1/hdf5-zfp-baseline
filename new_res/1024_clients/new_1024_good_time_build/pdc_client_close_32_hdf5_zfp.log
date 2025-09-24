@@ -1,0 +1,39 @@
+[INFO] PDC_CLIENT[3]: PDCtf_init called
+[INFO] PDC_CLIENT[14]: PDCtf_init called
+[INFO] PDC_CLIENT[5]: PDCtf_init called
+[INFO] PDC_CLIENT[16]: PDCtf_init called
+[INFO] PDC_CLIENT[12]: PDCtf_init called
+[INFO] PDC_CLIENT[22]: PDCtf_init called
+[INFO] PDC_CLIENT[25]: PDCtf_init called
+[INFO] PDC_CLIENT[11]: PDCtf_init called
+[INFO] PDC_CLIENT[24]: PDCtf_init called
+[INFO] PDC_CLIENT[13]: PDCtf_init called
+[INFO] PDC_CLIENT[31]: PDCtf_init called
+[INFO] PDC_CLIENT[2]: PDCtf_init called
+[INFO] PDC_CLIENT[15]: PDCtf_init called
+[INFO] PDC_CLIENT[30]: PDCtf_init called
+[INFO] PDC_CLIENT[1]: PDCtf_init called
+[INFO] PDC_CLIENT[18]: PDCtf_init called
+[INFO] PDC_CLIENT[28]: PDCtf_init called
+[INFO] PDC_CLIENT[8]: PDCtf_init called
+[INFO] PDC_CLIENT[9]: PDCtf_init called
+[INFO] PDC_CLIENT[27]: PDCtf_init called
+[INFO] PDC_CLIENT[29]: PDCtf_init called
+[INFO] PDC_CLIENT[7]: PDCtf_init called
+[INFO] PDC_CLIENT[17]: PDCtf_init called
+[INFO] PDC_CLIENT[10]: PDCtf_init called
+[INFO] PDC_CLIENT[21]: PDCtf_init called
+[INFO] PDC_CLIENT[20]: PDCtf_init called
+[INFO] PDC_CLIENT[26]: PDCtf_init called
+[INFO] PDC_CLIENT[4]: PDCtf_init called
+[INFO] PDC_CLIENT[23]: PDCtf_init called
+[INFO] PDC_CLIENT[6]: PDCtf_init called
+[INFO] PDC_CLIENT[19]: PDCtf_init called
+[INFO] PDC_CLIENT[0]: PDCtf_init called
+[INFO] PDC_CLIENT[0]: PDC_DEBUG set to 0
+[INFO] PDC_CLIENT[0]: Found 32 PDC Metadata servers, running with 32 PDC clients
+[INFO] PDC_CLIENT[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_CLIENT[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_CLIENT[0]: Connection string: ofi+tcp://nid005564:8000
+[INFO] PDC_CLIENT[0]: Using [./pdc_tmp] as tmp dir, 1 clients per server
+[INFO] PDC_CLIENT[0]: total close time = 0.068783

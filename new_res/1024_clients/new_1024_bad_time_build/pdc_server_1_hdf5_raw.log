@@ -1,0 +1,106 @@
+[INFO] PDC_SERVER[4]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[4]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[6]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[6]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[1]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[1]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[15]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[15]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[16]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[16]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[2]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[2]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[5]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[5]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[20]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[20]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[8]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[8]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[18]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[18]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[14]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[14]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[19]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[19]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[26]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[26]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[11]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[11]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[29]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[29]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[7]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[7]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[12]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[12]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[27]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[27]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[10]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[10]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[25]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[25]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[30]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[30]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[13]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[13]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Using [./pdc_tmp/] as tmp dir, 1 OSTs, 1 OSTs per data file, 0% to BB
+[INFO] PDC_SERVER[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[23]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[23]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[24]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[24]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[31]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[31]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[17]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[17]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[9]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[9]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[22]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[22]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[21]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[21]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[28]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[28]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[3]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[3]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Connection string: ofi+tcp://nid004372:7000
+[INFO] PDC_SERVER[0]: Without multi-thread
+[INFO] PDC_SERVER[0]: Successfully established connection to 31 other PDC servers
+[INFO] PDC_SERVER[0]: Server ready!
+
+
+[INFO] PDC_SERVER[0]: Checkpoint file [./pdc_tmp//0/metadata_checkpoint.0]
+[INFO] PDC_CLIENT[5]: [IDIOMS_Index_Dump_5] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[18]: [IDIOMS_Index_Dump_18] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[19]: [IDIOMS_Index_Dump_19] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[13]: [IDIOMS_Index_Dump_13] Timer to dump index = 11.0000 microseconds
+[INFO] PDC_CLIENT[21]: [IDIOMS_Index_Dump_21] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[11]: [IDIOMS_Index_Dump_11] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[10]: [IDIOMS_Index_Dump_10] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[2]: [IDIOMS_Index_Dump_2] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[3]: [IDIOMS_Index_Dump_3] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[17]: [IDIOMS_Index_Dump_17] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[23]: [IDIOMS_Index_Dump_23] Timer to dump index = 8.0000 microseconds
+[INFO] PDC_CLIENT[29]: [IDIOMS_Index_Dump_29] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[31]: [IDIOMS_Index_Dump_31] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[30]: [IDIOMS_Index_Dump_30] Timer to dump index = 12.0000 microseconds
+[INFO] PDC_CLIENT[28]: [IDIOMS_Index_Dump_28] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[14]: [IDIOMS_Index_Dump_14] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[15]: [IDIOMS_Index_Dump_15] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[27]: [IDIOMS_Index_Dump_27] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[26]: [IDIOMS_Index_Dump_26] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[1]: [IDIOMS_Index_Dump_1] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[12]: [IDIOMS_Index_Dump_12] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[22]: [IDIOMS_Index_Dump_22] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[25]: [IDIOMS_Index_Dump_25] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[24]: [IDIOMS_Index_Dump_24] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[9]: [IDIOMS_Index_Dump_9] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[8]: [IDIOMS_Index_Dump_8] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[20]: [IDIOMS_Index_Dump_20] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[16]: [IDIOMS_Index_Dump_16] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_SERVER[0]: Checkpointed          0 objects, with          0 regions 
+[INFO] PDC_CLIENT[0]: Writing DART info to file_name: ./pdc_tmp//dart_info.bin
+[INFO] PDC_CLIENT[7]: [IDIOMS_Index_Dump_7] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[6]: [IDIOMS_Index_Dump_6] Timer to dump index = 10.0000 microseconds
+[INFO] PDC_CLIENT[4]: [IDIOMS_Index_Dump_4] Timer to dump index = 9.0000 microseconds
+[INFO] PDC_CLIENT[0]: [IDIOMS_Index_Dump_0] Timer to dump index = 2007.0000 microseconds

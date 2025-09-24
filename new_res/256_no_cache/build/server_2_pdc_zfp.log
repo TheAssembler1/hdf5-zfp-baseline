@@ -1,0 +1,291 @@
+[INFO] PDC_SERVER[0]: Using [./pdc_tmp/] as tmp dir, 1 OSTs, 1 OSTs per data file, 0% to BB
+[INFO] PDC_SERVER[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Connection string: ofi+tcp://nid004332:7000
+[INFO] PDC_SERVER[0]: Without multi-thread
+[INFO] PDC_SERVER[0]: Successfully established connection to 0 other PDC servers
+[INFO] PDC_SERVER[0]: Server ready!
+
+
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.002751 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002773 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000316 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000478 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000107 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001736 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001740 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000234 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000398 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000101 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001673 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001677 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000242 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000435 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000102 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001671 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001674 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000208 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000403 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000098 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001675 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001680 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.002912 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000272 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000122 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001659 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001663 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.002361 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000299 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000094 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001663 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001667 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.001806 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000270 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000100 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: ZFP compression succeeded, compressed size bytes: 282352 bytes
+[INFO] PDC_SERVER[0]: [TIMER] zfp_compress time_elapsed: 0.001658 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.001662 s
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.002267 s
+[INFO] PDC_SERVER[0]: [TIMER] write time_elapsed: 0.000277 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000094 s
+[INFO] PDC_SERVER[0]: Ran write storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000133 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000159 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000005 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002346 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002353 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000117 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000127 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000004 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002342 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002348 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000662 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000025 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000004 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002302 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002307 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000118 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000029 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000004 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002361 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002367 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000437 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000030 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000093 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002352 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002358 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000162 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000027 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000152 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002239 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002244 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000163 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000020 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000488 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002236 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002241 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: [TIMER] open time_elapsed: 0.000150 s
+[INFO] PDC_SERVER[0]: [TIMER] read time_elapsed: 0.000022 s
+[INFO] PDC_SERVER[0]: [TIMER] close time_elapsed: 0.000504 s
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[INFO] PDC_SERVER[0]: [TIMER] zfp_decompress time_elapsed: 0.002353 s
+[INFO] PDC_SERVER[0]: [TIMER] PDCtf_exec_graph time_elapsed: 0.002359 s
+[INFO] PDC_SERVER[0]: Ran read storage strategy STORE_FLATTENED_REGION_PER_FILE_TRANSFORMATION
+[INFO] PDC_SERVER[0]: Checkpoint file [./pdc_tmp//0/metadata_checkpoint.0]
+num_objs: 1
+obj_id: 1000000001
+	obj[1000000001] json_filepath_str: /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+	num_region_mappings: 8
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1024
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1280
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1536
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1792
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=0
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=256
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=512
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=768
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 1
+		pdc_var_type 15, size: 1
+		actual_region_size:
+			size[0]=282352
+		func_name: zfp_compress
+			params_str: none
+			num_params: 8
+			conceptual_flat_offset: 1024
+			params_size: 48
+			conceptual_flat_offset: 1280
+			params_size: 48
+			conceptual_flat_offset: 1536
+			params_size: 48
+			conceptual_flat_offset: 1792
+			params_size: 48
+			conceptual_flat_offset: 0
+			params_size: 48
+			conceptual_flat_offset: 256
+			params_size: 48
+			conceptual_flat_offset: 512
+			params_size: 48
+			conceptual_flat_offset: 768
+			params_size: 48
+		func_name: zfp_decompress
+			params_str: none
+			num_params: 0
+		state_name: decompressed
+			num_params: 0
+		state_name: compressed
+			num_params: 0
+[INFO] PDC_SERVER[0]: Checkpointed          1 objects, with          0 regions 
+[INFO] PDC_CLIENT[0]: Writing DART info to file_name: ./pdc_tmp//dart_info.bin
+[INFO] PDC_CLIENT[0]: [IDIOMS_Index_Dump_0] Timer to dump index = 1671.0000 microseconds

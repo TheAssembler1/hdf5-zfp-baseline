@@ -1,0 +1,36 @@
+[INFO] PDC_SERVER[0]: Using [./pdc_tmp/] as tmp dir, 1 OSTs, 1 OSTs per data file, 0% to BB
+[INFO] PDC_SERVER[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Connection string: ofi+tcp://nid005273:7000
+[INFO] PDC_SERVER[1]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[1]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[3]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[3]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[2]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[2]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[5]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[5]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[7]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[7]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[4]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[4]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[6]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[6]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Without multi-thread
+[INFO] PDC_SERVER[0]: Read cache enabled
+[INFO] PDC_SERVER[0]: Max cache size: 34359738368
+[INFO] PDC_SERVER[0]: Successfully established connection to 7 other PDC servers
+[INFO] PDC_SERVER[0]: Server ready!
+
+
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: nid005340: task 1: Terminated
+srun: Terminating StepId=41186049.731
+srun: error: nid005476: task 2: Terminated
+srun: error: nid006071: task 5: Terminated
+srun: error: nid006791: task 7: Terminated
+srun: error: nid005273: task 0: Terminated
+srun: error: nid005873: task 3: Terminated
+srun: error: nid006032: task 4: Terminated
+srun: error: nid006366: task 6: Terminated

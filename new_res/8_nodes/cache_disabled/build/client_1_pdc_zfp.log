@@ -1,0 +1,75 @@
+Entered main
+Rank[0] {
+  "workloads":[
+    {
+      "name":"PDC-ZFP",
+      "implementation":"pdc",
+      "io_participations":[
+        "independent"
+      ],
+      "filter":"zfp_compress",
+      "params":"batch"
+    }
+  ],
+  "chunk_size_bytes":4194304,
+  "chunks_per_rank":4,
+  "validate_read":false
+}
+Rank[0] ==============================================
+Rank[0] Starting workload PDC-ZFP
+Rank[0] Running with 1 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params batchRank[0] Using independent I/O
+Rank[0] Requested chunk size 4194304 bytes
+Rank[0] Rounded chunk size 524288 bytes
+Rank[0] Total data to be written: 0 GB (2097152) bytes
+Rank[0] ==============================================
+[INFO] PDC_CLIENT[0]: PDCtf_init called
+[INFO] PDC_CLIENT[0]: PDC_DEBUG set to 0
+[INFO] PDC_CLIENT[0]: Found 1 PDC Metadata servers, running with 1 PDC clients
+[INFO] PDC_CLIENT[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_CLIENT[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_CLIENT[0]: Connection string: ofi+tcp://nid006277:8000
+[INFO] PDC_CLIENT[0]: Using [./pdc_tmp] as tmp dir, 1 clients per server
+Rank[0] Calling init_dataset on impl
+Creating container with name cont_0
+Rank[0] Creating object with name obj_0
+Rank[0] ZFP Compression filter enabled
+Rank[0] Calling enable_compression_on_dataset on impl
+Rank[0] Calling create_dataset on impl
+Rank[0] Starting write
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling reopen on impl
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Rank[0] ==============================================
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload PDC-ZFP
+Rank[0] ==============================================

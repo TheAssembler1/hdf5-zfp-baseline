@@ -1,0 +1,413 @@
+[INFO] PDC_SERVER[0]: Using [./pdc_tmp/] as tmp dir, 1 OSTs, 1 OSTs per data file, 0% to BB
+[INFO] PDC_SERVER[0]: Environment variable HG_TRANSPORT was NOT set
+[INFO] PDC_SERVER[0]: Environment variable HG_HOST was NOT set
+[INFO] PDC_SERVER[0]: Connection string: ofi+tcp://nid004486:7000
+[INFO] PDC_SERVER[0]: Without multi-thread
+[INFO] PDC_SERVER[0]: Read cache enabled
+[INFO] PDC_SERVER[0]: Max cache size: 34359738368
+[INFO] PDC_SERVER[0]: Successfully established connection to 0 other PDC servers
+[INFO] PDC_SERVER[0]: Server ready!
+
+
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262116] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262129] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262134] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262139] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262147] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262154] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 8.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262252] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262259] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262263] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262268] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262275] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262282] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 7.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262349] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262354] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262359] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262363] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262370] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262377] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 7.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262445] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262451] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262455] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262459] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262466] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262473] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 6.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262543] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262549] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262553] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262557] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262565] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262572] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 6.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262593] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262599] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262603] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262607] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262614] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262621] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 5.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262639] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262644] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262648] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262653] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262660] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262667] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 5.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262684] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262690] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262694] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262698] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262705] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262712] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 4.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262730] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262736] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262741] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262746] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262754] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262763] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 4.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262783] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262790] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262795] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262800] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262808] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262816] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 3.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262837] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262844] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262849] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262854] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262862] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262871] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 3.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262891] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262898] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262902] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262908] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262916] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262924] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 2.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262945] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.262952] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262957] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.262962] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.262970] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.262979] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 2.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.262999] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.263006] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.263011] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.263016] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.263024] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.263033] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 1.5 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.263053] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.263060] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.263065] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.263070] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.263078] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.263087] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 1.0 MB to storage
+[INFO] PDC_SERVER[0]: Executing graph with json filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.263106] [ERROR] [pdc_dg.c:307] PDC_CLIENT[0]: Path is too short to contain any edges
+[11:36:10.263113] [ERROR] [pdc_tf_server.c:200] PDC_SERVER[0]: JSON filepath /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+[11:36:10.263118] [ERROR] [pdc_tf_server.c:201] PDC_SERVER[0]: Curent state compressed, desired state compressed
+[11:36:10.263123] [ERROR] [pdc_tf_server.c:202] PDC_SERVER[0]: No path to desired state
+[11:36:10.263131] [ERROR] [pdc_server_region_transfer.c:737] PDC_SERVER[0]: Error with PDCtf_exec_graph
+[11:36:10.263140] [ERROR] [pdc_server_region_transfer.c:853] PDC_SERVER[0]: Error with PDC_Server_data_io_region_per_file_transformations
+[INFO] PDC_SERVER[0]: Server flushed 0.5 / 0.5 MB to storage
+[INFO] PDC_SERVER[0]: Checkpoint file [./pdc_tmp//0/metadata_checkpoint.0]
+num_objs: 1
+obj_id: 1000000001
+	obj[1000000001] json_filepath_str: /pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/tf_graphs/compression.json
+	num_region_mappings: 16
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=0
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274555] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=256
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274601] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=512
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274645] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=768
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274689] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1024
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274733] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1280
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274776] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1536
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274819] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=1792
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274862] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=3072
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274916] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=3328
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.274959] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=3584
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275003] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=3840
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275046] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=2048
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275089] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=2304
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275132] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=2560
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275175] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		dg_id: 1
+		cur_state_str: compressed
+		client_state_str: decompressed
+		store_state_str: compressed
+		conceptual_region_ndim: 2
+		pdc_var_type: 14, size: 8
+		conceptual_region_offset:
+			offset[0]=2816
+			offset[1]=0
+		conceptual_region_size:
+			size[0]=256
+			size[1]=256
+		actual_region_ndim: 0
+[11:36:10.275218] [ERROR] [pdc_client_server_common.c:272] PDC_SERVER[0]: PDC_get_var_type_size: WARNING - Using an unknown datatype
+		pdc_var_type 0, size: 0
+		actual_region_size:
+		func_name: zfp_compress
+			params_str: none
+			num_params: 0
+		func_name: zfp_decompress
+			params_str: none
+			num_params: 0
+		state_name: decompressed
+			num_params: 0
+		state_name: compressed
+			num_params: 0
+[INFO] PDC_SERVER[0]: Checkpointed          1 objects, with          0 regions 
+[INFO] PDC_CLIENT[0]: Writing DART info to file_name: ./pdc_tmp//dart_info.bin
+[INFO] PDC_CLIENT[0]: [IDIOMS_Index_Dump_0] Timer to dump index = 1906.0000 microseconds

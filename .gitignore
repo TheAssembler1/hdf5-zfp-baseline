@@ -39,6 +39,5 @@ myenv
 *.vs/
 
 # Logs and temporary files
-*.log
 *.tmp
 
