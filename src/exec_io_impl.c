@@ -9,9 +9,10 @@
 #include "common/log.h"
 #include "common/config.h"
 
-void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_funcs,
-                  uint32_t elements_per_dim, int num_ranks, int chunks_per_rank,
-                  int rank, io_participation_t io_participation, bool validate_read) {
+void exec_io_impl(char *params, io_impl_t cur_io_impl,
+                  io_impl_funcs_t io_impl_funcs, uint32_t elements_per_dim,
+                  int num_ranks, int chunks_per_rank, int rank,
+                  io_participation_t io_participation, bool validate_read) {
     io_impl_funcs.init(params);
 
     // init dataset
@@ -38,7 +39,8 @@ void exec_io_impl(char* params, io_impl_t cur_io_impl, io_impl_funcs_t io_impl_f
     srand(time(NULL));
     for (uint32_t i = 0; i < elements_per_dim; i++) {
         for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] = rand();
+            buffer[i * elements_per_dim + j] =
+                (double) rand() + ((double) rand() / (double) RAND_MAX);
         }
     }
 
