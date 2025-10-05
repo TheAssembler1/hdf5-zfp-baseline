@@ -1,0 +1,16 @@
+{
+    "workloads": [
+        {
+            "name": "HDF5-ZFP",
+            "implementation": "hdf5",
+            "io_participations": [
+                "collective"
+            ],
+            "filter": "zfp_compress",
+            "params": "none"
+        }
+    ],
+    "chunk_size_bytes": 4194304,
+    "chunks_per_rank": 4,
+    "validate_read": false
+}

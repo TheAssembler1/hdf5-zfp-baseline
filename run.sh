@@ -75,6 +75,8 @@ function run_benchmark() {
 				--error="$CLIENT_CLOSE_LOG_ERR"\
 				--output="$CLIENT_CLOSE_LOG" \
 				close_server
+		else 
+			/pscratch/sd/n/nlewi26/src/hdf5/install/bin/h5ls -v output.h5
 		fi
 	done
 

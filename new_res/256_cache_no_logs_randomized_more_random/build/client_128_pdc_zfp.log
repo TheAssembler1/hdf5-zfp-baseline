@@ -1,0 +1,322 @@
+Entered main
+Rank[0] {
+  "workloads":[
+    {
+      "name":"PDC-ZFP",
+      "implementation":"pdc",
+      "io_participations":[
+        "independent"
+      ],
+      "filter":"zfp_compress",
+      "params":"batch"
+    }
+  ],
+  "chunk_size_bytes":4194304,
+  "chunks_per_rank":4,
+  "validate_read":false
+}
+Rank[0] ==============================================
+Rank[0] Starting workload PDC-ZFP
+Rank[0] Running with 128 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params batchRank[0] Using independent I/O
+Rank[0] Requested chunk size 4194304 bytes
+Rank[0] Rounded chunk size 524288 bytes
+Rank[0] Total data to be written: 0 GB (268435456) bytes
+Rank[0] ==============================================
+Rank[0] Calling init_dataset on impl
+Creating container with name cont_0
+Rank[0] Creating object with name obj_0
+Rank[0] ZFP Compression filter enabled
+Rank[0] Calling enable_compression_on_dataset on impl
+Rank[0] Calling create_dataset on impl
+Rank[0] Starting write
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling reopen on impl
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Rank[0] ==============================================
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Entered main
+Creating container with name cont_0
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload PDC-ZFP
+Rank[0] ==============================================

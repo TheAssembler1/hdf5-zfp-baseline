@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "exec_io_impl.h"
 #include "common/log.h"
@@ -36,33 +37,33 @@ void exec_io_impl(char *params, io_impl_t cur_io_impl,
     uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(double);
     double *buffer = (double *) malloc(chunk_bytes);
     // Seed RNG
-    srand(time(NULL));
+    long seed = time(NULL) ^ (rank * 1337) ^ getpid(); // More entropy
+    srand48(seed);
     for (uint32_t i = 0; i < elements_per_dim; i++) {
         for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] =
-                (double) rand() + ((double) rand() / (double) RAND_MAX);
+            buffer[i * elements_per_dim + j] = drand48();
         }
     }
 
-    PRINT("Starting write\n");
+    PRINT_RANK0("Starting write\n");
 
     START_TIMER(WRITE_ALL_CHUNKS);
     MPI_Barrier(MPI_COMM_WORLD);
     for (int c = 0; c < chunks_per_rank; c++) {
-        PRINT("Starting chunk write %d\n", c + 1);
+        PRINT_RANK0("Starting chunk write %d\n", c + 1);
         START_TIMER(WRITE_CHUNK);
         PRINT_RANK0("Calling write_chunk on impl\n");
         io_impl_funcs.write_chunk(elements_per_dim, buffer, io_participation,
                                   rank, chunks_per_rank, c, MPI_COMM_WORLD);
         STOP_TIMER(WRITE_CHUNK);
-        PRINT("Finished chunk write %d\n", c + 1);
+        PRINT_RANK0("Finished chunk write %d\n", c + 1);
     }
     PRINT_RANK0("Calling flush on impl\n");
     io_impl_funcs.flush();
     MPI_Barrier(MPI_COMM_WORLD);
     STOP_TIMER(WRITE_ALL_CHUNKS);
 
-    PRINT("Finished write\n");
+    PRINT_RANK0("Finished write\n");
 
     // close dataset
     free(buffer);
@@ -84,7 +85,7 @@ void exec_io_impl(char *params, io_impl_t cur_io_impl,
     START_TIMER(READ_ALL_CHUNKS);
     MPI_Barrier(MPI_COMM_WORLD);
     for (int c = 0; c < chunks_per_rank; c++) {
-        PRINT("Starting chunk read %d\n", c + 1);
+        PRINT_RANK0("Starting chunk read %d\n", c + 1);
         START_TIMER(READ_CHUNK);
         PRINT_RANK0("Calling read_chunk on impl\n");
         io_impl_funcs.read_chunk(elements_per_dim, read_buf, io_participation,
@@ -101,7 +102,7 @@ void exec_io_impl(char *params, io_impl_t cur_io_impl,
             }
         }*/
         STOP_TIMER(READ_CHUNK);
-        PRINT("Finished chunk read %d\n", c + 1);
+        PRINT_RANK0("Finished chunk read %d\n", c + 1);
     }
     PRINT_RANK0("Calling flush on impl\n");
     io_impl_funcs.flush();

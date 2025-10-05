@@ -1,0 +1,17 @@
+{
+    "workloads": [
+        {
+            "name": "HDF5",
+            "implementation": "hdf5",
+            "io_participations": [
+                "independent",
+                "collective"
+            ],
+            "filter": "raw",
+            "params": "none"
+        }
+    ],
+    "chunk_size_bytes": 4194304,
+    "chunks_per_rank": 4,
+    "validate_read": false
+}
