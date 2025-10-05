@@ -85,14 +85,15 @@ int main(int argc, char **argv) {
                    "Failed to find io participation for workload %s\n",
                    cur_participation_str);
 
-            uint32_t elements_per_dim =
-                (config->chunk_size_bytes / sizeof(double)) /
-                (uint32_t) sqrt(config->chunk_size_bytes);
-
-            uint64_t total_bytes = (uint64_t) config->chunks_per_rank *
-                                   num_ranks * elements_per_dim *
-                                   elements_per_dim * sizeof(double);
-            uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
+	    uint32_t elements_per_dim =
+	           (uint32_t) sqrt(config->chunk_size_bytes / sizeof(double));
+	    uint64_t total_bytes =
+	           (uint64_t) config->chunks_per_rank *
+	           num_ranks *
+	           elements_per_dim *
+	           elements_per_dim *
+	           sizeof(double);
+	    uint64_t total_GB = total_bytes / (1024ULL * 1024 * 1024);
 
             io_filter_t cur_io_filter = -1;
             for(int k = 0; k < NUM_IO_FILTERS; k++) {
@@ -120,8 +121,7 @@ int main(int argc, char **argv) {
                 PRINT_RANK0("Using independent I/O\n");
             PRINT_RANK0("Requested chunk size %lu bytes\n",
                         config->chunk_size_bytes);
-            PRINT_RANK0("Rounded chunk size %lu bytes\n",
-                        elements_per_dim * elements_per_dim * sizeof(double));
+	    PRINT_RANK0("Elements per dimension: %lu\n", elements_per_dim);
             PRINT_RANK0("Total data to be written: %lu GB (%lu) bytes\n",
                         total_GB, total_bytes);
             PRINT_RANK0("==============================================\n");

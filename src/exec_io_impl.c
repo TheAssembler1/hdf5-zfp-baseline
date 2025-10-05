@@ -37,11 +37,11 @@ void exec_io_impl(char *params, io_impl_t cur_io_impl,
     uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(double);
     double *buffer = (double *) malloc(chunk_bytes);
     // Seed RNG
-    long seed = time(NULL) ^ (rank * 1337) ^ getpid(); // More entropy
-    srand48(seed);
+    srand(time(NULL));
     for (uint32_t i = 0; i < elements_per_dim; i++) {
         for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] = drand48();
+            buffer[i * elements_per_dim + j] =
+                (double) rand() + ((double) rand() / (double) RAND_MAX);
         }
     }
 
