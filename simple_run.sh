@@ -9,6 +9,8 @@ pushd ./build
 echo "Removing old output.csv"
 rm output.csv || true
 rm pdc_server.log || true
+rm output.h5 || true
+rm -r /pscratch/sd/n/nlewi26/pdc_data/* || true
 
 # Launch the pdc server(s)
 pkill pdc_server || true 
@@ -22,8 +24,10 @@ fi
 sleep 1
 
 # Run the benchmark
-./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/hdf5_raw.json"
+./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_raw.json"
 
 close_server
+
+find /pscratch/sd/n/nlewi26/pdc_data -type f -exec stat --printf="%s %n\n" {} \;
 
 popd

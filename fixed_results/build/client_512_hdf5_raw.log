@@ -1,0 +1,626 @@
+Entered main
+Rank[0] {
+  "workloads":[
+    {
+      "name":"HDF5",
+      "implementation":"hdf5",
+      "io_participations":[
+        "independent",
+        "collective"
+      ],
+      "filter":"raw",
+      "params":"none"
+    }
+  ],
+  "chunk_size_bytes":4194304,
+  "chunks_per_rank":4,
+  "validate_read":false
+}
+Rank[0] ==============================================
+Rank[0] Starting workload HDF5
+Rank[0] Running with 512 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params noneRank[0] Using independent I/O
+Rank[0] Requested chunk size 4194304 bytes
+Rank[0] Elements per dimension: 724
+Rank[0] Total data to be written: 7 GB (8588099584) bytes
+Rank[0] ==============================================
+Rank[0] ZFP filter available? YES
+Rank[0] Calling init_dataset on impl
+Rank[0] No filter enabled
+Rank[0] Calling create_dataset on impl
+Rank[0] Starting write
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling reopen on impl
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Rank[0] ==============================================
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Entered main
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload HDF5
+Rank[0] ==============================================
+Rank[0] ==============================================
+Rank[0] Starting workload HDF5
+Rank[0] Running with 512 rank(s)
+Rank[0] Chunks per rank 4
+Rank[0] Params noneRank[0] Using collective I/O
+Rank[0] Requested chunk size 4194304 bytes
+Rank[0] Elements per dimension: 724
+Rank[0] Total data to be written: 7 GB (8588099584) bytes
+Rank[0] ==============================================
+Rank[0] Calling init_dataset on impl
+Rank[0] No filter enabled
+Rank[0] Calling create_dataset on impl
+Rank[0] Starting write
+Rank[0] Starting chunk write 1
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 1
+Rank[0] Starting chunk write 2
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 2
+Rank[0] Starting chunk write 3
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 3
+Rank[0] Starting chunk write 4
+Rank[0] Calling write_chunk on impl
+Rank[0] Finished chunk write 4
+Rank[0] Calling flush on impl
+Rank[0] Finished write
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling reopen on impl
+Rank[0] Starting chunk read 1
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 1
+Rank[0] Starting chunk read 2
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 2
+Rank[0] Starting chunk read 3
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 3
+Rank[0] Starting chunk read 4
+Rank[0] Calling read_chunk on impl
+Rank[0] Finished chunk read 4
+Rank[0] Calling flush on impl
+Rank[0] Calling close_dataset on impl
+Rank[0] Calling deinit on impl
+Rank[0] ==============================================
+Rank[0] Timer results appended to output.csv
+Rank[0] Finished workload HDF5
+Rank[0] ==============================================

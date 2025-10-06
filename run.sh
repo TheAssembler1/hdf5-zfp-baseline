@@ -49,6 +49,9 @@ function run_benchmark() {
 
 		# Launch the PDC server(s)
 		if [ "$3" = "true" ]; then
+			# Remove old PDC data
+			rm -rf /pscratch/sd/n/nlewi26/pdc_data/*
+
 			echo "CLIENT_CLOSE_LOG=$CLIENT_CLOSE_LOG, CLIENT_CLOSE_LOG_ERR=$CLIENT_CLOSE_LOG_ERR"
 			echo "SERVER_LOG=$SERVER_LOG, SERVER_LOG_ERR=$SERVER_LOG_ERR"
 			echo "Starting PDC servers"
@@ -76,7 +79,8 @@ function run_benchmark() {
 				--output="$CLIENT_CLOSE_LOG" \
 				close_server
 			# Shows PDC data size
-			du -h /pscratch/sd/n/nlewi26/pdc_data
+			find /pscratch/sd/n/nlewi26/pdc_data -type f | wc -l
+			find /pscratch/sd/n/nlewi26/pdc_data -type f -exec stat --printf="%s %n\n" {} \;
 		else 
 			# Shows HDF5 data size
 			/pscratch/sd/n/nlewi26/src/hdf5/install/bin/h5ls -v output.h5
