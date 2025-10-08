@@ -23,20 +23,16 @@
         }                                                                      \
     } while (0)
 
-void pdc_io_init(char* params);
-void pdc_io_deinit();
-void pdc_io_init_dataset(MPI_Comm comm, uint32_t elements_per_dim, int my_rank,
-                         int num_ranks, int chunks_per_rank);
-void pdc_io_create_dataset();
-void pdc_io_enable_compression_on_dataset();
-void pdc_io_write_chunk(uint32_t elements_per_dim, double *buffer,
-                        io_participation_t io_participation, int rank,
-                        int chunks_per_rank, int chunk, MPI_Comm comm);
-void pdc_io_read_chunk(uint32_t elements_per_dim, double *buffer,
-                       io_participation_t io_participation, int rank,
-                       int chunks_per_rank, int chunk, MPI_Comm comm);
-void pdc_io_flush();
-void pdc_io_close_dataset();
-void pdc_io_reopen_dataset();
+void pdc_io_init(config_t *config, config_workload_t *config_workload);
+void pdc_io_deinit(config_t *config, config_workload_t *config_workload);
+void pdc_io_create_dataset(config_t *config,
+                           config_workload_t *config_workload);
+void pdc_io_open_dataset(config_t *config, config_workload_t *config_workload);
+void pdc_io_close_dataset(config_t *config, config_workload_t *config_workload);
+void pdc_io_write_chunk(config_t *config, config_workload_t *config_workload,
+                        double *buffer);
+void pdc_io_read_chunk(config_t *config, config_workload_t *config_workload,
+                       double *buffer);
+void pdc_io_flush(config_t *config, config_workload_t *config_workload);
 
 #endif

@@ -1,0 +1,16 @@
+{
+    "workloads": [
+        {
+            "name": "PDC-ZFP",
+            "implementation": "pdc",
+            "io_participations": [
+                "independent"
+            ],
+            "filter": "zfp_compress",
+            "params": "batch",
+            "io_type": "write"
+        }
+    ],
+    "chunk_size_bytes": 4194304,
+    "chunks_per_rank": 4
+}

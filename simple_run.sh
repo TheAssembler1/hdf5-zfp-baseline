@@ -6,28 +6,19 @@ LAUNCHER="none"
 
 pushd ./build
 
-echo "Removing old output.csv"
-rm output.csv || true
-rm pdc_server.log || true
-rm output.h5 || true
-rm -r /pscratch/sd/n/nlewi26/pdc_data/* || true
+export PDC_TMPDIR=/pscratch/sd/n/nlewi26/pdc_tmp
+export PDC_DATA_LOC=/pscratch/sd/n/nlewi26/pdc_data
 
-# Launch the pdc server(s)
-pkill pdc_server || true 
-if [[ "$LAUNCHER" == "mpirun" ]]; then
-	mpirun -np 1 pdc_server > pdc_server.log 2>&1 &
-elif [[ "$LAUNCHER" == "none" ]]; then
-	pdc_server > pdc_server.log 2>&1 &
-else
-	nohup srun -n 1 pdc_server > pdc_server.log 2>&1 &
-fi
-sleep 1
-
-# Run the benchmark
-./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_raw.json"
-
+pkill pdc_server || true
+pdc_server  > pdc_write_server.log 2>&1 &
+./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_raw_write.json"
 close_server
 
 find /pscratch/sd/n/nlewi26/pdc_data -type f -exec stat --printf="%s %n\n" {} \;
+
+pkill pdc_server || true
+pdc_server restart  > pdc_write_server.log 2>&1 &
+./zfp_baseline "/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/workloads/pdc_raw_read.json"
+close_server
 
 popd

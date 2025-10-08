@@ -18,6 +18,7 @@ typedef struct config_workload_t {
     uint32_t num_io_participations;
     char io_participations[MAX_CONFIG_IO_PARTICIPATIONS]
                           [MAX_CONFIG_STRING_SIZE];
+    char io_type[MAX_CONFIG_STRING_SIZE];
 } config_workload_t;
 
 // this should mirror JSON
@@ -26,7 +27,13 @@ typedef struct config_t {
     config_workload_t workloads[MAX_CONFIG_WORKLOADS];
     uint64_t chunk_size_bytes;
     uint64_t chunks_per_rank;
-    bool validate_read;
+    // this should not mirror JSON
+    uint64_t elements_per_dim;
+    uint64_t total_bytes;
+    int num_ranks;
+    int my_rank;
+    uint64_t cur_chunk;
+    char io_participation[MAX_CONFIG_STRING_SIZE];
 } config_t;
 
 config_t *init_config(char *config_path);

@@ -1,3 +1,0 @@
-/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/build/CMakeFiles/rebuild_cache.dir
-/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/build/CMakeFiles/edit_cache.dir
-/pscratch/sd/n/nlewi26/src/hdf5-zfp-baseline/build/CMakeFiles/zfp_baseline.dir

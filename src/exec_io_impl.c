@@ -5,121 +5,121 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
+#include <math.h>
 
 #include "exec_io_impl.h"
 #include "common/log.h"
 #include "common/config.h"
 
-void exec_io_impl(char *params, io_impl_t cur_io_impl,
-                  io_impl_funcs_t io_impl_funcs, uint32_t elements_per_dim,
-                  int num_ranks, int chunks_per_rank, int rank,
-                  io_participation_t io_participation, bool validate_read) {
-    io_impl_funcs.init(params);
+void exec_io_impl(io_impl_funcs_t io_impl_funcs, config_t *config,
+                  config_workload_t *config_workload) {
+    io_impl_funcs.init(config, config_workload);
 
-    // init dataset
-    PRINT_RANK0("Calling init_dataset on impl\n");
-    io_impl_funcs.init_dataset(MPI_COMM_WORLD, elements_per_dim, rank,
-                               num_ranks, chunks_per_rank);
+    uint32_t chunk_bytes =
+        config->elements_per_dim * config->elements_per_dim * sizeof(double);
 
-    if (io_impl_funcs.io_filter == IO_FILTER_ZFP_COMPRESS) {
-        PRINT_RANK0("ZFP Compression filter enabled\n");
-        // FIXME: need a global config with compression settings
-        PRINT_RANK0("Calling enable_compression_on_dataset on impl\n");
-        io_impl_funcs.enable_compression_on_dataset();
-    } else {
-        PRINT_RANK0("No filter enabled\n");
-    }
+    if (!strcmp(config_workload->io_type, "write")) {
+        PRINT_RANK0("Calling create_dataset on impl\n");
+        io_impl_funcs.create_dataset(config, config_workload);
 
-    PRINT_RANK0("Calling create_dataset on impl\n");
-    io_impl_funcs.create_dataset();
-
-    // Allocate write buffer
-    uint32_t chunk_bytes = elements_per_dim * elements_per_dim * sizeof(double);
-    double *buffer = (double *) malloc(chunk_bytes);
-    // Seed RNG
-    srand(time(NULL));
-    for (uint32_t i = 0; i < elements_per_dim; i++) {
-        for (uint32_t j = 0; j < elements_per_dim; j++) {
-            buffer[i * elements_per_dim + j] =
-                (double) rand() + ((double) rand() / (double) RAND_MAX);
+        // Allocate write buffer
+        double *write_buffer = (double *) malloc(chunk_bytes);
+        // Seed RNG
+        srand(42);
+        for (uint32_t i = 0; i < config->elements_per_dim; i++) {
+            for (uint32_t j = 0; j < config->elements_per_dim; j++) {
+                write_buffer[i * config->elements_per_dim + j] =
+                    (double) rand() + ((double) rand() / (double) RAND_MAX);
+            }
         }
-    }
 
-    PRINT_RANK0("Starting write\n");
+        PRINT_RANK0("Starting write\n");
 
-    START_TIMER(WRITE_ALL_CHUNKS);
-    MPI_Barrier(MPI_COMM_WORLD);
-    for (int c = 0; c < chunks_per_rank; c++) {
-        PRINT_RANK0("Starting chunk write %d\n", c + 1);
-        START_TIMER(WRITE_CHUNK);
-        PRINT_RANK0("Calling write_chunk on impl\n");
-        io_impl_funcs.write_chunk(elements_per_dim, buffer, io_participation,
-                                  rank, chunks_per_rank, c, MPI_COMM_WORLD);
-        STOP_TIMER(WRITE_CHUNK);
-        PRINT_RANK0("Finished chunk write %d\n", c + 1);
-    }
-    PRINT_RANK0("Calling flush on impl\n");
-    io_impl_funcs.flush();
-    MPI_Barrier(MPI_COMM_WORLD);
-    STOP_TIMER(WRITE_ALL_CHUNKS);
+        START_TIMER(WRITE_ALL_CHUNKS);
+        MPI_Barrier(MPI_COMM_WORLD);
+        for (config->cur_chunk = 0; config->cur_chunk < config->chunks_per_rank;
+             config->cur_chunk++) {
+            PRINT_RANK0("Starting chunk write %lu\n", config->cur_chunk);
+            START_TIMER(WRITE_CHUNK);
+            PRINT_RANK0("Calling write_chunk on impl\n");
+            io_impl_funcs.write_chunk(config, config_workload, write_buffer);
+            STOP_TIMER(WRITE_CHUNK);
+            PRINT_RANK0("Finished chunk write %lu\n", config->cur_chunk);
+        }
+        PRINT_RANK0("Calling write flush on impl\n");
+        START_TIMER(WRITE_FLUSH);
+        io_impl_funcs.flush(config, config_workload);
+        STOP_TIMER(WRITE_FLUSH);
+        MPI_Barrier(MPI_COMM_WORLD);
+        STOP_TIMER(WRITE_ALL_CHUNKS);
 
-    PRINT_RANK0("Finished write\n");
+        // close dataset
+        free(write_buffer);
+    } else if ((!strcmp(config_workload->io_type, "read"))) {
+        PRINT_RANK0("Calling open_dataset on impl\n");
+        io_impl_funcs.open_dataset(config, config_workload);
 
-    // close dataset
-    free(buffer);
-    PRINT_RANK0("Calling close_dataset on impl\n");
-    io_impl_funcs.close_dataset();
+        // Allocate read buffer
+        double *read_buf =
+            (double *) calloc(1, chunk_bytes * config->chunks_per_rank);
 
-    PRINT_RANK0("Calling reopen on impl\n");
-    io_impl_funcs.reopen_dataset();
+        START_TIMER(READ_ALL_CHUNKS);
+        MPI_Barrier(MPI_COMM_WORLD);
+        for (config->cur_chunk = 0; config->cur_chunk < config->chunks_per_rank;
+             config->cur_chunk++) {
+            PRINT_RANK0("Starting chunk read %lu\n", config->cur_chunk);
+            START_TIMER(READ_CHUNK);
+            PRINT_RANK0("Calling read_chunk on impl\n");
+            io_impl_funcs.read_chunk(
+                config, config_workload,
+                &(read_buf[config->elements_per_dim * config->elements_per_dim *
+                           config->cur_chunk]));
+            STOP_TIMER(READ_CHUNK);
+            PRINT_RANK0("Finished chunk read %lu\n", config->cur_chunk);
+        }
+        PRINT_RANK0("Calling read flush on impl\n");
+        START_TIMER(READ_FLUSH);
+        io_impl_funcs.flush(config, config_workload);
+        STOP_TIMER(READ_FLUSH);
+        MPI_Barrier(MPI_COMM_WORLD);
+        STOP_TIMER(READ_ALL_CHUNKS);
 
-    // Allocate read buffer
-    double *read_buf = (double *) malloc(chunk_bytes);
-    // set init random value that's invalid rank
-    for (uint32_t i = 0; i < elements_per_dim * elements_per_dim; i++) {
-        read_buf[i] = -1;
-    }
+        for (config->cur_chunk = 0; config->cur_chunk < config->chunks_per_rank;
+             config->cur_chunk++) {
+            srand(42);
+            for (uint32_t i = 0; i < config->elements_per_dim; i++) {
+                for (uint32_t j = 0; j < config->elements_per_dim; j++) {
+                    double ran =
+                        (double) rand() + ((double) rand() / (double) RAND_MAX);
+                    double read_val =
+                        read_buf[(config->cur_chunk * config->elements_per_dim *
+                                  config->elements_per_dim) +
+                                 (i * config->elements_per_dim + j)];
 
-    bool chunks_read_valid = true;
+                    // Allow small difference due to rounding
+                    double diff = fabs(read_val - ran);
+                    const double tolerance = 1e-9;
 
-    START_TIMER(READ_ALL_CHUNKS);
-    MPI_Barrier(MPI_COMM_WORLD);
-    for (int c = 0; c < chunks_per_rank; c++) {
-        PRINT_RANK0("Starting chunk read %d\n", c + 1);
-        START_TIMER(READ_CHUNK);
-        PRINT_RANK0("Calling read_chunk on impl\n");
-        io_impl_funcs.read_chunk(elements_per_dim, read_buf, io_participation,
-                                 rank, chunks_per_rank, c, MPI_COMM_WORLD);
-        /*if (validate_read) {
-            for (uint32_t i = 0; i < elements_per_dim * elements_per_dim; i++) {
-                if ((int) read_buf[i] != rank + 100) {
-                    PRINT_ERROR(
-                        "Read mismatch at index %d: expected %d got %lf\n", i,
-                        rank + 100, read_buf[i]);
-                    chunks_read_valid = false;
-                    break;
+                    if (diff > tolerance) {
+                        PRINT_ERROR("Invalid data read (diff = %g)\n", diff);
+                        abort();
+                    }
                 }
             }
-        }*/
-        STOP_TIMER(READ_CHUNK);
-        PRINT_RANK0("Finished chunk read %d\n", c + 1);
+        }
+        PRINT_RANK0("Data read was valid :)\n");
+        free(read_buf);
+    } else {
+        PRINT_ERROR("Invalid io type: %s\n", config_workload->io_type);
+        abort();
     }
-    PRINT_RANK0("Calling flush on impl\n");
-    io_impl_funcs.flush();
-    MPI_Barrier(MPI_COMM_WORLD);
-    STOP_TIMER(READ_ALL_CHUNKS);
-
-    free(read_buf);
 
     PRINT_RANK0("Calling close_dataset on impl\n");
-    io_impl_funcs.close_dataset();
+    io_impl_funcs.close_dataset(config, config_workload);
     PRINT_RANK0("Calling deinit on impl\n");
-    io_impl_funcs.deinit();
+    io_impl_funcs.deinit(config, config_workload);
 
-    if (validate_read && chunks_read_valid)
-        PRINT("All chunk reads were valid\n");
-    else if (validate_read && !chunks_read_valid)
-        PRINT("ERROR: Not all chunks reads were valid\n");
     fflush(stdout);
     fflush(stderr);
 }

@@ -19,35 +19,14 @@
  *             "io_participations": [
  *                 "collective",
  *                 "independent"
- *             ]
- *         },
- *         {
- *             "name": "HDF5 ZFP",
- *             "implementation": "hdf5_zfp",
- *             "io_participations": [
- *                 "collective"
- *             ]
- *         },
- *         {
- *             "name": "PDC",
- *             "implementation": "pdc",
- *             "io_participations": [
- *                 "collective",
- *                 "independent"
- *             ]
- *         },
- *         {
- *             "name": "PDC ZFP",
- *             "implementation": "pdc_zfp",
- *             "io_participations": [
- *                 "collective",
- *                 "independent"
- *             ]
+ *             ],
+ *             "io_type": "read",
+ *             "filter": "raw",
+ *             "params": "none"
  *         }
- *     ],
+ *     ]
  *     "chunk_size_bytes": 64000,
  *     "chunks_per_rank": 1,
- *     "validate_read": false
  * }
  */
 
@@ -178,11 +157,13 @@ config_t *init_config(char *config_path) {
         const char *workload_implementation = validate_json_string(
             workload, "implementation", MAX_CONFIG_STRING_SIZE);
         strcpy(config->workloads[i].implementation, workload_implementation);
-        const char* workload_io_filter = validate_json_string(
-            workload, "filter", MAX_CONFIG_STRING_SIZE);
-        strcpy(config->workloads[i].io_filter, workload_io_filter);
-        const char* params = validate_json_string(
-            workload, "params", MAX_CONFIG_STRING_SIZE);
+        const char *workload_io_filter =
+            validate_json_string(workload, "filter", MAX_CONFIG_STRING_SIZE);
+        const char *workload_io_type =
+            validate_json_string(workload, "io_type", MAX_CONFIG_STRING_SIZE);
+        strcpy(config->workloads[i].io_type, workload_io_type);
+        const char *params =
+            validate_json_string(workload, "params", MAX_CONFIG_STRING_SIZE);
         strcpy(config->workloads[i].params, params);
 
         // validate and pull out io participations
@@ -205,7 +186,6 @@ config_t *init_config(char *config_path) {
     config->chunk_size_bytes =
         validate_json_number(json_obj, "chunk_size_bytes");
     config->chunks_per_rank = validate_json_number(json_obj, "chunks_per_rank");
-    config->validate_read = validate_json_bool(json_obj, "validate_read");
 
     /**
      * FIXME: at this point we have pulled out correct values from json
@@ -213,6 +193,8 @@ config_t *init_config(char *config_path) {
      * and string values being valid.
      */
     json_object_put(json_obj);
+
+    // Default compression to false
 
     return config;
 }
